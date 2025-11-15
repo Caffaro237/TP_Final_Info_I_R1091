@@ -1,4 +1,4 @@
-#include "librerias_fachas.h"
+#include "Estructuras.h"
 
 void* crear_cliente (NODO_CLI** top_cliente);
 void mostrar_cliente (NODO_CLI* cliente);
