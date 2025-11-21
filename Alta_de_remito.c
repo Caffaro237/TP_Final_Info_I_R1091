@@ -1,4 +1,4 @@
-#include "Archivos_de_cabezera.h"
+#include "Headers.h"
 #include "Estructuras.h"
 
 //ASUMO QUE SI NO EXIXSTE UNA LISTA, SU PUNTERO TOP APUNTA A NULL//
