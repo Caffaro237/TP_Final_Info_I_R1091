@@ -5,3 +5,6 @@
 #include <unistd.h> //Archivos
 #include <sys/types.h> //Archivos
 #include <sys/stat.h> //Archivos//
+
+#include "Estructuras.h"
+#include "Prototipos.h"

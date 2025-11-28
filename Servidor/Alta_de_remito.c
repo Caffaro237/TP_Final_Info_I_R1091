@@ -1,19 +1,11 @@
 #include "Headers.h"
-#include "Estructuras.h"
 
 //ASUMO QUE SI NO EXIXSTE UNA LISTA, SU PUNTERO TOP APUNTA A NULL//
 
-void crear_cliente (NODO_CLI** top_cliente, CLIENTE datos);
-void mostrar_cliente (NODO_CLI* cliente);
-void crear_equipo (NODO_EQUI** top_equipo, EQUIPO datos);
-void mostrar_equipo (NODO_EQUI* equipo);
-
-int mostrar_por_id (int id, NODO_CLI* top_cliente, NODO_EQUI* top_equipo);
-
-void crear_equipo (NODO_EQUI** top_equipo, EQUIPO datos)
+void crear_equipo (NodoEquipo** top_equipo, EQUIPO datos)
 {
-  NODO_EQUI* equipo_nuevo=(NODO_EQUI*) malloc(sizeof(NODO_EQUI)); //Creo el equipo
-  NODO_EQUI* aux = *top_equipo;
+  NodoEquipo* equipo_nuevo=(NodoEquipo*) malloc(sizeof(NodoEquipo)); //Creo el equipo
+  NodoEquipo* aux = *top_equipo;
   equipo_nuevo -> data=datos;
   equipo_nuevo -> next=NULL;
     
@@ -45,10 +37,10 @@ void crear_equipo (NODO_EQUI** top_equipo, EQUIPO datos)
   }
 }
 
-void crear_cliente (NODO_CLI** top_cliente, CLIENTE datos)
+void crear_cliente (NodoCliente** top_cliente, CLIENTE datos)
 {
-  NODO_CLI* cliente_nuevo=(NODO_CLI*) malloc(sizeof(NODO_CLI)); //Creo el cliente
-  NODO_CLI* aux=*top_cliente;
+  NodoCliente* cliente_nuevo=(NodoCliente*) malloc(sizeof(NodoCliente)); //Creo el cliente
+  NodoCliente* aux=*top_cliente;
   cliente_nuevo -> data=datos;
   cliente_nuevo -> next=NULL;
     
@@ -82,26 +74,27 @@ void crear_cliente (NODO_CLI** top_cliente, CLIENTE datos)
 }
 
 
-void mostrar_cliente (NODO_CLI* cliente)
+void mostrar_cliente (NodoCliente* cliente)
 {
   printf("Nombre: %s\n", cliente->data.nombre);
   printf("Apellido: %s\n", cliente->data.apellido);
   printf("Dirección: %s\n", cliente->data.direccion);
+  printf("Telefono: %s\n", cliente->data.telefono);
 
 }
 
-void mostrar_equipo (NODO_EQUI* equipo)
+void mostrar_equipo (NodoEquipo* equipo)
 {
-  printf("Nombre: %s\n", equipo->data.marca);
-  printf("Apellido: %s\n", equipo->data.falla);
-  //etc...
-
+  printf("Tipo: %s\n", equipo->data.tipo);
+  printf("Marca: %s\n", equipo->data.marca);
+  printf("Modelo: %s\n", equipo->data.modelo);
+  printf("Falla: %s\n", equipo->data.falla);
 }
 
-int mostrar_por_id (int id, NODO_CLI* top_cliente, NODO_EQUI* top_equipo)
+int mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo)
 {
-  NODO_CLI* cliente;
-  NODO_EQUI* equipo;
+  NodoCliente* cliente;
+  NodoEquipo* equipo;
   
   cliente = top_cliente;
   equipo = top_equipo;
