@@ -1,0 +1,55 @@
+#include "GestorRemito.h"
+#include "Mostrar_cliente.h"
+
+// gcc -Wall main_servidor.c sock-lib.c -o servidor
+
+int main (void)
+{
+  NodoCliente *TOP_CLIENTE=NULL;
+  NodoEquipo *TOP_EQUIPO=NULL;
+  //NodoReparaciones *TOP_REPARACION=NULL;
+
+	int sock;
+	int sockdup;
+  char datos_crudos [300];
+  int opcion;
+  int num_de_orden;
+  NodoCliente* puntero_a_cliente;
+  NodoEquipo* puntero_a_equipo;
+
+	sock=abrir_conexion(8000, 10, 1);
+  
+
+  while (1==1)
+  {
+  sockdup = aceptar_pedidos(sock,1);
+  read(sockdup, &opcion, sizeof(int));
+
+	switch(opcion) 
+  {
+
+    case 2:
+      read(sockdup, datos_crudos, 300);
+      AltaDatos_Cliente(&TOP_CLIENTE, datos_crudos);
+      read(sockdup, datos_crudos, 300);
+      AltaDatos_Equipo(&TOP_EQUIPO, datos_crudos);
+      //Agregar creacion de estructura reparación
+
+    case 5:
+      read(sockdup, &num_de_orden, sizeof(int));
+      puntero_a_cliente=BusquedaCliente_por_numero_de_orden(TOP_CLIENTE, num_de_orden); //Guardo en un puntero el cliente que quiero
+      EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
+      write(sockdup, datos_crudos, 300); //Lo envio al cliente
+      puntero_a_equipo=BusquedaEquipo_por_numero_de_orden(TOP_EQUIPO, num_de_orden); //Guardo en un puntero el equipo que quiero
+      EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
+      write(sockdup, datos_crudos, 300); //Lo envio al cliente
+
+
+
+    default:
+      break;
+  }
+  close(sockdup);
+}
+  
+}
