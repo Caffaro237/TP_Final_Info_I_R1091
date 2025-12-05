@@ -5,8 +5,14 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos);
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);
 void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos);
 void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos);
+EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos); //Devuelve el string en forma de estructura equipo
+CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos); //Devuelve el string en forma de estructura cliente
 
-//Busqueda por numeor de orden
+//Modiifcar datos
+void ModificarDatos_Equipo (NodoEquipo* top_equipo, int num_de_orden, char* datos_crudos); //Tiene que reescribir todo los datos
+void ModificarDatos_Cliente (NodoCliente* top_cliente, int num_de_orden, char* datos_crudos); //Tiene que reescribir todo los datos
+
+//Busqueda por numeor de orden (devuelven puntero al nodo buscado)
 NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden);
 NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden);
 
@@ -47,8 +53,9 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 {
   EQUIPO equipo_nuevo;
   NodoEquipo* aux=*top_equipo;
-  int i=0;
-  int j=0;
+
+  equipo_nuevo=Datos_crudos_a_EQUIPO(datos_crudos);
+
 
   if (*top_equipo!=NULL)
   {
@@ -61,6 +68,17 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
   }
   else {equipo_nuevo.numero_de_orden=1000;} //Si es el primero
 
+  
+
+  AgregarNodo_Equipo(top_equipo, equipo_nuevo);
+
+}
+
+EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
+{
+  EQUIPO equipo_nuevo;
+  int i=0;
+  int j=0;
   // Obtengo el tipo
   j = 0;
   // Prao cuanod encuentro la coma, o el límite de palabras.
@@ -112,10 +130,8 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
   }
   equipo_nuevo.falla[j] = '\0'; // Terminación
 
-  AgregarNodo_Equipo(top_equipo, equipo_nuevo);
-
+  return equipo_nuevo;
 }
-
 
 void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos)
 {
@@ -148,8 +164,8 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 {
   CLIENTE cliente_nuevo;
   NodoCliente* aux=*top_cliente;
-  int i=0;
-  int j=0;
+
+  cliente_nuevo=Datos_crudos_a_CLIENTE(datos_crudos);
 
   if (*top_cliente!=NULL)
   {
@@ -158,12 +174,24 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
       aux=aux->next;
     }
 
-    cliente_nuevo.numero_de_orden=aux->data.numero_de_orden + 1; //El nuevo cliente tiene el siguiente numero de orden
+    cliente_nuevo.numero_de_orden=(aux->data.numero_de_orden) + 1; //El nuevo cliente tiene el siguiente numero de orden
   }
 
   else {cliente_nuevo.numero_de_orden=1000;} //Si es el primero
     
-	// Obtengo la fechaIngreso
+	
+
+  AgregarNodo_Cliente(top_cliente, cliente_nuevo);
+
+}
+
+CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
+{
+  int i=0;
+  int j=0;
+  CLIENTE cliente_nuevo;
+
+  // Obtengo la fechaIngreso
 	j = 0;
 	// Paro cuando encuentro la coma, o el límite de palabras.
 	while (datos_crudos[i] != ',' && j < 10) 
@@ -218,9 +246,7 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 	}
 		cliente_nuevo.telefono[j] = '\0'; // Terminación
 
-
-  AgregarNodo_Cliente(top_cliente, cliente_nuevo);
-
+    return cliente_nuevo;
 }
 
 NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden)
@@ -290,4 +316,23 @@ void mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo)
     mostrar_equipo (equipo);
   }
   else{printf("Erro de datos, no se encontro el nuemro de orden");}
+}
+
+void ModificarDatos_Equipo (NodoEquipo* top_equipo, int num_de_orden, char* datos_crudos)
+{
+  EQUIPO cambios_realizados=Datos_crudos_a_EQUIPO(datos_crudos);
+
+  NodoEquipo* aux=BusquedaEquipo_por_numero_de_orden(top_equipo, num_de_orden);
+
+  aux->data=cambios_realizados;
+}
+
+void ModificarDatos_Cliente (NodoCliente* top_cliente, int num_de_orden, char* datos_crudos)
+{
+  CLIENTE cambios_realizados=Datos_crudos_a_CLIENTE(datos_crudos);
+
+  NodoCliente* aux=BusquedaCliente_por_numero_de_orden(top_cliente, num_de_orden);
+
+  aux->data= cambios_realizados;
+
 }
