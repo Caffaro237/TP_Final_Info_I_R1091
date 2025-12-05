@@ -23,4 +23,5 @@ void Mostrar_cadena (char* cadena)
         
         i++;
     }
+    printf("\n");
 }
