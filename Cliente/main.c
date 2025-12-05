@@ -1,13 +1,12 @@
-#include "Mostrar_datos.h"
+#include "Headers.h"
 
 
 int main (void)
 {
   char path[200] = "./Clientes.csv";
   char datos[300];
-  int opcion;
-  int c;
-  int num_de_orden;
+  int32_t opcion=0;
+  int32_t num_de_orden=0;
 
   int sock;
   sock = conectar("localhost", 8000, 1);
@@ -16,31 +15,45 @@ int main (void)
   {
     
     opcion = menu();
-    write(sock, opcion, sizeof(int));
-
+    write(sock, &opcion, sizeof(int32_t));
+    
     switch(opcion) 
     {
-
+      
       case 2:
-        pritnf("Escriba los datos del cliente");
-        scanf("%s", &datos);
+        printf("Escriba los datos del cliente: ");
+        scanf("%299s", datos);
         write(sock, datos, 300);
-        pritnf("Escriba los datos del equipo");
-        scanf("%s", &datos);
+        printf("Escriba los datos del equipo: ");
+        scanf("%299s", datos);
         write(sock, datos, 300);
-
+        pausa();
+        break;
 
       case 5:
-        pritnf("Escriba el numero de orden");
+        printf("Escriba el numero de orden: ");
         scanf("%d", &num_de_orden);
         //Envio el numero de orden
-        write(sock, &num_de_orden, sizeof(int));
+        write(sock, &num_de_orden, sizeof(int32_t));
         //Muestro el cliente
         read(sock, datos, 300);
-        Mostrar_cadena(datos);
-        //Muestro el equipo
-        read(sock, datos, 300);
-        Mostrar_cadena(datos);
+        if (strcmp(datos,"N"))
+        {
+          printf ("No se encontro el numero de orden\n");
+        }
+        else 
+        {
+          printf("Cliente:\n");
+          Mostrar_cadena(datos);
+          strcpy(datos, "");
+          //Muestro el equipo
+          read(sock, datos, 300);
+          printf("\nEquipo:\n");
+          Mostrar_cadena(datos);
+
+        }
+        pausa();
+        break;
 
       case 6:
         printf("Saliendo de la Aplicacion\n");
@@ -48,18 +61,13 @@ int main (void)
 
       default:
         printf("Opción invalida");
+        pausa();
         break;
+    
+    
     }
 
-    if(opcion != 6)
-    {
-      // Limpia cualquier caracter previo (incluye el \n que deja scanf)
-      while ((c = getchar()) != '\n' && c != EOF);
 
-      printf("Presiona ENTER para continuar...");
-      fflush(stdout);
-      getchar();
-    }
   }
   
   
