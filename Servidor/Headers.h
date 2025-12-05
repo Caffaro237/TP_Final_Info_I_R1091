@@ -1,3 +1,6 @@
+#ifndef HEADERS_H
+#define HEADERS_H
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> //Memoria dinámica
@@ -7,4 +10,8 @@
 #include <sys/stat.h> //Archivos//
 #include <stdint.h>
 
+#endif
+
 #include "Estructuras.h"
+#include "sock-lib.h"
+
