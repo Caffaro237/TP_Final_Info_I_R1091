@@ -255,7 +255,8 @@ NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int n
   
   cliente = top_cliente;
 
-  
+  if (top_cliente==NULL) {printf ("No existe la lista"); return NULL;}
+
   while (cliente->data.numero_de_orden!=numero_de_orden) //Recorro la lista hasta encontrar el cliente con el id
   {
     if (cliente->next==NULL) {printf ("No se encontro el cliente"); return NULL;} //Si llego al final, me salgo
@@ -273,6 +274,7 @@ NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numer
   
   equipo = top_equipo;
 
+  if (top_equipo==NULL) {printf ("No existe la lista"); return NULL;}
   
   while (equipo->data.numero_de_orden!=numero_de_orden) //Recorro la lista hasta encontrar el cliente con el id
   {
