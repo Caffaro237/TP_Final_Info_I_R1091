@@ -7,19 +7,22 @@ int main (void)
   char datos[300];
   int32_t opcion=0;
   int32_t num_de_orden=0;
+  int existe_el_cliente=0;
+  int32_t fin_de_la_lista;
 
   int sock;
   sock = conectar("localhost", 8000, 1);
 
   while(opcion != 6)
   {
-    
+    fin_de_la_lista=0;
+    strcpy(datos,"");
     opcion = menu();
     write(sock, &opcion, sizeof(int32_t));
     
     switch(opcion) 
     {
-      
+
       case 2:
         printf("Escriba los datos del cliente: ");
         scanf("%299s", datos);
@@ -36,13 +39,10 @@ int main (void)
         //Envio el numero de orden
         write(sock, &num_de_orden, sizeof(int32_t));
         //Muestro el cliente
-        read(sock, datos, 300);
-        if (strcmp(datos,"N"))
+        read(sock, &existe_el_cliente, sizeof(int));
+        if (existe_el_cliente)
         {
-          printf ("No se encontro el numero de orden\n");
-        }
-        else 
-        {
+          read(sock, datos, 300);
           printf("Cliente:\n");
           Mostrar_cadena(datos);
           strcpy(datos, "");
@@ -52,10 +52,14 @@ int main (void)
           Mostrar_cadena(datos);
 
         }
+        else 
+        {
+          printf ("No se encontro el numero de orden\n");
+        }
         pausa();
         break;
 
-      case 6:
+      case 7:
         printf("Saliendo de la Aplicacion\n");
         break;
 
