@@ -1,6 +1,4 @@
 #include "Headers.h"
-#include "GestorArchivos.c"
-#include "menu.c"
 
 int main (void)
 {
