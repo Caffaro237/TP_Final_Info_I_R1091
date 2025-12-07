@@ -1,6 +1,7 @@
 //gcc ./Servidor/*.c -o ./Servidor/Server -Wall
 
 #include "Headers.h"
+#include "GestorArchivos.c"
 
 int main (void)
 {
@@ -8,10 +9,11 @@ int main (void)
     NodoEquipo *TOP_Equipo = NULL;
     NodoReparaciones *TOP_Reparaciones = NULL;
 
-    char path[200] = "./Clientes.csv";
     char seguir = 's';
     int c;
     int option;
+
+    inicializar(TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
 
     while(seguir == 's')
     {
@@ -21,7 +23,6 @@ int main (void)
         switch(option) //Llama a la funcion para mostrar la sopciones principales
         {
             case 1:
-                readFile(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, path);
                 break;
 
             case 2:
@@ -61,6 +62,12 @@ int main (void)
     return 0;
 }
 
+int inicializar(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+{
+    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+}
 
 /*
 
