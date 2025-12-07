@@ -3,9 +3,9 @@
 int menu(void);
 
 //Funciones para manejo archivos
-int readFile(char path[200]);
+int readFile(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, char path[200]);
 int readline(int fd, char **linea);
-int writeFile(char path[200]);
+int writeFile(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, char path[200]);
 
 //Funciones para altas de clientes y equipos
 void crear_cliente (NodoCliente** top_cliente, CLIENTE datos);
