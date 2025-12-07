@@ -9,6 +9,7 @@
 
 void Mostrar_cadena (char* cadena);
 
+
 void Mostrar_cadena (char* cadena)
 {
     int i=0;
