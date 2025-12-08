@@ -1,3 +1,5 @@
+#include "Estructuras.h"
+
 //Prototipos de Funciones
 
 int menu(void);
@@ -30,3 +32,7 @@ void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
 //Convierte una estructura a cadena
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente);
 void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo);
+
+//Funciones para conexion por Socket
+int abrir_conexion(int port, int backlog, int debug); // función que crea la conexión
+int aceptar_pedidos(int, int debug);                  // función que acepta una conexión entrante
