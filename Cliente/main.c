@@ -1,6 +1,4 @@
 #include "Headers.h"
-#include "GestorArchivos.c"
-#include "menu.c"
 
 int main (void)
 {
@@ -13,7 +11,7 @@ int main (void)
         switch(menu()) //Llama a la funcion para mostrar la sopciones principales
         {
             case 1:
-                readFile(path);
+                
                 break;
 
             case 6:
