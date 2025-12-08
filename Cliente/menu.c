@@ -1,10 +1,12 @@
 #include "Headers.h"
+int32_t menu ();
+void pausa ();
 
-int menu(void)
+int32_t menu()
 {
     //Menu principal de opciones
 
-    int opcion;
+    int32_t opcion;
 
     system("clear"); //Limpia la consola
    //system("color 0F"); //Cambia a color negro de la consola y las letras a blanco brillante
@@ -22,4 +24,16 @@ int menu(void)
     scanf("%d", &opcion); //Ingresa la opcion
 
     return opcion;
+}
+
+void pausa ()
+{
+    int c;
+    // Limpia cualquier caracter previo (incluye el \n que deja scanf)
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    printf("Presiona ENTER para continuar...");
+    fflush(stdout);
+    getchar();
+
 }

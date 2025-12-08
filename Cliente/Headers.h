@@ -9,9 +9,7 @@
 #include <sys/types.h> //Archivos
 #include <sys/stat.h> //Archivos//
 #include <stdint.h>
-
-#endif
-
-#include "Estructuras.h"
 #include "sock-lib.h"
 
+
+#endif

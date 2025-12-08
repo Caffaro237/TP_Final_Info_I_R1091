@@ -11,8 +11,5 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 int SepararPorComa(char *linea, char campos[][50]);
 
 //Funciones para altas de clientes y equipos
-void crear_cliente (NodoCliente** top_cliente, CLIENTE datos);
-void mostrar_cliente (NodoCliente* cliente);
-void crear_equipo (NodoEquipo** top_equipo, EQUIPO datos);
-void mostrar_equipo (NodoEquipo* equipo);
-int mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
+#include "GestorRemito.h"
+#include "Mostrar_cliente.h"
