@@ -12,7 +12,4 @@
 #include "sock-lib.h"
 
 
-#include "Mostrar_datos.h"
-#include "menu.h"
-
 #endif
