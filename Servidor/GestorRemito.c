@@ -1,26 +1,5 @@
 #include "Headers.h"
 
-//Alta de remito
-void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos);
-void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);
-void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos);
-void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos);
-EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos); //Devuelve el string en forma de estructura equipo
-CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos); //Devuelve el string en forma de estructura cliente
-
-//Modiifcar datos
-void ModificarDatos_Equipo (NodoEquipo* top_equipo, int num_de_orden, char* datos_crudos); //Tiene que reescribir todo los datos
-void ModificarDatos_Cliente (NodoCliente* top_cliente, int num_de_orden, char* datos_crudos); //Tiene que reescribir todo los datos
-
-//Busqueda por numeor de orden (devuelven puntero al nodo buscado)
-NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden);
-NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden);
-
-//SOLO PARA MOSTRA EN EL SERVIDOR, NO AL CLIENTE
-void mostrar_cliente (NodoCliente* cliente);
-void mostrar_equipo (NodoEquipo* equipo);
-void mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
-
 
 void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos)
 {
@@ -287,7 +266,7 @@ NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numer
 
 }
 
-void mostrar_cliente (NodoCliente* cliente)
+void Mostrar_cliente (NodoCliente* cliente)
 {
   printf("Fecha de ingreso: %s\n", cliente->data.fechaIngreso);
   printf("Nombre: %s\n", cliente->data.nombre);
@@ -297,7 +276,7 @@ void mostrar_cliente (NodoCliente* cliente)
 
 }
 
-void mostrar_equipo (NodoEquipo* equipo)
+void Mostrar_equipo (NodoEquipo* equipo)
 {
   printf("Tipo: %s\n", equipo->data.tipo);
   printf("Modelo: %s\n", equipo->data.modelo);
@@ -305,7 +284,7 @@ void mostrar_equipo (NodoEquipo* equipo)
   printf("Falla: %s\n", equipo->data.falla);
 }
 
-void mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo)
+void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo)
 {
   NodoCliente* cliente = BusquedaCliente_por_numero_de_orden(top_cliente,id);
   NodoEquipo* equipo = BusquedaEquipo_por_numero_de_orden(top_equipo,id);
@@ -313,28 +292,9 @@ void mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo)
   if (cliente!=NULL && equipo!=NULL)
   {
     printf ("\nDatos del cliente\n");
-    mostrar_cliente (cliente);
+    Mostrar_cliente (cliente);
     printf ("\nDatos del equipo\n");
-    mostrar_equipo (equipo);
+    Mostrar_equipo (equipo);
   }
   else{printf("Erro de datos, no se encontro el nuemro de orden");}
-}
-
-void ModificarDatos_Equipo (NodoEquipo* top_equipo, int num_de_orden, char* datos_crudos)
-{
-  EQUIPO cambios_realizados=Datos_crudos_a_EQUIPO(datos_crudos);
-
-  NodoEquipo* aux=BusquedaEquipo_por_numero_de_orden(top_equipo, num_de_orden);
-
-  aux->data=cambios_realizados;
-}
-
-void ModificarDatos_Cliente (NodoCliente* top_cliente, int num_de_orden, char* datos_crudos)
-{
-  CLIENTE cambios_realizados=Datos_crudos_a_CLIENTE(datos_crudos);
-
-  NodoCliente* aux=BusquedaCliente_por_numero_de_orden(top_cliente, num_de_orden);
-
-  aux->data= cambios_realizados;
-
 }

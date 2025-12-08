@@ -10,8 +10,10 @@
 #include <sys/stat.h> //Archivos//
 #include <stdint.h>
 
+#include "Estructuras.h"
+#include "Prototipos.h"
+
+
 #endif
 
-#include "Estructuras.h"
-#include "sock-lib.h"
 
