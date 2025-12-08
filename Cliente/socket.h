@@ -27,6 +27,3 @@
 // api cliente
 int conectar(char *hostname, int port, int debug); // funcion que se conecta a un servidor
 
-// api servidor
-int abrir_conexion(int port, int backlog, int debug); // función que crea la conexión
-int aceptar_pedidos(int, int debug);                  // función que acepta una conexión entrante
