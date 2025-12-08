@@ -1,6 +1,5 @@
 #include "Headers.h"
 
-
 int main (void)
 {
   char datos[300];
