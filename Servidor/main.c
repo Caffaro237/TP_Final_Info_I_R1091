@@ -1,6 +1,3 @@
-#include "GestorRemito.h"
-#include "Mostrar_cliente.h"
-
 // gcc -Wall main_servidor.c sock-lib.c -o servidor
 
 int main (void)
