@@ -7,10 +7,11 @@
 #define ARCHIVO_EQUIPOS "./Equipos.csv"
 #define ARCHIVO_REPARACIONES "./Reparaciones.csv"
 
-int LeerArchivo(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato)
+int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, int tipoDato)
 {
     char *linea;
     int fdFile = 0;
+    int retorno = 0;
 
     char archivo[100];
 
@@ -19,9 +20,11 @@ int LeerArchivo(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparacio
         case 1:
             strcpy(archivo, ARCHIVO_CLIENTES);
             break;
+            
         case 2:
             strcpy(archivo, ARCHIVO_EQUIPOS);
             break;
+
         case 3:
             strcpy(archivo, ARCHIVO_REPARACIONES);
             break;
@@ -41,14 +44,19 @@ int LeerArchivo(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparacio
 
     while(LeerLinea(fdFile, &linea))
     {
-        CargarDato(linea, tipoDato);
+        retorno = CargarDato(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, linea, tipoDato);
+
+        if(retorno < 0)
+        {
+            return retorno;
+        }
 
         printf("Linea: %s\n", linea);
 
         free(linea);
     }
 
-    return 0;
+    return retorno;
 }
 
 int LeerLinea(int fd, char **linea)
@@ -106,7 +114,7 @@ int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones
     return 0;
 }
 
-int CargarDato(char *linea, int tipoDato)
+int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato)
 {
     char campos[6][50];
 
@@ -133,6 +141,7 @@ int CargarDato(char *linea, int tipoDato)
             strcpy(cliente.telefono, campos[5]);
 
             //funcion cargar datos benja
+            //CargarCliente(&TOP_Cliente, cliente);
             break;
 
         case 2: //Carga Equipos
