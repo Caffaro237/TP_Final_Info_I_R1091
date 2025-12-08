@@ -9,7 +9,7 @@
 #include <sys/types.h> //Archivos
 #include <sys/stat.h> //Archivos//
 #include <stdint.h>
-#include "sock-lib.h"
 
+#include "Prototipos.h"
 
 #endif
