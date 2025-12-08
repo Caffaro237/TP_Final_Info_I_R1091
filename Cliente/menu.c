@@ -1,6 +1,4 @@
 #include "Headers.h"
-int32_t menu ();
-void pausa ();
 
 int32_t menu()
 {

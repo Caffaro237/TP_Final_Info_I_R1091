@@ -1,8 +1,6 @@
 #include "Headers.h"
 
-//Convierte una etsructura a cadena, asi se la paso al cliente
-void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente);
-void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo);
+
 
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 {
