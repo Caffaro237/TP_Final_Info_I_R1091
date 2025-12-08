@@ -5,15 +5,20 @@
 
 int main (void)
 {
+    int retorno = 0;
     NodoCliente *TOP_Clientes = NULL;
     NodoEquipo *TOP_Equipo = NULL;
     NodoReparaciones *TOP_Reparaciones = NULL;
 
     char seguir = 's';
-    int c;
     int option;
 
-    inicializar(TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+    retorno = inicializar(&TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
+    
+    if(retorno < 0)
+    {
+        return retorno;
+    }
 
     while(seguir == 's')
     {
@@ -59,14 +64,35 @@ int main (void)
     printf("Saliendo de la Aplicacion\n");
     printf("\n");
 
-    return 0;
+    return retorno;
 }
 
-int inicializar(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones)
 {
-    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
-    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
-    LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+    int retorno = 0;
+
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+
+    if(retorno < 0)
+    {
+        return retorno;
+    }
+
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+
+    if(retorno < 0)
+    {
+        return retorno;
+    }
+
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+
+    if(retorno < 0)
+    {
+        return retorno;
+    }
+
+    return retorno;
 }
 
 /*
