@@ -1,4 +1,15 @@
+//Para compilacion desde terminal con gcc usar esta linea
 //gcc ./Servidor/*.c -o ./Servidor/Server -Wall
+
+//Para compilacion desde VS Code usar estos include
+/*
+
+#include "socket.c"
+#include "Mostrar_cliente.c"
+#include "GestorArchivos.c"
+#include "GestorRemito.c"
+
+*/
 
 #include "Headers.h"
 
@@ -9,6 +20,10 @@ int main (void)
     NodoEquipo *TOP_Equipo = NULL;
     NodoReparaciones *TOP_Reparaciones = NULL;
 
+    NodoCliente* puntero_a_cliente;
+    NodoEquipo* puntero_a_equipo;
+    NodoReparaciones* puntero_a_reparaciones;
+
   
     int sock;
 	int sockdup;
@@ -16,8 +31,6 @@ int main (void)
     int32_t opcion = 0;
     int32_t num_de_orden;
     int existe_el_cliente = 0;
-    int i = 0;
-
     char seguir = 's';
 
     retorno = inicializar(&TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
@@ -27,15 +40,10 @@ int main (void)
         return retorno;
     }
 
-
-    NodoCliente* puntero_a_cliente;
-    NodoEquipo* puntero_a_equipo;
-    NodoReparaciones* puntero_a_reparaciones;
-
 	sock = abrir_conexion(8000, 2, 1);
     sockdup = aceptar_pedidos(sock, 1);
 
-    while(1)
+    while(seguir != 's')
     {
         strcpy(datos_crudos, "");
         read(sockdup, &opcion, sizeof(int32_t));
@@ -44,15 +52,15 @@ int main (void)
         {
             case 2:
                 read(sockdup, datos_crudos, 300);
-                AltaDatos_Cliente(&TOP_CLIENTE, datos_crudos);
+                AltaDatos_Cliente(&TOP_Clientes, datos_crudos);
                 read(sockdup, datos_crudos, 300);
-                AltaDatos_Equipo(&TOP_EQUIPO, datos_crudos);
+                AltaDatos_Equipo(&TOP_Equipo, datos_crudos);
                 break;
                 //Agregar creacion de estructura reparación
 
             case 5:
                 read(sockdup, &num_de_orden, sizeof(int32_t));
-                puntero_a_cliente=BusquedaCliente_por_numero_de_orden(TOP_CLIENTE, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
+                puntero_a_cliente=BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
                 
                 if (puntero_a_cliente!=NULL)
                 {
@@ -64,7 +72,7 @@ int main (void)
                     write(sockdup, datos_crudos, 300); //Lo envio al cliente
                     strcpy(datos_crudos, "");
                     
-                    puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_EQUIPO, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
+                    puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
                     
                     EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
                     write(sockdup, datos_crudos, 300); //Lo envio al cliente
@@ -83,13 +91,19 @@ int main (void)
                 sockdup = aceptar_pedidos(sock, 1);
                 break;
 
+            case -1:
+                seguir = 'n';
+                close(sockdup);
+                break;
+
             default:
                 break;
-        
         }
-    
     }
+
     close (sock);
+
+    return retorno;
 }
 
 

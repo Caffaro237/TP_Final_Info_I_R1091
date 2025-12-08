@@ -1,29 +1,5 @@
-/**
- * \file sock-lib.c
- * \brief contiene las funciones simplificadas de manejo de sockets para usar en Informática I
- * \author Alejandro Furfaro
- * \date 2018.09.10
- * \author Oscar Paniagua
- * \date 2022.12.12
- */
+#include "Headers.h"
 
-#include "socket.h"
-
-
-/**
- * \fn int open_conection ( struct sockaddr_in * my_addr)
- * \brief Primer función del lado server, que crea un socket lo enlaza con un número de port que es el definido en el header de la
- * biblioteca, el  3490, y define cuntos buffers de conexiones armacenará durante la aceptación de al conexión, y pasa a escuchar.
- * \details Se crea un socket y luego se invoca a la función bind para indicarle al SIstema Operativo por que port escuchará conexiones.
- * Utilizará la ip default invocando a una macro definida en la biblioteca de sockets del sistema operativo. A posteriori se pondrá a escuchar
- * conexiones por el port declarado al Sistema Operativo, definiendo previamente la cantidad de pedidos de conexión remotos que buffereará
- * mientras eventualmente esté iniciando el intercambio con el cliente que pide inicio de una conexión
- * \arg[in] puntero a estrictura sockaddr_in que completará antes de invocar a bind () con el número de port y la ip por la que escuchará
- * conexiones a través del sockeet.
- * return Devuelve un entero con el file descriptor de socket
- * \author Alejandro Furfaro
- * \date 2018.09.10
- */
 
 int abrir_conexion(int port, int backlog, int debug)
 {
@@ -85,20 +61,6 @@ int abrir_conexion(int port, int backlog, int debug)
 	return sockaux;
 }
 
-/**
- * int aceptar_pedidos (int sockfd)
- * \brief Una vez recibido el pedido de conexión, esta función establece la conexión con el extremo remoto.
- * \details Cuando se recibe el pedido de conexión desde el extremo remoto al que se espera en segundo plano mediante la función listen (),
- * se recibe de dicha función el avviso para llamar a accept (). Ests función tiene  por objeto completar la conexión. Durante ese lapso se
- * ejecuta con el cliente reomoto un intercambio de paquetes de control que permiten establecer la conexión de manera confiable y segura.
- * El procecso estará en estado Sleeped hasta que termine esta actividad. Al terminar la función devolverá un  duplicado del socket para
- * ser utilizado en el intercambio de información con el extremo remoto, mientras si se lo desea, al mismmo tiempo se vuelva a escuchar
- * pedidos de conexión por el socket original.
- * \arg[in] sockeet originalmente creado por el que se recibió el pedido de conexión.
- * return Devuelve un entero con el file descriptor de socket duplicado para intercambio de datos
- * \author Alejandro Furfaro
- * \date 2018.09.10
- */
 
 int aceptar_pedidos(int sockfd, int debug)
 {

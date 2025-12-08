@@ -1,3 +1,15 @@
+//Para compilacion desde terminal con gcc usar esta linea
+//gcc ./Cliente/*.c -o ./Cliente/Cliente -Wall
+
+//Para compilacion desde VS Code usar estos include
+/*
+
+#include "socket.c"
+#include "menu.c"
+#include "Mostrar_datos.c"
+
+*/
+
 #include "Headers.h"
 
 int main (void)
