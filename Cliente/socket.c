@@ -1,26 +1,5 @@
-/**
- * \file sock-lib.c
- * \brief contiene las funciones simplificadas de manejo de sockets para usar en Informática I
- * \author Alejandro Furfaro
- * \date 2018.09.10
- * \author Oscar Paniagua
- * \date 2022.12.12
- */
+#include "Headers.h"
 
-#include "socket.h"
-
-/**
- * \fn int conectar (char *hostname, int port)
- * \brief Única función del lado cliente, que crea un socket y conecta a un server que le llega como argumento.
- * \details Se crea un socket y luego se invoca a la función connect para iniciar conexión con el nodo remoto en el
- * cual debe estar ejecutando un programa servidor escuchando conexiones por el mismo port al ue inicia la conexión.
- * El port si es 0 se utiliza el valor por default
- * \return Devuelve un entero con el file descriptor de socket
- * \author Alejandro Furfaro
- * \date 2018.09.10
- * \author Oscar Paniagua
- * \date 2022.12.12
- */
 int conectar(char *hostname, int port, int debug)
 {
 	int sockfd;
@@ -65,5 +44,3 @@ int conectar(char *hostname, int port, int debug)
 
 	return sockfd;
 }
-
-
