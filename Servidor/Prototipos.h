@@ -36,6 +36,7 @@ NodoReparaciones* BusquedaReparaciones_por_numero_de_orden(NodoReparaciones* top
 void Mostrar_reparaciones (NodoReparaciones* reparaciones_a_mostrar); //Funcion para mostrar un elemento de la lista reparaciones
 
 
+void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
 
 
 
