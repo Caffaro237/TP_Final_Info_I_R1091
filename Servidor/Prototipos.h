@@ -12,22 +12,33 @@ int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
 int SepararPorComa(char *linea, char campos[][50]);
 
-//Funciones para alta de remito
-void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos);
+//Funciones para el cliente
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);
-void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos);
 void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos);
-EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos); //Devuelve el string en forma de estructura equipo
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos); //Devuelve el string en forma de estructura cliente
+NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden);//Busqueda por numero de orden (devuelven puntero al nodo buscado)
+void Mostrar_cliente (NodoCliente* cliente_a_mostrar);//Funcion para mostrar un elemento de la lista cliente
 
-//Busqueda por numeor de orden (devuelven puntero al nodo buscado)
-NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden);
-NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden);
 
-//Funciones para mostrar la lista en el servidor
-void Mostrar_cliente (NodoCliente* cliente);
-void Mostrar_equipo (NodoEquipo* equipo);
+//Funciones para el equipo
+void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos);
+void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos);
+EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos); //Devuelve el string en forma de estructura equipo
+NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden); //Busqueda por numero de orden (devuelven puntero al nodo buscado)
+void Mostrar_equipo (NodoEquipo* equipo_a_mostrar); //Funcion para mostrar un elemento de la lista equipo
+
+
+//Funciones para reparaciones
+void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_crudos);
+void AgregarNodo_Reparaciones (NodoReparaciones** top_reparaciones, REPARACIONES datos);
+REPARACIONES Datos_crudos_a_REPARACIONES(char* datos_crudos); //Devuelve el string en forma de estructura reparaciones
+NodoReparaciones* BusquedaReparaciones_por_numero_de_orden(NodoReparaciones* top_reparaciones, int numero_de_orden); //Busqueda por numero de orden (devuelven puntero al nodo buscado)
+void Mostrar_reparaciones (NodoReparaciones* reparaciones_a_mostrar); //Funcion para mostrar un elemento de la lista reparaciones
+
+
 void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
+
+
 
 //Convierte una estructura a cadena
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente);
