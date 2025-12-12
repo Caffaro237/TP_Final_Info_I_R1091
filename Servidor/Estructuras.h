@@ -3,11 +3,11 @@
 
 typedef struct datosCliente{
   int numero_de_orden;
-  char fechaIngreso[11];
-  char nombre[15];
-  char apellido[15];
-  char direccion[20];
-  char telefono[10];
+  char fechaIngreso[MAX_FECHA_INGRESO];
+  char nombre[MAX_NOMBRE];
+  char apellido[MAX_APELLIDO];
+  char direccion[MAX_DIRECCION];
+  char telefono[MAX_TELEFONO];
 } CLIENTE;
 
 
@@ -18,10 +18,10 @@ typedef struct nodoCliente{
 
 typedef struct datosEquipo{
   int numero_de_orden;
-  char tipo[15];
-  char modelo[15];
-  char marca[20];
-  char falla [20];
+  char tipo[MAX_TIPO];
+  char modelo[MAX_MODELO];
+  char marca[MAX_MARCA];
+  char falla [MAX_FALLA];
 } EQUIPO;
 
 
@@ -34,11 +34,11 @@ typedef struct nodoEquipo{
 
 typedef struct datosReparaciones{
   int numero_de_orden;
-  char reparacionAEfectuar[15];
-  char presupuesto[15];
-  char confirmacion[20];
-  char reparado [20];
-  char fechaEgreso[11];
+  char reparacionAEfectuar[MAX_REPARACION];
+  char presupuesto[MAX_PRESUPUESTO];
+  char confirmacion[MAX_CONFIRMACION];
+  char reparado [MAX_REPARADO];
+  char fechaEgreso[MAX_FECHA_EGRESO];
 } REPARACIONES;
 
 
