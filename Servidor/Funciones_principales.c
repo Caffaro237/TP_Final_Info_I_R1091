@@ -1,7 +1,7 @@
 #include "Headers.h"
 
 
-void Opcion_2 (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
+void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
 {
     char datos_crudos [300];
     read(sockdup, datos_crudos, 300);
@@ -13,7 +13,7 @@ void Opcion_2 (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** T
 
 }
 
-void Opcion_4 (int sock, int sockdup, NodoCliente *TOP_Clientes)
+void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
 {
     int existe_el_cliente = 0;
     int32_t opcion_a_modificar;
@@ -108,7 +108,7 @@ void Opcion_4 (int sock, int sockdup, NodoCliente *TOP_Clientes)
 
 }
 
-void Opcion_5 (int sock, int sockdup, NodoEquipo *TOP_Equipo)
+void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 {
     int existe_el_equipo = 0;
     int32_t opcion_a_modificar;
@@ -192,7 +192,7 @@ void Opcion_5 (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 }
 
 
-void Opcion_6 (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
 {
     char datos_crudos[300];
     int32_t num_de_orden;
