@@ -47,19 +47,19 @@ int main (void)
         switch(opcion) 
         {
             case 2:
-                Opcion_2 (sock, sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
+                Alta_de_cliente (sock, sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
                 break;
                 
             case 4:
-                Opcion_4 (sock, sockdup, TOP_Clientes);
+                Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
                 break;
 
             case 5:
-                Opcion_5 (sock, sockdup, TOP_Equipo);
+                Modificar_datos_de_equipo (sock, sockdup, TOP_Equipo);
                 break;
                 
             case 6:
-                Opcion_6 (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+                Buscar_cliente (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
             
 
