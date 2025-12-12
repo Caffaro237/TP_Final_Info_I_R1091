@@ -11,7 +11,7 @@ void Mostrar_cadena (char* cadena);
 
 
 //Pedir datos del cliente
-int vreificar_longitud(char* cadena, int tamaño_maximo);
+int verificar_longitud(char* cadena, int tamaño_maximo);
 void Pedir_datos_del_cliente(char* cadena_para_guardar_datos);
 void Pedir_datos_del_equipo(char* datos_crudos);
 
