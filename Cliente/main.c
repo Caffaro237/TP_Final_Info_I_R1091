@@ -6,7 +6,7 @@
 
 #include "socket.c"
 #include "menu.c"
-#include "MAnejo_datos.c"
+#include "Manejo_datos.c"
 #include "Funciones_principales.c"
 
 */
@@ -32,24 +32,26 @@ int main (void)
            
 
             case 2:
-                Opcion_2(sock);
+                Alta_de_cliente (sock);
                 pausa();
                 break;
 
             case 4:
-                Opcion_4(sock);
+                Modificar_datos_de_cliente (sock);
                 pausa();
                 break;
-
-            case 6:
-                Opcion_6(sock);
-                pausa();
-                break;
-
+            
             case 5:
-                Opcion_5(sock);
+                Modificar_datos_de_equipo (sock);
                 pausa();
                 break;
+            
+            case 6:
+                Buscar_cliente(sock);
+                pausa();
+                break;
+
+          
 
             case 7:
                 printf("Saliendo de la Aplicacion\n");
