@@ -1,0 +1,163 @@
+#include "Headers.h"
+
+void Opcion_2(int sock)
+{
+    char datos[300];
+    Pedir_datos_del_cliente(datos);
+    write(sock, datos, 300);
+    Pedir_datos_del_equipo(datos);
+    write(sock, datos, 300);
+}
+
+void Opcion_4 (int sock)
+{
+    int32_t num_de_orden=0;
+    int32_t opcion_a_modificar;
+    int existe_el_cliente=0;
+    int32_t se_logro_la_modificación;
+    char datos_del_cliente[300];
+    char datos_a_modficar [50];
+
+    printf("Escriba el numero de orden del cliente: ");
+    scanf("%d", &num_de_orden);
+    
+    //Envio el numero de orden
+    write(sock, &num_de_orden, sizeof(int32_t));
+    
+    //El servidor me dice si existe el cliente
+    read(sock, &existe_el_cliente, sizeof(int));
+    
+    if(existe_el_cliente)
+    {
+        //Muestro el cliente
+        read(sock, datos_del_cliente, 300);
+        printf("Los datos del cliente con numero de orden %d son:\n", num_de_orden);
+        Mostrar_cadena(datos_del_cliente);
+        pausa();
+        do
+        {        
+            printf("(0) Fecha de ingreso\n");
+            printf("(1) Nombre\n");
+            printf("(2) Apellido\n");
+            printf("(3) Dirección\n");
+            printf("(4) Telefono\n");
+            printf ("Indique con el numero correspondiente que dato quiere modificar: ");
+            scanf("%d", &opcion_a_modificar);
+
+            if (opcion_a_modificar<0 || opcion_a_modificar>4)
+            {
+                printf("Opcion no valida, intente de vuelta\n");
+            }
+        } while (opcion_a_modificar<0 || opcion_a_modificar>4);
+
+        write(sock, &opcion_a_modificar, sizeof(int32_t)); //Envio la opcion elegida al servidor
+        printf("Escriba el dato a reemplazar: ");
+        scanf("%s", datos_a_modficar);
+        write(sock, datos_a_modficar, 50);
+        read(sock, &se_logro_la_modificación, sizeof(int32_t));
+
+        if (!se_logro_la_modificación)
+        {
+            printf("NO se logro modificar, tipo de dato incompatible\n");
+        }
+    }
+    else 
+    {
+        printf ("No se encontro el numero de orden\n");
+    }
+
+}
+
+void Opcion_5 (int sock)
+{
+    int32_t num_de_orden=0;
+    int32_t opcion_a_modificar;
+    int existe_el_equipo=0;
+    int32_t se_logro_la_modificación;
+    char datos_del_equipo[300];
+    char datos_a_modficar [50];
+
+    printf("Escriba el numero de orden del equipo: ");
+    scanf("%d", &num_de_orden);
+    
+    //Envio el numero de orden
+    write(sock, &num_de_orden, sizeof(int32_t));
+    
+    //El servidor me dice si existe el equipo
+    read(sock, &existe_el_equipo, sizeof(int));
+    
+    if(existe_el_equipo)
+    {
+        //Muestro el equipo
+        read(sock, datos_del_equipo, 300);
+        printf("Los datos del equipo con numero de orden %d son:\n", num_de_orden);
+        Mostrar_cadena(datos_del_equipo);
+        pausa();
+        do
+        {        
+            printf("(0) Tipo\n");
+            printf("(1) Modelo\n");
+            printf("(2) Marca\n");
+            printf("(3) Falla\n");
+            printf ("Indique con el numero correspondiente que dato quiere modificar: ");
+            scanf("%d", &opcion_a_modificar);
+
+            if (opcion_a_modificar<0 || opcion_a_modificar>3)
+            {
+                printf("Opcion no valida, intente de vuelta\n");
+            }
+        } while (opcion_a_modificar<0 || opcion_a_modificar>3);
+
+        write(sock, &opcion_a_modificar, sizeof(int32_t)); //Envio la opcion elegida al servidor
+        printf("Escriba el dato a reemplazar: ");
+        scanf("%s", datos_a_modficar);
+        write(sock, datos_a_modficar, 50);
+        read(sock, &se_logro_la_modificación, sizeof(int32_t));
+
+        if (!se_logro_la_modificación)
+        {
+            printf("NO se logro modificar, tipo de dato incompatible\n");
+        }
+    }
+    else 
+    {
+        printf ("No se encontro el numero de orden\n");
+    }
+
+}
+
+void Opcion_6 (int sock)
+{
+    int32_t num_de_orden=0;
+    int existe_el_cliente=0;
+    char datos[300];
+    printf("Escriba el numero de orden: ");
+    scanf("%d", &num_de_orden);
+    
+    //Envio el numero de orden
+    write(sock, &num_de_orden, sizeof(int32_t));
+    
+    //El servidor me dice si existe el cliente
+    read(sock, &existe_el_cliente, sizeof(int));
+    
+    if(existe_el_cliente)
+    {
+        //Muestro el cliente
+        read(sock, datos, 300);
+        printf("Cliente:\n");
+        Mostrar_cadena(datos);
+        strcpy(datos, "");
+        //Muestro el equipo
+        read(sock, datos, 300);
+        printf("\nEquipo:\n");
+        Mostrar_cadena(datos);
+        //Muestro las reparaciones
+        read(sock, datos, 300);
+        printf("\nReparaciones:\n");
+        Mostrar_cadena(datos);
+    }
+    else 
+    {
+        printf ("No se encontro el numero de orden\n");
+    }
+}
