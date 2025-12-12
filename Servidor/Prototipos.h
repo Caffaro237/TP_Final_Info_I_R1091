@@ -49,7 +49,7 @@ int abrir_conexion(int port, int backlog, int debug); // función que crea la co
 int aceptar_pedidos(int, int debug);                  // función que acepta una conexión entrante
 
 //FUNCIONES PRINCIPALES (que van en el main)
-void Opcion_2 (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones);
-void Opcion_4 (int sock, int sockdup, NodoCliente *TOP_Clientes);
-void Opcion_5 (int sock, int sockdup, NodoEquipo *TOP_Equipo);
-void Opcion_6 (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
+void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones);
+void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes);
+void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo);
+void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
