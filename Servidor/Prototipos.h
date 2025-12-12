@@ -36,14 +36,20 @@ NodoReparaciones* BusquedaReparaciones_por_numero_de_orden(NodoReparaciones* top
 void Mostrar_reparaciones (NodoReparaciones* reparaciones_a_mostrar); //Funcion para mostrar un elemento de la lista reparaciones
 
 
-void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo);
-
+void Mostrar_por_id (int id, NodoCliente* top_cliente, NodoEquipo* top_equipo, NodoReparaciones* top_reparaciones);
 
 
 //Convierte una estructura a cadena
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente);
 void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo);
+void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* cadena_reparaciones);
 
 //Funciones para conexion por Socket
 int abrir_conexion(int port, int backlog, int debug); // función que crea la conexión
 int aceptar_pedidos(int, int debug);                  // función que acepta una conexión entrante
+
+//FUNCIONES PRINCIPALES (que van en el main)
+void Opcion_2 (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones);
+void Opcion_4 (int sock, int sockdup, NodoCliente *TOP_Clientes);
+void Opcion_5 (int sock, int sockdup, NodoEquipo *TOP_Equipo);
+void Opcion_6 (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
