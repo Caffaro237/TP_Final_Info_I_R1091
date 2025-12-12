@@ -138,3 +138,65 @@ void Mostrar_equipo (NodoEquipo* equipo_a_mostrar)
   printf("Marca: %s\n", equipo_a_mostrar->data.marca);
   printf("Falla: %s\n", equipo_a_mostrar->data.falla);
 }
+
+void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
+{
+ int i=0; 
+ int j=0; 
+    
+ 
+ // Obtengo el tipo
+
+ j = 0;
+ // Paro cuando encuentro el final del string, o el límite de palabras.
+ while (estruct_equipo.tipo[j] != '\0' && j < 14)
+ {
+     cadena_equipo[i]= estruct_equipo.tipo[j];
+     i++;
+     j++;
+ }
+ cadena_equipo[i] = ','; // Pongo la coma
+ i++; // Salto la coma
+
+
+
+ // Obtengo el modelo
+ j = 0;
+ // Paro cuando encuentro el final del string, o el límite de palabras.
+ while (estruct_equipo.modelo[j] != '\0' && j < 14)
+ {
+     cadena_equipo[i] = estruct_equipo.modelo[j];
+     i++;
+     j++;
+ }
+ cadena_equipo[i] = ','; // Pongo la coma
+ i++; // Salto la coma
+
+
+
+ // Obtengo la marca
+ j = 0;
+ // Paro cuando encuentro el final del string, o el límite de palabras.
+ while (estruct_equipo.marca[j] != '\0' && j < 19)
+ {
+     cadena_equipo[i] = estruct_equipo.marca[j];
+     i++;
+     j++;
+ }
+ cadena_equipo[i] = ','; // Pongo la coma
+ i++; // Salto la coma
+
+
+
+ // Obtengo la falla
+ j = 0;
+ // Paro cuando encuentro el final del string, o el límite de palabras.
+ while (estruct_equipo.falla[j] != '\0' && j < 19)
+ {
+     cadena_equipo[i] = estruct_equipo.falla[j];
+     i++;
+     j++;
+ }
+
+ cadena_equipo[i] = '\0'; //Añadir el terminador nulo ('\0')
+}
