@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-void Opcion_2(int sock)
+void Alta_de_cliente(int sock)
 {
     char datos[300];
     Pedir_datos_del_cliente(datos);
@@ -9,7 +9,7 @@ void Opcion_2(int sock)
     write(sock, datos, 300);
 }
 
-void Opcion_4 (int sock)
+void Modificar_datos_de_cliente (int sock)
 {
     int32_t num_de_orden=0;
     int32_t opcion_a_modificar;
@@ -68,7 +68,7 @@ void Opcion_4 (int sock)
 
 }
 
-void Opcion_5 (int sock)
+void Modificar_datos_de_equipo (int sock)
 {
     int32_t num_de_orden=0;
     int32_t opcion_a_modificar;
@@ -126,7 +126,7 @@ void Opcion_5 (int sock)
 
 }
 
-void Opcion_6 (int sock)
+void Buscar_cliente (int sock)
 {
     int32_t num_de_orden=0;
     int existe_el_cliente=0;
