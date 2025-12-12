@@ -16,7 +16,7 @@ void Pedir_datos_del_cliente(char* cadena_para_guardar_datos);
 void Pedir_datos_del_equipo(char* datos_crudos);
 
 //FUNCIONES PRINCIPALES (que van en el main)
-void Opcion_2(int sock);
-void Opcion_4 (int sock);
-void Opcion_5 (int sock);
-void Opcion_6 (int sock);
+void Alta_de_cliente (int sock);
+void Modificar_datos_de_cliente (int sock);
+void Modificar_datos_de_equipo (int sock);
+void Buscar_cliente (int sock);
