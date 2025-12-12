@@ -6,7 +6,8 @@
 
 #include "socket.c"
 #include "menu.c"
-#include "Mostrar_datos.c"
+#include "MAnejo_datos.c"
+#include "Funciones_principales.c"
 
 */
 
@@ -14,71 +15,59 @@
 
 int main (void)
 {
-    char datos[300];
+
     int32_t opcion=0;
-    int32_t num_de_orden=0;
-    int existe_el_cliente=0;
-
     int sock;
-    sock = conectar("localhost", 8000, 1);
+    
+    sock = conectar("localhost", PORT, 1);
 
-    while(opcion != 6)
+    while(opcion != 7)
     {
-        strcpy(datos,"");
 
         opcion = menu();
         write(sock, &opcion, sizeof(int32_t));
       
         switch(opcion) 
         {
+           
 
-          case 2:
-                printf("Escriba los datos del cliente: ");
-                scanf("%299s", datos);
-                write(sock, datos, 300);
-                printf("Escriba los datos del equipo: ");
-                scanf("%299s", datos);
-                write(sock, datos, 300);
+            case 2:
+                Opcion_2(sock);
                 pausa();
                 break;
 
-          case 5:
-                printf("Escriba el numero de orden: ");
-                scanf("%d", &num_de_orden);
-                
-                //Envio el numero de orden
-                write(sock, &num_de_orden, sizeof(int32_t));
-                
-                //Muestro el cliente
-                read(sock, &existe_el_cliente, sizeof(int));
-                
-                if(existe_el_cliente)
-                {
-                    read(sock, datos, 300);
-                    printf("Cliente:\n");
-                    Mostrar_cadena(datos);
-                    strcpy(datos, "");
-                    //Muestro el equipo
-                    read(sock, datos, 300);
-                    printf("\nEquipo:\n");
-                    Mostrar_cadena(datos);
-                }
-                else 
-                {
-                    printf ("No se encontro el numero de orden\n");
-                }
+            case 4:
+                Opcion_4(sock);
+                pausa();
+                break;
 
+            case 6:
+                Opcion_6(sock);
+                pausa();
+                break;
+
+            case 5:
+                Opcion_5(sock);
                 pausa();
                 break;
 
             case 7:
                 printf("Saliendo de la Aplicacion\n");
+                close (sock);
+                break;
+                
+            case -1:
+                printf("Cerrando servidor\n");
+                opcion = 7;// Para salir del while
+                close (sock);
                 break;
 
             default:
-                printf("Opción invalida");
+                printf("Opción invalida\n");
                 pausa();
                 break;
+
+
         }
     }
   
