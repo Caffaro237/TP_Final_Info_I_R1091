@@ -17,7 +17,7 @@ void Mostrar_cadena (char* cadena)
     printf("\n");
 }
 
-int vreificar_longitud(char* cadena, int tamaño_maximo)
+int verificar_longitud(char* cadena, int tamaño_maximo)
 {
     int longitud_cadena = strlen(cadena);
 
@@ -46,7 +46,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_FECHA_INGRESO));
+    } while (!verificar_longitud(aux, MAX_FECHA_INGRESO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -61,7 +61,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_NOMBRE));
+    } while (!verificar_longitud(aux, MAX_NOMBRE));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -75,7 +75,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_APELLIDO));
+    } while (!verificar_longitud(aux, MAX_APELLIDO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -89,7 +89,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_DIRECCION));
+    } while (!verificar_longitud(aux, MAX_DIRECCION));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -103,7 +103,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_TELEFONO));
+    } while (!verificar_longitud(aux, MAX_TELEFONO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -123,7 +123,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_TIPO));
+    } while (!verificar_longitud(aux, MAX_TIPO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -138,7 +138,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_MODELO));
+    } while (!verificar_longitud(aux, MAX_MODELO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -152,7 +152,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_MARCA));
+    } while (!verificar_longitud(aux, MAX_MARCA));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -165,7 +165,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
         scanf("%299s", aux);
 
         
-    } while (!vreificar_longitud(aux, MAX_FALLA));
+    } while (!verificar_longitud(aux, MAX_FALLA));
     
     strcpy(&datos_crudos[i], aux);
 
