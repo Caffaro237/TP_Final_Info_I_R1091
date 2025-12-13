@@ -153,7 +153,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 	// Obtengo la fechaIngreso
 	j = 0;
 	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.fechaIngreso[j] != '\0' && j < 10) 
+	while (estruct_cliente.fechaIngreso[j] != '\0' && j < (MAX_FECHA_EGRESO -1)) 
 	{
 			cadena_cliente[i]= estruct_cliente.fechaIngreso[j];
 			i++;
@@ -165,7 +165,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 	// --- Obtengo el nombre ---
 	j = 0;
 	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.nombre[j] != '\0' && j < 14)
+	while (estruct_cliente.nombre[j] != '\0' && j < (MAX_NOMBRE - 1))
 	{
 			cadena_cliente[i] = estruct_cliente.nombre[j];
 			i++;
@@ -177,7 +177,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 	//Obtengo el apellido
 	j = 0;
 	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.apellido[j] != '\0' && j < 14)
+	while (estruct_cliente.apellido[j] != '\0' && j < (MAX_APELLIDO - 1))
 	{
 			cadena_cliente[i] = estruct_cliente.apellido[j];
 			i++;
@@ -189,7 +189,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 	//Obtengo la direccion
 	j = 0;
 	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.direccion[j] != '\0' && j < 19)
+	while (estruct_cliente.direccion[j] != '\0' && j < (MAX_DIRECCION - 1))
 	{
 			cadena_cliente[i] = estruct_cliente.direccion[j];
 			i++;
@@ -201,7 +201,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 	//Obtengo el telefono
 	j = 0;
 	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.telefono[j] != '\0' && j < 9)
+	while (estruct_cliente.telefono[j] != '\0' && j < (MAX_TELEFONO - 1))
 	{
 			cadena_cliente[i] = estruct_cliente.telefono[j];
 			i++;

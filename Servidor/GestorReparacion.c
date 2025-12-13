@@ -156,7 +156,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
 
  j = 0;
  // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.reparacionAEfectuar[j] != '\0' && j < 14)
+ while (estruct_reparaciones.reparacionAEfectuar[j] != '\0' && j < (MAX_REPARACION - 1))
  {
      cadena_reparaciones[i]= estruct_reparaciones.reparacionAEfectuar[j]; //Reemplazo caracter a caracter
      i++;
@@ -165,12 +165,24 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
  cadena_reparaciones[i] = ','; // Pongo la coma
  i++; // Salto la coma
 
+// Obtengo el presupuesto
+
+ j = 0;
+ // Paro cuando encuentro el final del string, o el límite de palabras.
+ while (estruct_reparaciones.presupuesto[j] != '\0' && j < (MAX_PRESUPUESTO - 1))
+ {
+     cadena_reparaciones[i]= estruct_reparaciones.presupuesto[j]; //Reemplazo caracter a caracter
+     i++;
+     j++;
+ }
+ cadena_reparaciones[i] = ','; // Pongo la coma
+ i++; // Salto la coma
 
 
  // Obtengo la confirmacion
  j = 0;
  // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.confirmacion[j] != '\0' && j < 14)
+ while (estruct_reparaciones.confirmacion[j] != '\0' && j < (MAX_CONFIRMACION - 1))
  {
      cadena_reparaciones[i] = estruct_reparaciones.confirmacion[j]; //Reemplazo caracter a caracter
      i++;
@@ -184,7 +196,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
  // Obtengo ele stado de reparacion
  j = 0;
  // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.reparado[j] != '\0' && j < 19)
+ while (estruct_reparaciones.reparado[j] != '\0' && j < (MAX_REPARADO - 1))
  {
      cadena_reparaciones[i] = estruct_reparaciones.reparado[j]; //Reemplazo caracter a caracter
      i++;
@@ -198,7 +210,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
  // Obtengo la fecha de entrega
  j = 0;
  // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.fechaEgreso[j] != '\0' && j < 19)
+ while (estruct_reparaciones.fechaEgreso[j] != '\0' && j < (MAX_FECHA_EGRESO - 1))
  {
      cadena_reparaciones[i] = estruct_reparaciones.fechaEgreso[j]; //Reemplazo caracter a caracter
      i++;

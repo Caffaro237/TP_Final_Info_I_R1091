@@ -61,7 +61,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
   // Obtengo el tipo
   j = 0;
   // Prao cuanod encuentro la coma, o el límite de palabras.
-  while (datos_crudos[i] != ',' && j < 14) 
+  while (datos_crudos[i] != ',' && j < (MAX_TIPO - 1)) 
   {
       equipo_nuevo.tipo[j] = datos_crudos[i];
       i++;
@@ -75,7 +75,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 
   //Obtengo el modelo
   j = 0;
-  while (datos_crudos[i] != ',' && j < 14) 
+  while (datos_crudos[i] != ',' && j < (MAX_MODELO - 1)) 
   {
       equipo_nuevo.modelo[j] = datos_crudos[i];
       i++;
@@ -89,7 +89,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 
   //Obengo la marca
   j = 0;
-  while (datos_crudos[i] != ',' && j < 19) 
+  while (datos_crudos[i] != ',' && j < (MAX_MARCA - 1)) 
   {
       equipo_nuevo.marca[j] = datos_crudos[i];
       i++;
@@ -101,7 +101,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 
   //Obtengo la falla
   j = 0;
-  while (datos_crudos[i] != '\0' && j < 19) 
+  while (datos_crudos[i] != '\0' && j < (MAX_FALLA - 1)) 
   {
       equipo_nuevo.falla[j] = datos_crudos[i];
       i++;
