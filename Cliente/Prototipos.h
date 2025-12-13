@@ -14,9 +14,12 @@ void Mostrar_cadena (char* cadena);
 int verificar_longitud(char* cadena, int tamaño_maximo);
 void Pedir_datos_del_cliente(char* cadena_para_guardar_datos);
 void Pedir_datos_del_equipo(char* datos_crudos);
+void Pedir_datos_de_reparacion (char* datos_crudos);
 
 //FUNCIONES PRINCIPALES (que van en el main)
+void Listar_clientes (int sock);
 void Alta_de_cliente (int sock);
+void Generar_raparacion (int sock);
 void Modificar_datos_de_cliente (int sock);
 void Modificar_datos_de_equipo (int sock);
 void Buscar_cliente (int sock);
