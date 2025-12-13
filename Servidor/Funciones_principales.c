@@ -1,5 +1,51 @@
 #include "Headers.h"
 
+void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+{
+    int32_t termino_la_lista;
+    char datos_a_pasar [300];
+    NodoCliente* puntero_a_cliente = TOP_Clientes;
+    NodoEquipo* puntero_a_equipo = TOP_Equipo;
+    NodoReparaciones* puntero_a_reparaciones = TOP_Reparaciones;
+
+    if (TOP_Clientes != NULL) //Veo si la lista esta vacia
+    {
+        termino_la_lista = 0;
+        write(sockdup, &termino_la_lista, sizeof(int32_t));
+        do
+        {
+
+            EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_a_pasar); //Guardo la estructura en un cadena
+            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+
+            EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_a_pasar); //Guardo la estructura en un cadena
+            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+
+            EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_a_pasar); //Guardo la estructura en un cadena
+            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+
+            //Paso al siguiente elemento
+            puntero_a_cliente = puntero_a_cliente -> next;
+            puntero_a_equipo = puntero_a_equipo -> next;
+            puntero_a_reparaciones = puntero_a_reparaciones -> next;
+
+            if (puntero_a_cliente == NULL) //Si recorri toda lista
+                {
+                    termino_la_lista = 1;
+                }
+
+            write(sockdup, &termino_la_lista, sizeof(int32_t)); //Le digo si llegue al final de la lista
+        } while (!termino_la_lista);
+        
+    }
+    else
+    {
+        termino_la_lista = 1;
+        write(sockdup, &termino_la_lista, sizeof(int32_t));
+
+    }
+}
+
 
 void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
 {
@@ -107,6 +153,37 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
     }
 
 }
+
+void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
+{
+    NodoReparaciones* reparacion_a_generar;
+    int32_t num_de_orden;
+    int existe_la_reparacion = 0;
+    char datos_crudos[300];
+    REPARACIONES reparacion_datos;
+
+
+    read(sockdup, &num_de_orden, sizeof(int32_t));
+    reparacion_a_generar=BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero la reparacion que quiero
+  
+    if (reparacion_a_generar != NULL)
+    {
+        existe_la_reparacion = 1;
+        write(sockdup, &existe_la_reparacion, sizeof(int));
+
+        read(sockdup, datos_crudos, 300);
+        reparacion_datos = Datos_crudos_a_REPARACIONES (datos_crudos);
+        reparacion_datos.numero_de_orden = reparacion_a_generar -> data.numero_de_orden;
+        reparacion_a_generar -> data = reparacion_datos;
+
+    }
+    else
+    {
+        existe_la_reparacion = 0;
+        write(sockdup, &existe_la_reparacion,sizeof(int)); //Lo envio al cliente
+    }
+}
+
 
 void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 {

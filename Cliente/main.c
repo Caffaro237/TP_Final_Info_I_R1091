@@ -29,10 +29,18 @@ int main (void)
       
         switch(opcion) 
         {
-           
+            case 1:
+                Listar_clientes(sock);
+                pausa();
+                break;
 
             case 2:
                 Alta_de_cliente (sock);
+                pausa();
+                break;
+            
+            case 3:
+                Generar_raparacion (sock);
                 pausa();
                 break;
 

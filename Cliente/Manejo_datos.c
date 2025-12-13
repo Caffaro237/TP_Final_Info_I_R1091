@@ -171,3 +171,78 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
 }
 
+void Pedir_datos_de_reparacion (char* datos_crudos)
+{
+
+    int i=0;
+
+    char aux [300];
+    
+    do
+    {
+        printf("Escriba la reparacion a efectuar: ");
+        scanf("%299s", aux);
+
+        
+    } while (!verificar_longitud(aux, MAX_REPARACION));
+    
+    strcpy(&datos_crudos[i], aux);
+
+    
+    i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
+    datos_crudos[i]=',';
+    i++; //Me muevo despues de la coma
+
+    do
+    {
+        printf("Indicar el presupuesto: ");
+        scanf("%299s", aux);
+
+        
+    } while (!verificar_longitud(aux, MAX_PRESUPUESTO));
+    
+    strcpy(&datos_crudos[i], aux);
+
+    i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
+    datos_crudos[i]=',';
+    i++; //Me muevo despues de la coma
+
+    do
+    {
+        printf("Confirmación?: ");
+        scanf("%299s", aux);
+
+        
+    } while (!verificar_longitud(aux, MAX_CONFIRMACION));
+    
+    strcpy(&datos_crudos[i], aux);
+
+    i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
+    datos_crudos[i]=',';
+    i++; //Me muevo despues de la coma
+
+    do
+    {
+        printf("Escriba si se realizo la reparacion: ");
+        scanf("%299s", aux);
+
+        
+    } while (!verificar_longitud(aux, MAX_REPARADO));
+    
+    strcpy(&datos_crudos[i], aux);
+
+    i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
+    datos_crudos[i]=',';
+    i++; //Me muevo despues de la coma
+
+    do
+    {
+        printf("Fecha de egreso: ");
+        scanf("%299s", aux);
+
+        
+    } while (!verificar_longitud(aux, MAX_FECHA_EGRESO));
+    
+    strcpy(&datos_crudos[i], aux);
+
+}
