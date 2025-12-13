@@ -1,5 +1,38 @@
 #include "Headers.h"
 
+void Listar_clientes (int sock)
+{
+    char datos [300];
+    int32_t termino_la_lista;
+    read(sock, &termino_la_lista, sizeof(int32_t));
+
+    if (!termino_la_lista) //Ver si la lista etsa vacia
+    {
+        while (!termino_la_lista)
+        {
+            //Muestro el cliente
+            read(sock, datos, 300);
+            printf("Cliente:\n");
+            Mostrar_cadena(datos);
+            strcpy(datos, "");
+            //Muestro el equipo
+            read(sock, datos, 300);
+            printf("\nEquipo:\n");
+            Mostrar_cadena(datos);
+            //Muestro las reparaciones
+            read(sock, datos, 300);
+            printf("\nReparaciones:\n");
+            Mostrar_cadena(datos);
+
+            read(sock, &termino_la_lista, sizeof(int32_t));        
+        }
+    }
+    else
+    {
+        printf ("No existe la lista\n");
+    }
+}
+
 void Alta_de_cliente(int sock)
 {
     char datos[300];
@@ -67,6 +100,37 @@ void Modificar_datos_de_cliente (int sock)
     }
 
 }
+
+void Generar_raparacion (int sock)
+{
+    int32_t num_de_orden;
+    int existe_la_reparacion = 0;
+    char datos[300];
+
+
+    printf("Escriba el numero de orden de la reparación a generar: ");
+    scanf("%d", &num_de_orden);
+
+    //Envio el numero de orden
+    write(sock, &num_de_orden, sizeof(int32_t));
+
+    //El servidor me dice si existe la reparacion
+    read(sock, &existe_la_reparacion, sizeof(int));
+
+    if (existe_la_reparacion)
+    {
+    Pedir_datos_de_reparacion(datos);
+    write(sock, datos, 300);
+
+
+    }
+    else 
+    {
+        printf ("No se encontro el numero de orden\n");
+    }
+
+}
+
 
 void Modificar_datos_de_equipo (int sock)
 {
