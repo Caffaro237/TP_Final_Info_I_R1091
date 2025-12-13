@@ -145,3 +145,68 @@ void Mostrar_cliente (NodoCliente* cliente_a_mostrar)
   printf("Telefono: %s\n", cliente_a_mostrar->data.telefono);
 
 }
+
+void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
+{
+  int i=0;
+  int j=0;
+	// Obtengo la fechaIngreso
+	j = 0;
+	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
+	while (estruct_cliente.fechaIngreso[j] != '\0' && j < (MAX_FECHA_EGRESO -1)) 
+	{
+			cadena_cliente[i]= estruct_cliente.fechaIngreso[j];
+			i++;
+			j++;
+	}
+	cadena_cliente[i] = ','; // Pongo la coma
+	i++; // Salto la coma
+
+	// --- Obtengo el nombre ---
+	j = 0;
+	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
+	while (estruct_cliente.nombre[j] != '\0' && j < (MAX_NOMBRE - 1))
+	{
+			cadena_cliente[i] = estruct_cliente.nombre[j];
+			i++;
+			j++;
+	}
+	cadena_cliente[i] = ','; // Pongo la coma
+	i++; // Salto la coma
+
+	//Obtengo el apellido
+	j = 0;
+	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
+	while (estruct_cliente.apellido[j] != '\0' && j < (MAX_APELLIDO - 1))
+	{
+			cadena_cliente[i] = estruct_cliente.apellido[j];
+			i++;
+			j++;
+	}
+	cadena_cliente[i] = ','; // Pongo la coma
+	i++; // Salto la coma
+
+	//Obtengo la direccion
+	j = 0;
+	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
+	while (estruct_cliente.direccion[j] != '\0' && j < (MAX_DIRECCION - 1))
+	{
+			cadena_cliente[i] = estruct_cliente.direccion[j];
+			i++;
+			j++;
+	}
+	cadena_cliente[i] = ','; // Pongo la coma
+	i++; // Salto la coma
+
+	//Obtengo el telefono
+	j = 0;
+	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
+	while (estruct_cliente.telefono[j] != '\0' && j < (MAX_TELEFONO - 1))
+	{
+			cadena_cliente[i] = estruct_cliente.telefono[j];
+			i++;
+			j++;
+	}
+	cadena_cliente[i] = '\0'; //Añadir el terminador nulo ('\0')
+	
+}
