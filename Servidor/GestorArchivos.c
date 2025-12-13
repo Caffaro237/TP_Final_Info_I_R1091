@@ -90,9 +90,11 @@ int LeerLinea(int fd, char **linea)
     return bytesLeidos;
 }
 
-int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones, int tipoDato)
+int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato)
 {
     char archivo[100];
+    int fdFile = 0;
+    char buffer[1000] = "";
     
     switch (tipoDato)
     {
@@ -110,6 +112,64 @@ int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones
             return -1;
             break;
     }
+
+    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+
+    if (fdFile == -1)
+    {
+        printf("Error al abrir archivo\n");
+        return -1;
+    }
+
+    switch (tipoDato)
+    {
+        case 1:
+            strcat(buffer, cliente.numero_de_orden);
+            strcat(buffer, ",");
+            strcat(buffer, cliente.fechaIngreso);
+            strcat(buffer, ",");
+            strcat(buffer, cliente.nombre);
+            strcat(buffer, ",");
+            strcat(buffer, cliente.apellido);
+            strcat(buffer, ",");
+            strcat(buffer, cliente.direccion);
+            strcat(buffer, ",");
+            strcat(buffer, cliente.telefono);
+            strcat(buffer, "\n");
+            break;
+        case 2:
+            strcat(buffer, equipo.numero_de_orden);
+            strcat(buffer, ",");
+            strcat(buffer, equipo.tipo);
+            strcat(buffer, ",");
+            strcat(buffer, equipo.marca);
+            strcat(buffer, ",");
+            strcat(buffer, equipo.modelo);
+            strcat(buffer, ",");
+            strcat(buffer, equipo.falla);
+            strcat(buffer, "\n");
+            break;
+        case 3:
+            strcat(buffer, reparaciones.numero_de_orden);
+            strcat(buffer, ",");
+            strcat(buffer, reparaciones.reparacionAEfectuar);
+            strcat(buffer, ",");
+            strcat(buffer, reparaciones.presupuesto);
+            strcat(buffer, ",");
+            strcat(buffer, reparaciones.confirmacion);
+            strcat(buffer, ",");
+            strcat(buffer, reparaciones.reparado);
+            strcat(buffer, ",");
+            strcat(buffer, reparaciones.fechaEgreso);
+            strcat(buffer, "\n");
+            break;
+        
+        default:
+            return -1;
+            break;
+    }
+
+    write(fdFile, buffer, strlen(buffer));
 
     return 0;
 }
