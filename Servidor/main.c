@@ -46,10 +46,18 @@ int main (void)
 
         switch(opcion) 
         {
+            case 1:
+                Listar_clientes (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+                break;
+                
             case 2:
                 Alta_de_cliente (sock, sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
                 break;
                 
+            case 3:
+                Generar_reparacion (sock, sockdup, TOP_Reparaciones);
+                break;
+
             case 4:
                 Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
                 break;
