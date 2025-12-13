@@ -140,8 +140,8 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(cliente.direccion, campos[4]);
             strcpy(cliente.telefono, campos[5]);
 
-            //funcion cargar datos benja
-            //CargarCliente(&TOP_Cliente, cliente);
+            AgregarNodo_Cliente(&TOP_Clientes, cliente);
+
             break;
 
         case 2: //Carga Equipos
@@ -152,7 +152,8 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(equipo.modelo, campos[3]);
             strcpy(equipo.falla, campos[4]);
 
-            //funcion cargar datos benja
+            AgregarNodo_Equipo(&TOP_Equipo, equipo);
+
             break;
 
         case 3: //Carga Reparaciones
@@ -164,7 +165,8 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(reparacion.reparacionAEfectuar, campos[4]);
             strcpy(reparacion.fechaEgreso, campos[5]);
 
-            //funcion cargar datos benja
+            AgregarNodo_Reparaciones(&TOP_Reparaciones, reparacion);
+            
             break;
     
         default:
