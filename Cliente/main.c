@@ -19,7 +19,7 @@ int main (void)
     int32_t opcion=0;
     int sock;
     
-    sock = conectar("localhost", PORT, 1);
+    sock = conectar(SERVER, PORT, 1);
 
     while(opcion != 7)
     {
