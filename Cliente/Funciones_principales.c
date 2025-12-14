@@ -265,6 +265,10 @@ void Enviar_WhatsApp(int sock)
             AbrirWhatsapp(telefono, mensaje);
         }
     }
+    else 
+    {
+        printf ("No se encontro el numero de orden\n");
+    }
 }
 
 void AbrirWhatsapp(char *telefono, char *mensaje)
