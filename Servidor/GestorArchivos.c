@@ -122,7 +122,7 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
     switch (tipoDato)
     {
         case 1:
-            strcat(buffer, cliente.numero_de_orden);
+            strcat(buffer, itoa(cliente.numero_de_orden));
             strcat(buffer, ",");
             strcat(buffer, cliente.fechaIngreso);
             strcat(buffer, ",");
@@ -136,7 +136,7 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
             strcat(buffer, "\n");
             break;
         case 2:
-            strcat(buffer, equipo.numero_de_orden);
+            strcat(buffer, itoa(equipo.numero_de_orden));
             strcat(buffer, ",");
             strcat(buffer, equipo.tipo);
             strcat(buffer, ",");
@@ -148,7 +148,7 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
             strcat(buffer, "\n");
             break;
         case 3:
-            strcat(buffer, reparaciones.numero_de_orden);
+            strcat(buffer, itoa(reparaciones.numero_de_orden));
             strcat(buffer, ",");
             strcat(buffer, reparaciones.reparacionAEfectuar);
             strcat(buffer, ",");
@@ -198,7 +198,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(cliente.direccion, campos[4]);
             strcpy(cliente.telefono, campos[5]);
 
-            AgregarNodo_Cliente(&TOP_Clientes, cliente);
+            AgregarNodo_Cliente(TOP_Clientes, cliente);
 
             break;
 
@@ -210,7 +210,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(equipo.modelo, campos[3]);
             strcpy(equipo.falla, campos[4]);
 
-            AgregarNodo_Equipo(&TOP_Equipo, equipo);
+            AgregarNodo_Equipo(TOP_Equipo, equipo);
 
             break;
 
@@ -223,7 +223,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(reparacion.reparacionAEfectuar, campos[4]);
             strcpy(reparacion.fechaEgreso, campos[5]);
 
-            AgregarNodo_Reparaciones(&TOP_Reparaciones, reparacion);
+            AgregarNodo_Reparaciones(TOP_Reparaciones, reparacion);
             
             break;
     
