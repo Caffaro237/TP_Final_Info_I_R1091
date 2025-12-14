@@ -69,10 +69,12 @@ int main (void)
             case 6:
                 Buscar_cliente (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
-            
 
-            
             case 7:
+                Buscar_Telefono_Cliente(sock, sockdup, TOP_Clientes);
+                break;
+                
+            case 8:
                 close(sockdup);
                 sockdup = aceptar_pedidos(sock, 1);
                 break;

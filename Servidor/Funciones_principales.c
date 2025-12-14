@@ -315,6 +315,33 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 
 }
 
+void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes)
+{
+    int32_t num_de_orden;
+    int existe_el_cliente = 0;
+    char telefono[20] = "";
+
+    NodoCliente* puntero_a_cliente;
+
+    read(sockdup, &num_de_orden, sizeof(int32_t));
+    puntero_a_cliente = BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
+                
+    if (puntero_a_cliente!=NULL)
+    {
+        existe_el_cliente = 1;
+        write(sockdup, &existe_el_cliente, sizeof(int));
+
+        srtcpy(telefono, puntero_a_cliente->data.telefono);
+        
+        write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
+    }
+    else
+    {
+        existe_el_cliente = 0;
+        write(sockdup, &existe_el_cliente, sizeof(int)); //Lo envio al cliente
+    }
+}
+
 
 int SepararPorPuntoComa(char *linea, char campos[][50])
 {
