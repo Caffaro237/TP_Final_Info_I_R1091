@@ -61,7 +61,7 @@ REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
   // Obtengo la fechaIngreso
 	j = 0;
 	// Paro cuando encuentro la coma, o el límite de palabras.
-	while (datos_crudos[i] != ',' && j < 10) 
+	while (datos_crudos[i] != ';' && j < 10) 
 	{
 		reparaciones_nuevo.reparacionAEfectuar[j] = datos_crudos[i];
 		i++;
@@ -72,7 +72,7 @@ REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 
 	// Obtengo el nombre
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 14) 
+	while (datos_crudos[i] != ';' && j < 14) 
 	{
 		reparaciones_nuevo.presupuesto[j] = datos_crudos[i];
 		i++;
@@ -83,7 +83,7 @@ REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 
 	// Obtengo el apellido
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 14) 
+	while (datos_crudos[i] != ';' && j < 14) 
 	{
 		reparaciones_nuevo.confirmacion[j] = datos_crudos[i];
 		i++;
@@ -94,7 +94,7 @@ REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 
 	// Obtengo la direccion
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 19) 
+	while (datos_crudos[i] != ';' && j < 19) 
 	{
 		reparaciones_nuevo.reparado[j] = datos_crudos[i];
 		i++;
@@ -162,7 +162,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
      i++;
      j++;
  }
- cadena_reparaciones[i] = ','; // Pongo la coma
+ cadena_reparaciones[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 // Obtengo el presupuesto
@@ -175,7 +175,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
      i++;
      j++;
  }
- cadena_reparaciones[i] = ','; // Pongo la coma
+ cadena_reparaciones[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 
@@ -188,7 +188,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
      i++;
      j++;
  }
- cadena_reparaciones[i] = ','; // Pongo la coma
+ cadena_reparaciones[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 
@@ -202,7 +202,7 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
      i++;
      j++;
  }
- cadena_reparaciones[i] = ','; // Pongo la coma
+ cadena_reparaciones[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 

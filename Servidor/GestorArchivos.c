@@ -128,43 +128,43 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
         case 1:
             sprintf(auxNumeroOrden, "%d", cliente.numero_de_orden);
             strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, cliente.fechaIngreso);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, cliente.nombre);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, cliente.apellido);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, cliente.direccion);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, cliente.telefono);
             strcat(buffer, "\n");
             break;
         case 2:
             sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
             strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, equipo.tipo);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, equipo.marca);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, equipo.modelo);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, equipo.falla);
             strcat(buffer, "\n");
             break;
         case 3:
             sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
             strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.reparacionAEfectuar);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.presupuesto);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.confirmacion);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.reparado);
-            strcat(buffer, ",");
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.fechaEgreso);
             strcat(buffer, "\n");
             break;
@@ -187,7 +187,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
     EQUIPO equipo;
     REPARACIONES reparacion;
 
-    int cantidad = SepararPorComa(linea, campos);
+    int cantidad = SepararPorPuntoComa(linea, campos);
 
     if(cantidad == 0)
     {
@@ -240,31 +240,6 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
     }
     
     return 0;
-}
-
-int SepararPorComa(char *linea, char campos[][50])
-{
-    int i;
-    int j = 0;
-    int k = 0;
-
-    for (i = 0; linea[i] != '\0'; i++)
-    {
-        if (linea[i] == ',')
-        {
-            campos[k][j] = '\0';
-            k++;
-            j = 0;
-        }
-        else
-        {
-            campos[k][j++] = linea[i];
-        }
-    }
-
-    campos[k][j] = '\0';
-
-    return k + 1; //Cantidad de campos encontrados
 }
 
 #endif

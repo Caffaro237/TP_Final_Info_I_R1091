@@ -61,7 +61,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
   // Obtengo el tipo
   j = 0;
   // Prao cuanod encuentro la coma, o el límite de palabras.
-  while (datos_crudos[i] != ',' && j < (MAX_TIPO - 1)) 
+  while (datos_crudos[i] != ';' && j < (MAX_TIPO - 1)) 
   {
       equipo_nuevo.tipo[j] = datos_crudos[i];
       i++;
@@ -75,7 +75,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 
   //Obtengo el modelo
   j = 0;
-  while (datos_crudos[i] != ',' && j < (MAX_MODELO - 1)) 
+  while (datos_crudos[i] != ';' && j < (MAX_MODELO - 1)) 
   {
       equipo_nuevo.modelo[j] = datos_crudos[i];
       i++;
@@ -89,7 +89,7 @@ EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 
   //Obengo la marca
   j = 0;
-  while (datos_crudos[i] != ',' && j < (MAX_MARCA - 1)) 
+  while (datos_crudos[i] != ';' && j < (MAX_MARCA - 1)) 
   {
       equipo_nuevo.marca[j] = datos_crudos[i];
       i++;
@@ -155,7 +155,7 @@ void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
      i++;
      j++;
  }
- cadena_equipo[i] = ','; // Pongo la coma
+ cadena_equipo[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 
@@ -169,7 +169,7 @@ void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
      i++;
      j++;
  }
- cadena_equipo[i] = ','; // Pongo la coma
+ cadena_equipo[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 
@@ -183,7 +183,7 @@ void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
      i++;
      j++;
  }
- cadena_equipo[i] = ','; // Pongo la coma
+ cadena_equipo[i] = ';'; // Pongo la coma
  i++; // Salto la coma
 
 
