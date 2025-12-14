@@ -11,18 +11,18 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
     if (TOP_Clientes != NULL) //Veo si la lista esta vacia
     {
         termino_la_lista = 0;
-        write(sockdup, &termino_la_lista, sizeof(int32_t));
+        write(sockdup, &termino_la_lista, sizeof(termino_la_lista));
         do
         {
 
             EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, strlen(datos_a_pasar)); //Lo envio al cliente
 
             EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, strlen(datos_a_pasar)); //Lo envio al cliente
 
             EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, strlen(datos_a_pasar)); //Lo envio al cliente
 
             //Paso al siguiente elemento
             puntero_a_cliente = puntero_a_cliente -> next;
@@ -34,14 +34,14 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
                     termino_la_lista = 1;
                 }
 
-            write(sockdup, &termino_la_lista, sizeof(int32_t)); //Le digo si llegue al final de la lista
+            write(sockdup, &termino_la_lista, sizeof(termino_la_lista)); //Le digo si llegue al final de la lista
         } while (!termino_la_lista);
         
     }
     else
     {
         termino_la_lista = 1;
-        write(sockdup, &termino_la_lista, sizeof(int32_t));
+        write(sockdup, &termino_la_lista, sizeof(termino_la_lista));
 
     }
 }
@@ -74,11 +74,11 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
     if (puntero_a_cliente!=NULL)
     {
         existe_el_cliente = 1;
-        write(sockdup, &existe_el_cliente, sizeof(int));
+        write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente));
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_del_cliente); //Guardo la estructura en un cadena
         
-        write(sockdup, datos_del_cliente, sizeof(datos_del_cliente)); //Lo envio al cliente
+        write(sockdup, datos_del_cliente, strlen(datos_del_cliente)); //Lo envio al cliente
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
@@ -143,12 +143,12 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
                 break;
 
         }
-        write(sockdup, &se_logro_la_modificación, sizeof(int32_t)); //Lo digo al cliente si logro hacer la modificación o no
+        write(sockdup, &se_logro_la_modificación, sizeof(se_logro_la_modificación)); //Lo digo al cliente si logro hacer la modificación o no
     }
     else
     {
         existe_el_cliente=0;
-        write(sockdup, &existe_el_cliente,sizeof(int)); //Lo envio al cliente
+        write(sockdup, &existe_el_cliente,sizeof(existe_el_cliente)); //Lo envio al cliente
     }
 
 }
@@ -169,7 +169,7 @@ void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacion
     if (reparacion_a_generar != NULL)
     {
         existe_la_reparacion = 1;
-        write(sockdup, &existe_la_reparacion, sizeof(int));
+        write(sockdup, &existe_la_reparacion, sizeof(existe_la_reparacion));
 
         read(sockdup, datos_crudos, sizeof(datos_crudos));
         reparacion_datos = Datos_crudos_a_REPARACIONES (datos_crudos);
@@ -180,7 +180,7 @@ void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacion
     else
     {
         existe_la_reparacion = 0;
-        write(sockdup, &existe_la_reparacion,sizeof(int)); //Lo envio al cliente
+        write(sockdup, &existe_la_reparacion,sizeof(existe_la_reparacion)); //Lo envio al cliente
     }
 }
 
@@ -201,11 +201,11 @@ void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
     if (puntero_a_equipo!=NULL)
     {
         existe_el_equipo = 1;
-        write(sockdup, &existe_el_equipo, sizeof(int));
+        write(sockdup, &existe_el_equipo, sizeof(existe_el_equipo));
         
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_del_equipo); //Guardo la estructura en un cadena
         
-        write(sockdup, datos_del_equipo, sizeof(datos_del_equipo)); //Lo envio al equipo
+        write(sockdup, datos_del_equipo, strlen(datos_del_equipo)); //Lo envio al equipo
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
@@ -258,12 +258,12 @@ void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
                 break;
 
         }
-        write(sockdup, &se_logro_la_modificación, sizeof(int32_t)); //Lo digo al cliente si logro hacer la modificación o no
+        write(sockdup, &se_logro_la_modificación, sizeof(se_logro_la_modificación)); //Lo digo al cliente si logro hacer la modificación o no
     }
     else
     {
         existe_el_equipo=0;
-        write(sockdup, &existe_el_equipo,sizeof(int)); //Lo envio al equipo
+        write(sockdup, &existe_el_equipo,sizeof(existe_el_equipo)); //Lo envio al equipo
     }
 
 }
@@ -285,26 +285,26 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
     if (puntero_a_cliente!=NULL)
     {
         existe_el_cliente = 1;
-        write(sockdup, &existe_el_cliente, sizeof(int));
+        write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente));
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
+        write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
         sleep(1);
         
         puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
+        write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
         sleep(1);
 
         puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
         EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
+        write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
 
     }
     else
     {
-        existe_el_cliente=0;
-        write(sockdup, &existe_el_cliente,sizeof(int)); //Lo envio al cliente
+        existe_el_cliente = 0;
+        write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente)); //Lo envio al cliente
     }
 }
 
@@ -326,24 +326,24 @@ void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, N
     if (puntero_a_cliente!=NULL)
     {
         existe_el_cliente = 1;
-        write(sockdup, &existe_el_cliente, sizeof(int));
+        write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente));
 
         strcpy(telefono, puntero_a_cliente->data.telefono);
         strcpy(reparado, puntero_a_reparaciones->data.reparado);
 
         if(!strcmp(reparado, "NO"))
         {
-            write(sockdup, reparado, sizeof(reparado)); //Lo envio al cliente
+            write(sockdup, reparado, strlen(reparado)); //Lo envio al cliente
         }
         else
         {
-            write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
+            write(sockdup, telefono, strlen(telefono)); //Lo envio al cliente
         }
     }
     else
     {
         existe_el_cliente = 0;
-        write(sockdup, &existe_el_cliente, sizeof(int)); //Lo envio al cliente
+        write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente)); //Lo envio al cliente
     }
 }
 
