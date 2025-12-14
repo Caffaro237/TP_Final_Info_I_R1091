@@ -51,8 +51,6 @@ int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
             return retorno;
         }
 
-        printf("Linea: %s\n", linea);
-
         free(linea);
     }
 

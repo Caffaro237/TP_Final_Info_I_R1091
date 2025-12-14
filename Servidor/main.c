@@ -118,6 +118,8 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
         return retorno;
     }
 
+    printf("Archivos leidos y cargados con exito.\n\n");
+
     return retorno;
 }
 
