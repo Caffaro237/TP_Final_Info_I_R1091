@@ -230,11 +230,10 @@ void Enviar_WhatsApp(int sock)
 {
     int32_t num_de_orden = 0;
     int existe_el_cliente = 0;
-    char datos[1000];
-    int columnas = 0;
-    char campos[6][50];
+    char datos[20];
     char telefono[20] = "549";
-    char mensaje[1000] = "Enviando desde Programa en C";
+    char mensaje[1000];
+    char auxNumeroOrden[5] = "";
 
     printf("Escriba el numero de orden: ");
     scanf("%d", &num_de_orden);
@@ -249,18 +248,15 @@ void Enviar_WhatsApp(int sock)
     {
         read(sock, datos, sizeof(datos));
 
-        columnas = SepararPorPuntoComa(datos, campos);
+        strcat(mensaje, "Buenas tardes\n Su equipo se encuentra reparado, el numero de orden es: ");
+        sprintf(auxNumeroOrden, "%d", num_de_orden);
+        strcat(mensaje, auxNumeroOrden);
 
-        //strcat(telefono, campos[5]);
-
-        strcat(telefono, "1127473452");
+        strcat(telefono, datos);
 
         SoloDigitos(telefono);
 
-        strcat(mensaje, ", Telefono obtenido: ");
-        strcat(mensaje, campos[5]);
-
-        AbrirWhatsapp(telefono, mensaje)
+        AbrirWhatsapp(telefono, mensaje);
     }
 }
 
@@ -272,6 +268,7 @@ void AbrirWhatsapp(char *telefono, char *mensaje)
     strcat(comando, telefono);
     strcat(comando, "?text=");
     strcat(comando, mensaje);
+    strcat(comando, "\""); 
 
     system(comando);
 }
