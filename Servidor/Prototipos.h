@@ -18,7 +18,7 @@ void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos);
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos); //Devuelve el string en forma de estructura cliente
 NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden);//Busqueda por numero de orden (devuelven puntero al nodo buscado)
 void Mostrar_cliente (NodoCliente* cliente_a_mostrar);//Funcion para mostrar un elemento de la lista cliente
-void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes);
+void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones);
 
 
 //Funciones para el equipo

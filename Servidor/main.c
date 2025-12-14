@@ -71,7 +71,7 @@ int main (void)
                 break;
 
             case 7:
-                Buscar_Telefono_Cliente(sock, sockdup, TOP_Clientes);
+                Buscar_Telefono_Cliente(sock, sockdup, TOP_Clientes, TOP_Reparaciones);
                 break;
                 
             case 8:
