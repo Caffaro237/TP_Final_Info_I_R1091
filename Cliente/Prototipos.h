@@ -8,6 +8,8 @@ int conectar(char *hostname, int port, int debug); // funcion que se conecta a u
 
 //Muestra los datos separados por coma de una cadena de caracteres
 void Mostrar_cadena (char* cadena);
+void SoloDigitos(char *telefono);
+void AbrirWhatsapp(char *telefono, char *mensaje);
 
 
 //Pedir datos del cliente
@@ -23,3 +25,4 @@ void Generar_raparacion (int sock);
 void Modificar_datos_de_cliente (int sock);
 void Modificar_datos_de_equipo (int sock);
 void Buscar_cliente (int sock);
+void Enviar_WhatsApp(int sock);

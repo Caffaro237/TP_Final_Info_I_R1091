@@ -194,7 +194,7 @@ void Buscar_cliente (int sock)
 {
     int32_t num_de_orden=0;
     int existe_el_cliente=0;
-    char datos[300];
+    char datos[1000];
     printf("Escriba el numero de orden: ");
     scanf("%d", &num_de_orden);
     
@@ -207,16 +207,16 @@ void Buscar_cliente (int sock)
     if(existe_el_cliente)
     {
         //Muestro el cliente
-        read(sock, datos, 300);
+        read(sock, datos, sizeof(datos));
         printf("Cliente:\n");
         Mostrar_cadena(datos);
         strcpy(datos, "");
         //Muestro el equipo
-        read(sock, datos, 300);
+        read(sock, datos, sizeof(datos));
         printf("\nEquipo:\n");
         Mostrar_cadena(datos);
         //Muestro las reparaciones
-        read(sock, datos, 300);
+        read(sock, datos, sizeof(datos));
         printf("\nReparaciones:\n");
         Mostrar_cadena(datos);
     }
@@ -224,4 +224,96 @@ void Buscar_cliente (int sock)
     {
         printf ("No se encontro el numero de orden\n");
     }
+}
+
+void Enviar_WhatsApp(int sock)
+{
+    int32_t num_de_orden = 0;
+    int existe_el_cliente = 0;
+    char datos[1000];
+    int columnas = 0;
+    char campos[6][50];
+    char telefono[20] = "549";
+    char mensaje[1000] = "Enviando desde Programa en C";
+
+    printf("Escriba el numero de orden: ");
+    scanf("%d", &num_de_orden);
+    
+    //Envio el numero de orden
+    write(sock, &num_de_orden, sizeof(int32_t));
+    
+    //El servidor me dice si existe el cliente
+    read(sock, &existe_el_cliente, sizeof(int));
+
+    if(!existe_el_cliente)
+    {
+        read(sock, datos, sizeof(datos));
+
+        columnas = SepararPorPuntoComa(datos, campos);
+
+        //strcat(telefono, campos[5]);
+
+        strcat(telefono, "1127473452");
+
+        SoloDigitos(telefono);
+
+        strcat(mensaje, ", Telefono obtenido: ");
+        strcat(mensaje, campos[5]);
+
+        AbrirWhatsapp(telefono, mensaje)
+    }
+}
+
+void AbrirWhatsapp(char *telefono, char *mensaje)
+{
+    char comando[1000] = "";
+
+    strcat(comando, "xdg-open \"https://wa.me/");
+    strcat(comando, telefono);
+    strcat(comando, "?text=");
+    strcat(comando, mensaje);
+
+    system(comando);
+}
+
+void SoloDigitos(char *telefono)
+{
+    char *telefonoOriginal = telefono;
+    char *telefonoSinGuiones = telefono;
+
+    while(*telefonoOriginal)
+    {
+        if (isdigit((unsigned char)*telefonoOriginal))
+        {
+            *telefonoSinGuiones++ = *telefonoOriginal;
+        }
+        telefonoOriginal++;
+    }
+
+    *telefonoSinGuiones = '\0';
+}
+
+int SepararPorPuntoComa(char *linea, char campos[][50])
+{
+    int i;
+    int j = 0;
+    int k = 0;
+
+    for (i = 0; linea[i] != '\0'; i++)
+    {
+        if (linea[i] == ';')
+        {
+            campos[k][j] = '\0';
+            k++;
+            j = 0;
+        }
+        else
+        {
+            campos[k][j++] = linea[i];
+        }
+    }
+
+    campos[k][j] = '\0';
+
+    return k + 1; //Cantidad de campos encontrados
 }
