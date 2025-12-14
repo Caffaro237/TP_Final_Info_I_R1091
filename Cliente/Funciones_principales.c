@@ -244,7 +244,7 @@ void Enviar_WhatsApp(int sock)
     //El servidor me dice si existe el cliente
     read(sock, &existe_el_cliente, sizeof(int));
 
-    if(!existe_el_cliente)
+    if(existe_el_cliente)
     {
         read(sock, datos, sizeof(datos));
 

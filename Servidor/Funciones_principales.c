@@ -290,17 +290,15 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
         write(sockdup, &existe_el_cliente, sizeof(int));
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
-        
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
-
+        sleep(1);
         
         puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
+        sleep(1);
 
         puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        
         EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_crudos); //Guardo la estructura en un cadena
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
 
@@ -331,7 +329,7 @@ void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes)
         existe_el_cliente = 1;
         write(sockdup, &existe_el_cliente, sizeof(int));
 
-        srtcpy(telefono, puntero_a_cliente->data.telefono);
+        strcpy(telefono, puntero_a_cliente->data.telefono);
         
         write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
     }

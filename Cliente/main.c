@@ -71,7 +71,7 @@ int main (void)
                 
             case -1:
                 printf("Cerrando servidor\n");
-                opcion = 7;// Para salir del while
+                opcion = 8;// Para salir del while
                 close (sock);
                 break;
 
