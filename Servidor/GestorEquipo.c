@@ -55,61 +55,19 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 
 EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 {
-  EQUIPO equipo_nuevo;
-  int i=0;
-  int j=0;
-  // Obtengo el tipo
-  j = 0;
-  // Prao cuanod encuentro la coma, o el límite de palabras.
-  while (datos_crudos[i] != ';' && j < (MAX_TIPO - 1)) 
-  {
-      equipo_nuevo.tipo[j] = datos_crudos[i];
-      i++;
-      j++;
-  }
-  i+=1; //Salto la coma
-  equipo_nuevo.tipo[j] = '\0'; // Terminación
+  char campos[5][50];
+	EQUIPO equipo;
 
-  
+	SepararPorPuntoComa(datos_crudos, campos);
+
+	strcpy(equipo.tipo, campos[1]);
+  strcpy(equipo.marca, campos[2]);
+  strcpy(equipo.modelo, campos[3]);
+  strcpy(equipo.falla, campos[4]);
 
 
-  //Obtengo el modelo
-  j = 0;
-  while (datos_crudos[i] != ';' && j < (MAX_MODELO - 1)) 
-  {
-      equipo_nuevo.modelo[j] = datos_crudos[i];
-      i++;
-      j++;
-  }
-  i+=1; //Salto la coma
-  equipo_nuevo.modelo[j] = '\0'; // Terminación
+  return equipo;
 
-
-
-
-  //Obengo la marca
-  j = 0;
-  while (datos_crudos[i] != ';' && j < (MAX_MARCA - 1)) 
-  {
-      equipo_nuevo.marca[j] = datos_crudos[i];
-      i++;
-      j++;
-  }
-  i++; //Salto la coma
-  equipo_nuevo.marca[j] = '\0'; // Terminación
-
-
-  //Obtengo la falla
-  j = 0;
-  while (datos_crudos[i] != '\0' && j < (MAX_FALLA - 1)) 
-  {
-      equipo_nuevo.falla[j] = datos_crudos[i];
-      i++;
-      j++;
-  }
-  equipo_nuevo.falla[j] = '\0'; // Terminación
-
-  return equipo_nuevo;
 }
 
 NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden)
@@ -131,6 +89,7 @@ NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numer
 
 }
 
+
 void Mostrar_equipo (NodoEquipo* equipo_a_mostrar)
 {
   printf("Tipo: %s\n", equipo_a_mostrar->data.tipo);
@@ -141,62 +100,7 @@ void Mostrar_equipo (NodoEquipo* equipo_a_mostrar)
 
 void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
 {
- int i=0; 
- int j=0; 
-    
- 
- // Obtengo el tipo
-
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_equipo.tipo[j] != '\0' && j < 14)
- {
-     cadena_equipo[i]= estruct_equipo.tipo[j];
-     i++;
-     j++;
- }
- cadena_equipo[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
-
- // Obtengo el modelo
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_equipo.modelo[j] != '\0' && j < 14)
- {
-     cadena_equipo[i] = estruct_equipo.modelo[j];
-     i++;
-     j++;
- }
- cadena_equipo[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
-
- // Obtengo la marca
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_equipo.marca[j] != '\0' && j < 19)
- {
-     cadena_equipo[i] = estruct_equipo.marca[j];
-     i++;
-     j++;
- }
- cadena_equipo[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
-
- // Obtengo la falla
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_equipo.falla[j] != '\0' && j < 19)
- {
-     cadena_equipo[i] = estruct_equipo.falla[j];
-     i++;
-     j++;
- }
-
- cadena_equipo[i] = '\0'; //Añadir el terminador nulo ('\0')
+	CLIENTE x;
+	REPARACIONES z;
+	UnirPorPuntoComa(x, estruct_equipo, z, 2, cadena_equipo);
 }

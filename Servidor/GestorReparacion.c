@@ -54,66 +54,18 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 {
-  int i=0;
-  int j=0;
-  REPARACIONES reparaciones_nuevo;
+  char campos[6][50];
+  REPARACIONES reparacion;
 
-  // Obtengo la fechaIngreso
-	j = 0;
-	// Paro cuando encuentro la coma, o el límite de palabras.
-	while (datos_crudos[i] != ';' && j < 10) 
-	{
-		reparaciones_nuevo.reparacionAEfectuar[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	reparaciones_nuevo.reparacionAEfectuar[j] = '\0'; // Terminación
-	i++; // Salto la coma
+  SepararPorPuntoComa(datos_crudos, campos);
 
-	// Obtengo el nombre
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 14) 
-	{
-		reparaciones_nuevo.presupuesto[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	reparaciones_nuevo.presupuesto[j] = '\0'; // Terminación
-	i++; // Salto la coma
+  strcpy(reparacion.reparacionAEfectuar, campos[1]);
+  strcpy(reparacion.presupuesto, campos[2]);
+  strcpy(reparacion.confirmacion, campos[3]);
+  strcpy(reparacion.reparado, campos[4]);
+  strcpy(reparacion.fechaEgreso, campos[5]);
 
-	// Obtengo el apellido
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 14) 
-	{
-		reparaciones_nuevo.confirmacion[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-		reparaciones_nuevo.confirmacion[j] = '\0'; // Terminación
-	i++; // Salto la coma
-
-	// Obtengo la direccion
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 19) 
-	{
-		reparaciones_nuevo.reparado[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	reparaciones_nuevo.reparado[j] = '\0'; // Terminación
-	i++; // Salto la coma
-
-	// Obtengo el telefono
-	j = 0;
-	while (datos_crudos[i] != '\0' && j < 9) 
-	{
-		reparaciones_nuevo.fechaEgreso[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-		reparaciones_nuevo.fechaEgreso[j] = '\0'; // Terminación
-
-    return reparaciones_nuevo;
+  return reparacion;
 }
 
 NodoReparaciones* BusquedaReparaciones_por_numero_de_orden(NodoReparaciones* top_reparaciones, int numero_de_orden)
@@ -148,74 +100,7 @@ void Mostrar_reparaciones (NodoReparaciones* reparaciones_a_mostrar)
 
 void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* cadena_reparaciones)
 {
- int i=0; // Índice para escribir en cadena_cliente
- int j=0; // Índice para leer en estruct_reparaciones
-    
- 
- // Obtengo las reparaciones a efectuar
-
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.reparacionAEfectuar[j] != '\0' && j < (MAX_REPARACION - 1))
- {
-     cadena_reparaciones[i]= estruct_reparaciones.reparacionAEfectuar[j]; //Reemplazo caracter a caracter
-     i++;
-     j++;
- }
- cadena_reparaciones[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-// Obtengo el presupuesto
-
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.presupuesto[j] != '\0' && j < (MAX_PRESUPUESTO - 1))
- {
-     cadena_reparaciones[i]= estruct_reparaciones.presupuesto[j]; //Reemplazo caracter a caracter
-     i++;
-     j++;
- }
- cadena_reparaciones[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
- // Obtengo la confirmacion
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.confirmacion[j] != '\0' && j < (MAX_CONFIRMACION - 1))
- {
-     cadena_reparaciones[i] = estruct_reparaciones.confirmacion[j]; //Reemplazo caracter a caracter
-     i++;
-     j++;
- }
- cadena_reparaciones[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
-
- // Obtengo ele stado de reparacion
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.reparado[j] != '\0' && j < (MAX_REPARADO - 1))
- {
-     cadena_reparaciones[i] = estruct_reparaciones.reparado[j]; //Reemplazo caracter a caracter
-     i++;
-     j++;
- }
- cadena_reparaciones[i] = ';'; // Pongo la coma
- i++; // Salto la coma
-
-
-
- // Obtengo la fecha de entrega
- j = 0;
- // Paro cuando encuentro el final del string, o el límite de palabras.
- while (estruct_reparaciones.fechaEgreso[j] != '\0' && j < (MAX_FECHA_EGRESO - 1))
- {
-     cadena_reparaciones[i] = estruct_reparaciones.fechaEgreso[j]; //Reemplazo caracter a caracter
-     i++;
-     j++;
- }
-
- cadena_reparaciones[i] = '\0'; //Añadir el terminador nulo ('\0')
+ 	CLIENTE x;
+	EQUIPO y;
+	UnirPorPuntoComa(x, y, estruct_reparaciones, 3, cadena_reparaciones);
 }

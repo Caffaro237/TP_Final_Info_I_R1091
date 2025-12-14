@@ -93,7 +93,7 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
     char archivo[100];
     int fdFile = 0;
     char buffer[1000] = "";
-    char auxNumeroOrden[5] = "";
+
     
     switch (tipoDato)
     {
@@ -119,59 +119,12 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
         printf("Error al abrir archivo\n");
         return -1;
     }
-    
-    memset(buffer, 0, sizeof(buffer));
-    memset(auxNumeroOrden, 0, sizeof(auxNumeroOrden));
 
-    switch (tipoDato)
+    memset(buffer, 0, sizeof(buffer));
+
+    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, tipoDato, buffer))
     {
-        case 1:
-            sprintf(auxNumeroOrden, "%d", cliente.numero_de_orden);
-            strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ";");
-            strcat(buffer, cliente.fechaIngreso);
-            strcat(buffer, ";");
-            strcat(buffer, cliente.nombre);
-            strcat(buffer, ";");
-            strcat(buffer, cliente.apellido);
-            strcat(buffer, ";");
-            strcat(buffer, cliente.direccion);
-            strcat(buffer, ";");
-            strcat(buffer, cliente.telefono);
-            strcat(buffer, "\n");
-            break;
-        case 2:
-            sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
-            strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ";");
-            strcat(buffer, equipo.tipo);
-            strcat(buffer, ";");
-            strcat(buffer, equipo.marca);
-            strcat(buffer, ";");
-            strcat(buffer, equipo.modelo);
-            strcat(buffer, ";");
-            strcat(buffer, equipo.falla);
-            strcat(buffer, "\n");
-            break;
-        case 3:
-            sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
-            strcat(buffer, auxNumeroOrden);
-            strcat(buffer, ";");
-            strcat(buffer, reparaciones.reparacionAEfectuar);
-            strcat(buffer, ";");
-            strcat(buffer, reparaciones.presupuesto);
-            strcat(buffer, ";");
-            strcat(buffer, reparaciones.confirmacion);
-            strcat(buffer, ";");
-            strcat(buffer, reparaciones.reparado);
-            strcat(buffer, ";");
-            strcat(buffer, reparaciones.fechaEgreso);
-            strcat(buffer, "\n");
-            break;
-        
-        default:
-            return -1;
-            break;
+        return -1;
     }
 
     write(fdFile, buffer, strlen(buffer));

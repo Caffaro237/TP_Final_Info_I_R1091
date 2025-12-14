@@ -55,64 +55,16 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 {
-  int i=0;
-  int j=0;
-  CLIENTE cliente_nuevo;
+	char campos[6][50];
+	CLIENTE cliente_nuevo;
 
-  // Obtengo la fechaIngreso
-	j = 0;
-	// Paro cuando encuentro la coma, o el límite de palabras.
-	while (datos_crudos[i] != ';' && j < 10) 
-	{
-		cliente_nuevo.fechaIngreso[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	cliente_nuevo.fechaIngreso[j] = '\0'; // Terminación
-	 i++; // Salto la coma
+	SepararPorPuntoComa(datos_crudos, campos);
 
-	// Obtengo el nombre
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 14) 
-	{
-		cliente_nuevo.nombre[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	cliente_nuevo.nombre[j] = '\0'; // Terminación
-	i++; // Salto la coma
-
-	// Obtengo el apellido
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 14) 
-	{
-		cliente_nuevo.apellido[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-		cliente_nuevo.apellido[j] = '\0'; // Terminación
-	i++; // Salto la coma
-
-	// Obtengo la direccion
-	j = 0;
-	while (datos_crudos[i] != ';' && j < 19) 
-	{
-		cliente_nuevo.direccion[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-	cliente_nuevo.direccion[j] = '\0'; // Terminación
-	i++; // Salto la coma
-
-	// Obtengo el telefono
-	j = 0;
-	while (datos_crudos[i] != '\0' && j < 9) 
-	{
-		cliente_nuevo.telefono[j] = datos_crudos[i];
-		i++;
-		j++;
-	}
-		cliente_nuevo.telefono[j] = '\0'; // Terminación
+	strcpy(cliente_nuevo.fechaIngreso, campos[1]);
+	strcpy(cliente_nuevo.nombre, campos[2]);
+	strcpy(cliente_nuevo.apellido, campos[3]);
+	strcpy(cliente_nuevo.direccion, campos[4]);
+	strcpy(cliente_nuevo.telefono, campos[5]);
 
     return cliente_nuevo;
 }
@@ -148,65 +100,7 @@ void Mostrar_cliente (NodoCliente* cliente_a_mostrar)
 
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 {
-  int i=0;
-  int j=0;
-	// Obtengo la fechaIngreso
-	j = 0;
-	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.fechaIngreso[j] != '\0' && j < (MAX_FECHA_EGRESO -1)) 
-	{
-			cadena_cliente[i]= estruct_cliente.fechaIngreso[j];
-			i++;
-			j++;
-	}
-	cadena_cliente[i] = ';'; // Pongo la coma
-	i++; // Salto la coma
-
-	// --- Obtengo el nombre ---
-	j = 0;
-	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.nombre[j] != '\0' && j < (MAX_NOMBRE - 1))
-	{
-			cadena_cliente[i] = estruct_cliente.nombre[j];
-			i++;
-			j++;
-	}
-	cadena_cliente[i] = ';'; // Pongo la coma
-	i++; // Salto la coma
-
-	//Obtengo el apellido
-	j = 0;
-	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.apellido[j] != '\0' && j < (MAX_APELLIDO - 1))
-	{
-			cadena_cliente[i] = estruct_cliente.apellido[j];
-			i++;
-			j++;
-	}
-	cadena_cliente[i] = ';'; // Pongo la coma
-	i++; // Salto la coma
-
-	//Obtengo la direccion
-	j = 0;
-	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.direccion[j] != '\0' && j < (MAX_DIRECCION - 1))
-	{
-			cadena_cliente[i] = estruct_cliente.direccion[j];
-			i++;
-			j++;
-	}
-	cadena_cliente[i] = ';'; // Pongo la coma
-	i++; // Salto la coma
-
-	//Obtengo el telefono
-	j = 0;
-	// Paro cuando encuentro el final de la estructura, o el límite de palabras.
-	while (estruct_cliente.telefono[j] != '\0' && j < (MAX_TELEFONO - 1))
-	{
-			cadena_cliente[i] = estruct_cliente.telefono[j];
-			i++;
-			j++;
-	}
-	cadena_cliente[i] = '\0'; //Añadir el terminador nulo ('\0')
-	
+	EQUIPO y;
+	REPARACIONES z;
+	UnirPorPuntoComa(estruct_cliente, y, z, 1, cadena_cliente);
 }

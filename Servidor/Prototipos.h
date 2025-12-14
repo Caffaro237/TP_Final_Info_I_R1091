@@ -11,6 +11,7 @@ int LeerLinea(int fd, char **linea);
 int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato);
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
 int SepararPorPuntoComa(char *linea, char campos[][50]);
+int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);
 
 //Funciones para el cliente
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);
