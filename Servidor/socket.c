@@ -53,6 +53,7 @@ int abrir_conexion(int port, int backlog, int debug)
 	if (debug)
 	{
 		printf("Se abrio la conexion correctamente\n");
+		printf("Escuchando en el puerto %d\n", port);
 	}
 
 
@@ -77,7 +78,6 @@ int aceptar_pedidos(int sockfd, int debug)
 		if (debug)
 		{
 			printf("Conexión desde: %s\n", inet_ntoa(their_addr.sin_addr));
-			printf("Escuchando en el puerto %d", PORT);
 		}
 
 		return newfd;
