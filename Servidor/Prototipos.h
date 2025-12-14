@@ -8,7 +8,9 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 //Funciones para manejo archivos
 int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, int tipoDato);
 int LeerLinea(int fd, char **linea);
-int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato);
+int EscribirNuevoCliente(CLIENTE cliente);
+int EscribirNuevoEquipo(EQUIPO equipo);
+int EscribirNuevoReparacion(REPARACIONES reparaciones);
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
 int SepararPorPuntoComa(char *linea, char campos[][50]);
 int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);

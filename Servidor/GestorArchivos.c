@@ -88,29 +88,17 @@ int LeerLinea(int fd, char **linea)
     return bytesLeidos;
 }
 
-int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato)
+int EscribirNuevoCliente(CLIENTE cliente)
 {
     char archivo[100];
     int fdFile = 0;
     char buffer[1000] = "";
 
+    EQUIPO equipo;
+    REPARACIONES reparaciones;
+
     
-    switch (tipoDato)
-    {
-        case 1:
-            strcpy(archivo, ARCHIVO_CLIENTES);
-            break;
-        case 2:
-            strcpy(archivo, ARCHIVO_EQUIPOS);
-            break;
-        case 3:
-            strcpy(archivo, ARCHIVO_REPARACIONES);
-            break;
-        
-        default:
-            return -1;
-            break;
-    }
+    strcpy(archivo, ARCHIVO_CLIENTES);
 
     fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
 
@@ -122,7 +110,69 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, tipoDato, buffer))
+    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer))
+    {
+        return -1;
+    }
+
+    write(fdFile, buffer, strlen(buffer));
+
+    return 0;
+}
+
+int EscribirNuevoEquipo(EQUIPO equipo)
+{
+    char archivo[100];
+    int fdFile = 0;
+    char buffer[1000] = "";
+
+    CLIENTE cliente;
+    REPARACIONES reparaciones;
+    
+    strcpy(archivo, ARCHIVO_EQUIPOS);
+
+    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+
+    if (fdFile == -1)
+    {
+        printf("Error al abrir archivo\n");
+        return -1;
+    }
+
+    memset(buffer, 0, sizeof(buffer));
+
+    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer))
+    {
+        return -1;
+    }
+
+    write(fdFile, buffer, strlen(buffer));
+
+    return 0;
+}
+
+int EscribirNuevoReparacion(REPARACIONES reparaciones)
+{
+    char archivo[100];
+    int fdFile = 0;
+    char buffer[1000] = "";
+
+    CLIENTE cliente;
+    EQUIPO equipo;
+    
+    strcpy(archivo, ARCHIVO_REPARACIONES);
+
+    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+
+    if (fdFile == -1)
+    {
+        printf("Error al abrir archivo\n");
+        return -1;
+    }
+
+    memset(buffer, 0, sizeof(buffer));
+
+    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer))
     {
         return -1;
     }

@@ -16,13 +16,13 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
         {
 
             EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
 
             EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
 
             EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_a_pasar); //Guardo la estructura en un cadena
-            write(sockdup, datos_a_pasar, 300); //Lo envio al cliente
+            write(sockdup, datos_a_pasar, sizeof(datos_a_pasar)); //Lo envio al cliente
 
             //Paso al siguiente elemento
             puntero_a_cliente = puntero_a_cliente -> next;
@@ -50,13 +50,11 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
 void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
 {
     char datos_crudos [300];
-    read(sockdup, datos_crudos, 300);
+    read(sockdup, datos_crudos, sizeof(datos_crudos));
     AltaDatos_Cliente(TOP_Clientes, datos_crudos);
-    read(sockdup, datos_crudos, 300);
+    read(sockdup, datos_crudos, sizeof(datos_crudos));
     AltaDatos_Equipo(TOP_Equipo, datos_crudos);
-    AltaDatos_Reparaciones(TOP_Reparaciones, "Indefinido,Indefinido,Indefinido,Indefinido,Indefinido"); //Creo la estructura reparación vacia
-                
-
+    AltaDatos_Reparaciones(TOP_Reparaciones, "N/A;0;NO;NO;N/A"); //Creo la estructura reparación vacia
 }
 
 
@@ -80,7 +78,7 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_del_cliente); //Guardo la estructura en un cadena
         
-        write(sockdup, datos_del_cliente, 300); //Lo envio al cliente
+        write(sockdup, datos_del_cliente, sizeof(datos_del_cliente)); //Lo envio al cliente
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
@@ -173,7 +171,7 @@ void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacion
         existe_la_reparacion = 1;
         write(sockdup, &existe_la_reparacion, sizeof(int));
 
-        read(sockdup, datos_crudos, 300);
+        read(sockdup, datos_crudos, sizeof(datos_crudos));
         reparacion_datos = Datos_crudos_a_REPARACIONES (datos_crudos);
         reparacion_datos.numero_de_orden = reparacion_a_generar -> data.numero_de_orden;
         reparacion_a_generar -> data = reparacion_datos;
@@ -207,7 +205,7 @@ void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
         
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_del_equipo); //Guardo la estructura en un cadena
         
-        write(sockdup, datos_del_equipo, 300); //Lo envio al equipo
+        write(sockdup, datos_del_equipo, sizeof(datos_del_equipo)); //Lo envio al equipo
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
@@ -290,17 +288,17 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
         write(sockdup, &existe_el_cliente, sizeof(int));
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, 300); //Lo envio al cliente
+        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
         sleep(1);
         
         puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, 300); //Lo envio al cliente
+        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
         sleep(1);
 
         puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
         EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, 300); //Lo envio al cliente
+        write(sockdup, datos_crudos, sizeof(datos_crudos)); //Lo envio al cliente
 
     }
     else
@@ -308,10 +306,8 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
         existe_el_cliente=0;
         write(sockdup, &existe_el_cliente,sizeof(int)); //Lo envio al cliente
     }
-
-
-
 }
+
 
 void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
 {
@@ -376,6 +372,7 @@ int SepararPorPuntoComa(char *linea, char campos[][50])
 
     return k + 1; //Cantidad de campos encontrados
 }
+
 
 int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer)
 {

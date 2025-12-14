@@ -50,7 +50,7 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 	
 
   AgregarNodo_Cliente(top_cliente, cliente_nuevo);
-
+  EscribirNuevoCliente(cliente_nuevo);
 }
 
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
@@ -66,7 +66,7 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 	strcpy(cliente_nuevo.direccion, campos[4]);
 	strcpy(cliente_nuevo.telefono, campos[5]);
 
-    return cliente_nuevo;
+  return cliente_nuevo;
 }
 
 NodoCliente* BusquedaCliente_por_numero_de_orden(NodoCliente* top_cliente, int numero_de_orden)

@@ -49,7 +49,7 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 	
 
   AgregarNodo_Reparaciones(top_reparaciones, reparaciones_nuevo);
-
+  EscribirNuevoReparacion(reparaciones_nuevo);
 }
 
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
