@@ -154,7 +154,8 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
             strcat(buffer, "\n");
             break;
         case 3:
-            strcat(buffer, itoa(reparaciones.numero_de_orden));
+            sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
             strcat(buffer, ",");
             strcat(buffer, reparaciones.reparacionAEfectuar);
             strcat(buffer, ",");
