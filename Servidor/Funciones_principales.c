@@ -313,16 +313,19 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 
 }
 
-void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes)
+void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
 {
     int32_t num_de_orden;
     int existe_el_cliente = 0;
     char telefono[20] = "";
+    char reparado[5] = "";
 
     NodoCliente* puntero_a_cliente;
+    NodoReparaciones* puntero_a_reparaciones;
 
     read(sockdup, &num_de_orden, sizeof(int32_t));
     puntero_a_cliente = BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
+    puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
                 
     if (puntero_a_cliente!=NULL)
     {
@@ -330,8 +333,16 @@ void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes)
         write(sockdup, &existe_el_cliente, sizeof(int));
 
         strcpy(telefono, puntero_a_cliente->data.telefono);
-        
-        write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
+        strcpy(reparado, puntero_a_reparaciones->data.reparado);
+
+        if(!strcmp(reparado, "NO"))
+        {
+            write(sockdup, reparado, sizeof(reparado)); //Lo envio al cliente
+        }
+        else
+        {
+            write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
+        }
     }
     else
     {

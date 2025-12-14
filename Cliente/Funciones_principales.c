@@ -248,15 +248,22 @@ void Enviar_WhatsApp(int sock)
     {
         read(sock, datos, sizeof(datos));
 
-        strcat(mensaje, "Buenas tardes\n Su equipo se encuentra reparado, el numero de orden es: ");
-        sprintf(auxNumeroOrden, "%d", num_de_orden);
-        strcat(mensaje, auxNumeroOrden);
+        if(!strcmp(datos, "NO"))
+        {
+            printf("No se puede dar aviso de un equipo no reparado\n");
+        }
+        else
+        {
+            strcat(mensaje, "Buenas tardes. Su equipo se encuentra reparado, el numero de orden es: ");
+            sprintf(auxNumeroOrden, "%d", num_de_orden);
+            strcat(mensaje, auxNumeroOrden);
 
-        strcat(telefono, datos);
+            strcat(telefono, datos);
 
-        SoloDigitos(telefono);
+            SoloDigitos(telefono);
 
-        AbrirWhatsapp(telefono, mensaje);
+            AbrirWhatsapp(telefono, mensaje);
+        }
     }
 }
 
