@@ -56,14 +56,17 @@ int main (void)
                 
             case 3:
                 Generar_reparacion (sock, sockdup, TOP_Reparaciones);
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
                 break;
 
             case 4:
                 Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
                 break;
 
             case 5:
                 Modificar_datos_de_equipo (sock, sockdup, TOP_Equipo);
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
                 break;
                 
             case 6:

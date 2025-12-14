@@ -14,6 +14,8 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones);
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
 int SepararPorPuntoComa(char *linea, char campos[][50]);
 int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);
+int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato);
+int SeleccionarArchivo(char *archivo, int tipoDato);
 
 //Funciones para el cliente
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);

@@ -15,24 +15,7 @@ int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 
     char archivo[100];
 
-    switch (tipoDato)
-    {
-        case 1:
-            strcpy(archivo, ARCHIVO_CLIENTES);
-            break;
-            
-        case 2:
-            strcpy(archivo, ARCHIVO_EQUIPOS);
-            break;
-
-        case 3:
-            strcpy(archivo, ARCHIVO_REPARACIONES);
-            break;
-        
-        default:
-            return -1;
-            break;
-    }
+    SeleccionarArchivo(archivo, tipoDato);
 
     fdFile = open(archivo, O_RDONLY);
 
@@ -242,6 +225,106 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             break;
     }
     
+    return 0;
+}
+
+int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato)
+{
+    char archivo[100];
+    int fdFile = 0;
+    char buffer[1000] = "";
+
+    SeleccionarArchivo(archivo, tipoDato);
+
+    fdFile = open(archivo, O_WRONLY | O_CREAT | O_TRUNC, 0644); // TRUNC = borra y reescribe
+
+    if (fdFile == -1)
+    {
+        printf("Error al abrir archivo\n");
+        return -1;
+    }
+
+    char linea[256];
+
+    switch (tipoDato)
+    {
+        case 1:
+            while(TOP_Clientes != NULL)
+            {
+                memset(buffer, 0, sizeof(buffer));
+
+                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer))
+                {
+                    return -1;
+                }
+                
+                write(fdFile, buffer, strlen(buffer));
+
+                TOP_Clientes = TOP_Clientes->next;
+            }
+            break;
+        case 2:
+            while(TOP_Equipo != NULL)
+            {
+                memset(buffer, 0, sizeof(buffer));
+
+                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer))
+                {
+                    return -1;
+                }
+                
+                write(fdFile, buffer, strlen(buffer));
+
+                TOP_Equipo = TOP_Equipo->next;
+            }
+
+        case 3:
+            while(TOP_Reparaciones != NULL)
+            {
+                memset(buffer, 0, sizeof(buffer));
+
+                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer))
+                {
+                    return -1;
+                }
+                
+                write(fdFile, buffer, strlen(buffer));
+
+                TOP_Reparaciones = TOP_Reparaciones->next;
+            }
+    
+        default:
+            return -1;
+            break;
+    }
+
+    
+
+    close(fdFile);
+    return 1;
+}
+
+int SeleccionarArchivo(char *archivo, int tipoDato)
+{
+    switch (tipoDato)
+    {
+        case 1:
+            strcpy(archivo, ARCHIVO_CLIENTES);
+            break;
+            
+        case 2:
+            strcpy(archivo, ARCHIVO_EQUIPOS);
+            break;
+
+        case 3:
+            strcpy(archivo, ARCHIVO_REPARACIONES);
+            break;
+        
+        default:
+            return -1;
+            break;
+    }
+
     return 0;
 }
 
