@@ -194,7 +194,7 @@ void Buscar_cliente (int sock)
 {
     int32_t num_de_orden=0;
     int existe_el_cliente=0;
-    char datos[1000];
+    char datos[1000] = "";
     printf("Escriba el numero de orden: ");
     scanf("%d", &num_de_orden);
     
@@ -204,17 +204,22 @@ void Buscar_cliente (int sock)
     //El servidor me dice si existe el cliente
     read(sock, &existe_el_cliente, sizeof(int));
     
+    memset(datos, 0, sizeof(datos));
+
     if(existe_el_cliente)
     {
         //Muestro el cliente
         read(sock, datos, sizeof(datos));
         printf("Cliente:\n");
         Mostrar_cadena(datos);
-        strcpy(datos, "");
+        memset(datos, 0, sizeof(datos));
+
         //Muestro el equipo
         read(sock, datos, sizeof(datos));
         printf("\nEquipo:\n");
         Mostrar_cadena(datos);
+        memset(datos, 0, sizeof(datos));
+
         //Muestro las reparaciones
         read(sock, datos, sizeof(datos));
         printf("\nReparaciones:\n");

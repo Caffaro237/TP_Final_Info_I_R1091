@@ -1,16 +1,16 @@
-1106;PC Escritorio;;;Enciende - no da imagen
-1107;PC Escritorio;;;Colocar ssd - limpieza
-1108;Pendrive;-;-;Instalar boteable windows 11
+1106;PC Escritorio;N/A;N/A;Enciende - no da imagen
+1107;PC Escritorio;N/A;N/A;Colocar ssd - limpieza
+1108;Pendrive;N/A;N/A;Instalar boteable windows 11
 1109;Netbook;eNOVA;C141EP-I3ST;No anda teclapo
 1110;All in One;ASUS;TUF FX516P;Limpieza
 1111;Televisor;Noblex;43LD882FI;No da imagen
 1112;Notebook;Noblex;NB1502;No conecta redes wifi telecentro
-1113;PC Escritorio;;;Conexion a impresora - a domicilio
+1113;PC Escritorio;N/A;N/A;Conexion a impresora - a domicilio
 1114;Notebook;Gateway;GWTN156-11BK;Pantalla rota
-1115;PC Escritorio;;;Limpieza hardware general - no da imagen
-1116;PC Escritorio;;;Revisar y limpieza
+1115;PC Escritorio;N/A;N/A;Limpieza hardware general - no da imagen
+1116;PC Escritorio;N/A;N/A;Revisar y limpieza
 1117;PC Escritorio - Impresora;Brother;DCP-1617NW;No anda internet por cable - no conecta impresora
 1118;Notebook;Compaq;21N2F7AR;Bisagra dañada
-1119;PC Escritorio;;;No enciende
+1119;PC Escritorio;N/A;N/A;No enciende
 1120;Notebook;Compaq;21N2F7AR;No anda teclado
-1121;Notebook;HP;X;Restaurar carcasa y bisagras - cambias a ssd
+1121;Notebook;HP;N/A;Restaurar carcasa y bisagras - cambias a ssd
