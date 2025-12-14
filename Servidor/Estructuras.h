@@ -19,7 +19,7 @@ typedef struct nodoCliente{
 typedef struct datosEquipo{
   int numero_de_orden;
   char tipo[MAX_TIPO];
-  char modelo[MAX_MODELO];
+  char modelo[MAX_MODELO];//intercambiar modelo y marca hacerlo en todos los lugares usados
   char marca[MAX_MARCA];
   char falla [MAX_FALLA];
 } EQUIPO;
