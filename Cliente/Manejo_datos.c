@@ -5,7 +5,7 @@ void Mostrar_cadena (char* cadena)
     int i=0;
     while (cadena[i] != '\0')
     {
-        if (cadena[i]==',') //Si encuentro una coma, meto enter y paso al siguiente
+        if (cadena[i]==';') //Si encuentro una coma, meto enter y paso al siguiente
         {
             printf ("\n");
             i++;
@@ -52,7 +52,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
 
     
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -66,7 +66,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -80,7 +80,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -94,7 +94,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -129,7 +129,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -143,7 +143,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -157,7 +157,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     {
@@ -190,7 +190,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
 
     
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -204,7 +204,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -218,7 +218,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do
@@ -232,7 +232,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     strcpy(&datos_crudos[i], aux);
 
     i= i + strlen(aux);// Desplazo hasta el final del dato copiado, donde hay un '\0'
-    datos_crudos[i]=',';
+    datos_crudos[i]=';';
     i++; //Me muevo despues de la coma
 
     do

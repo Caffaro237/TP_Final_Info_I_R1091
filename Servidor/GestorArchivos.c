@@ -51,8 +51,6 @@ int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
             return retorno;
         }
 
-        printf("Linea: %s\n", linea);
-
         free(linea);
     }
 
@@ -90,9 +88,12 @@ int LeerLinea(int fd, char **linea)
     return bytesLeidos;
 }
 
-int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones, int tipoDato)
+int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato)
 {
     char archivo[100];
+    int fdFile = 0;
+    char buffer[1000] = "";
+    char auxNumeroOrden[5] = "";
     
     switch (tipoDato)
     {
@@ -111,6 +112,70 @@ int EscribirArchivo(CLIENTE *cliente, EQUIPO *equipo, REPARACIONES *reparaciones
             break;
     }
 
+    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+
+    if (fdFile == -1)
+    {
+        printf("Error al abrir archivo\n");
+        return -1;
+    }
+    
+    memset(buffer, 0, sizeof(buffer));
+    memset(auxNumeroOrden, 0, sizeof(auxNumeroOrden));
+
+    switch (tipoDato)
+    {
+        case 1:
+            sprintf(auxNumeroOrden, "%d", cliente.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.fechaIngreso);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.nombre);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.apellido);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.direccion);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.telefono);
+            strcat(buffer, "\n");
+            break;
+        case 2:
+            sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.tipo);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.marca);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.modelo);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.falla);
+            strcat(buffer, "\n");
+            break;
+        case 3:
+            sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.reparacionAEfectuar);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.presupuesto);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.confirmacion);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.reparado);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.fechaEgreso);
+            strcat(buffer, "\n");
+            break;
+        
+        default:
+            return -1;
+            break;
+    }
+
+    write(fdFile, buffer, strlen(buffer));
+
     return 0;
 }
 
@@ -122,7 +187,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
     EQUIPO equipo;
     REPARACIONES reparacion;
 
-    int cantidad = SepararPorComa(linea, campos);
+    int cantidad = SepararPorPuntoComa(linea, campos);
 
     if(cantidad == 0)
     {
@@ -140,8 +205,8 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(cliente.direccion, campos[4]);
             strcpy(cliente.telefono, campos[5]);
 
-            //funcion cargar datos benja
-            //CargarCliente(&TOP_Cliente, cliente);
+            AgregarNodo_Cliente(TOP_Clientes, cliente);
+
             break;
 
         case 2: //Carga Equipos
@@ -152,7 +217,8 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(equipo.modelo, campos[3]);
             strcpy(equipo.falla, campos[4]);
 
-            //funcion cargar datos benja
+            AgregarNodo_Equipo(TOP_Equipo, equipo);
+
             break;
 
         case 3: //Carga Reparaciones
@@ -161,10 +227,11 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(reparacion.reparacionAEfectuar, campos[1]);
             strcpy(reparacion.presupuesto, campos[2]);
             strcpy(reparacion.confirmacion, campos[3]);
-            strcpy(reparacion.reparacionAEfectuar, campos[4]);
+            strcpy(reparacion.reparado, campos[4]);
             strcpy(reparacion.fechaEgreso, campos[5]);
 
-            //funcion cargar datos benja
+            AgregarNodo_Reparaciones(TOP_Reparaciones, reparacion);
+            
             break;
     
         default:
@@ -173,31 +240,6 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
     }
     
     return 0;
-}
-
-int SepararPorComa(char *linea, char campos[][50])
-{
-    int i;
-    int j = 0;
-    int k = 0;
-
-    for (i = 0; linea[i] != '\0'; i++)
-    {
-        if (linea[i] == ',')
-        {
-            campos[k][j] = '\0';
-            k++;
-            j = 0;
-        }
-        else
-        {
-            campos[k][j++] = linea[i];
-        }
-    }
-
-    campos[k][j] = '\0';
-
-    return k + 1; //Cantidad de campos encontrados
 }
 
 #endif

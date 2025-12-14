@@ -59,6 +59,7 @@ void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEqu
 
 }
 
+
 void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
 {
     int existe_el_cliente = 0;
@@ -153,6 +154,7 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
     }
 
 }
+
 
 void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
 {
@@ -311,4 +313,30 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 
 
 
+}
+
+
+int SepararPorPuntoComa(char *linea, char campos[][50])
+{
+    int i;
+    int j = 0;
+    int k = 0;
+
+    for (i = 0; linea[i] != '\0'; i++)
+    {
+        if (linea[i] == ';')
+        {
+            campos[k][j] = '\0';
+            k++;
+            j = 0;
+        }
+        else
+        {
+            campos[k][j++] = linea[i];
+        }
+    }
+
+    campos[k][j] = '\0';
+
+    return k + 1; //Cantidad de campos encontrados
 }

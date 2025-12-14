@@ -1,16 +1,16 @@
-1106,Reparacion Fuente alimentacion,140000,OK,Reparado,29/10/2024
-1107,Colocacion SSD 240GB, Limpieza, Placa WiFi,120000,NO,No Reparado,27/12/2024
-1108,Instalar Windows 11,5000,OK,Reparado,28/12/2024
-1109,Cambio/Reparacion Teclado,0,OK,No Reparado,25/02/2025
-1110,Limpieza,25000,OK,Reparado,24/01/2025
-1111,Sin Reparacion,0,NO,No Reparado,06/05/2025
-1112,Cambio placa Wifi,30000,OK,Reparado,25/02/2025
-1113,Instalacion Driver Impresora,5000,OK,Reparado,25/02/2025
-1114,Cambio Pantalla - LM156LFCL,300000,NO,No Reparado,26/02/2025
-1115,Limpieza Hardware,33000,OK,Reparado,07/03/2025
-1116,Limpieza, reparacion y reconfiguracion BIOS,80000,OK,Reparado,28/05/2025
-1117,Configuracion WiFi,15000,OK,Reparado,09/06/2025
-1118,Reparacion bisagra pantalla,30000,OK,Reparado,07/09/2025
-1119,Reparar socket AM4, pines procesador, boton encendido, colocacion pasta termica, reparacion RAM,125000,OK,Reparado,02/10/2025
-1120,Cambio teclado,130000,OK,Reparado,07/10/2025
-1121,,0,,,
+1106;Reparacion Fuente alimentacion;14,0000;OK;SI;29/10/2024
+1107;Colocacion SSD 240GB - Limpieza - Placa WiFi;120000;NO;NO;27/12/2024
+1108;Instalar Windows 11;5000;OK;SI;28/12/2024
+1109;Cambio/Reparacion Teclado;0;OK;NO;25/02/2025
+1110;Limpieza;25000;OK;SI;24/01/2025
+1111;Sin Reparacion;0;NO;NO;06/05/2025
+1112;Cambio placa Wifi;30000;OK;SI;25/02/2025
+1113;Instalacion Driver Impresora;5000;OK;SI;25/02/2025
+1114;Cambio Pantalla - LM156LFCL;300000;NO;NO;26/02/2025
+1115;Limpieza Hardware;33000;OK;SI;07/03/2025
+1116;Limpieza - reparacion y reconfiguracion BIOS;80000;OK;SI;28/05/2025
+1117;Configuracion WiFi;15000;OK;SI;09/06/2025
+1118;Reparacion bisagra pantalla;30000;OK;SI;07/09/2025
+1119;Reparar socket AM4 - pines procesador - boton encendido - colocacion pasta termica - reparacion RAM;125000;OK;SI;02/10/2025
+1120;Cambio teclado;130000;OK;SI;07/10/2025
+1121;;0;;;

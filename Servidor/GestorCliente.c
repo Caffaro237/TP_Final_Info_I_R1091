@@ -62,7 +62,7 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
   // Obtengo la fechaIngreso
 	j = 0;
 	// Paro cuando encuentro la coma, o el límite de palabras.
-	while (datos_crudos[i] != ',' && j < 10) 
+	while (datos_crudos[i] != ';' && j < 10) 
 	{
 		cliente_nuevo.fechaIngreso[j] = datos_crudos[i];
 		i++;
@@ -73,7 +73,7 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 
 	// Obtengo el nombre
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 14) 
+	while (datos_crudos[i] != ';' && j < 14) 
 	{
 		cliente_nuevo.nombre[j] = datos_crudos[i];
 		i++;
@@ -84,7 +84,7 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 
 	// Obtengo el apellido
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 14) 
+	while (datos_crudos[i] != ';' && j < 14) 
 	{
 		cliente_nuevo.apellido[j] = datos_crudos[i];
 		i++;
@@ -95,7 +95,7 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 
 	// Obtengo la direccion
 	j = 0;
-	while (datos_crudos[i] != ',' && j < 19) 
+	while (datos_crudos[i] != ';' && j < 19) 
 	{
 		cliente_nuevo.direccion[j] = datos_crudos[i];
 		i++;
@@ -159,7 +159,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 			i++;
 			j++;
 	}
-	cadena_cliente[i] = ','; // Pongo la coma
+	cadena_cliente[i] = ';'; // Pongo la coma
 	i++; // Salto la coma
 
 	// --- Obtengo el nombre ---
@@ -171,7 +171,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 			i++;
 			j++;
 	}
-	cadena_cliente[i] = ','; // Pongo la coma
+	cadena_cliente[i] = ';'; // Pongo la coma
 	i++; // Salto la coma
 
 	//Obtengo el apellido
@@ -183,7 +183,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 			i++;
 			j++;
 	}
-	cadena_cliente[i] = ','; // Pongo la coma
+	cadena_cliente[i] = ';'; // Pongo la coma
 	i++; // Salto la coma
 
 	//Obtengo la direccion
@@ -195,7 +195,7 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 			i++;
 			j++;
 	}
-	cadena_cliente[i] = ','; // Pongo la coma
+	cadena_cliente[i] = ';'; // Pongo la coma
 	i++; // Salto la coma
 
 	//Obtengo el telefono
