@@ -15,7 +15,7 @@
 #include <ctype.h>
 
 
-#define SERVER "localhost"  /* Servidor al que se conectará*/
+#define SERVER "reparacionespcmaster.ddns.net"  /* Servidor al que se conectará*/
 #define PORT 7726  /* El puerto donde se conectará, servidor */
 
 #define MAX_FECHA_INGRESO 11
