@@ -7,7 +7,6 @@ int32_t menu()
     int32_t opcion;
 
     system("clear"); //Limpia la consola
-   //system("color 0F"); //Cambia a color negro de la consola y las letras a blanco brillante
 
     printf("*****Menu de opciones*****\n");
     printf("1 - Listar clientes\n");
@@ -16,7 +15,8 @@ int32_t menu()
     printf("4 - Modificar datos de cliente\n");
     printf("5 - Modificar datos de equipo\n");
     printf("6 - Buscar cliente\n");
-    printf("7 - Salir\n");
+    printf("7 - Enviar confirmacion por WhatsApp\n");
+    printf("8 - Salir\n");
 
     printf("Indique su opcion: ");
     scanf("%d", &opcion); //Ingresa la opcion

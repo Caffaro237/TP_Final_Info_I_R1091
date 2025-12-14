@@ -290,17 +290,15 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
         write(sockdup, &existe_el_cliente, sizeof(int));
         
         EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
-        
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
-
+        sleep(1);
         
         puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        
         EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
+        sleep(1);
 
         puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        
         EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_crudos); //Guardo la estructura en un cadena
         write(sockdup, datos_crudos, 300); //Lo envio al cliente
 
@@ -313,6 +311,44 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 
 
 
+}
+
+void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
+{
+    int32_t num_de_orden;
+    int existe_el_cliente = 0;
+    char telefono[20] = "";
+    char reparado[5] = "";
+
+    NodoCliente* puntero_a_cliente;
+    NodoReparaciones* puntero_a_reparaciones;
+
+    read(sockdup, &num_de_orden, sizeof(int32_t));
+    puntero_a_cliente = BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
+    puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
+                
+    if (puntero_a_cliente!=NULL)
+    {
+        existe_el_cliente = 1;
+        write(sockdup, &existe_el_cliente, sizeof(int));
+
+        strcpy(telefono, puntero_a_cliente->data.telefono);
+        strcpy(reparado, puntero_a_reparaciones->data.reparado);
+
+        if(!strcmp(reparado, "NO"))
+        {
+            write(sockdup, reparado, sizeof(reparado)); //Lo envio al cliente
+        }
+        else
+        {
+            write(sockdup, telefono, sizeof(telefono)); //Lo envio al cliente
+        }
+    }
+    else
+    {
+        existe_el_cliente = 0;
+        write(sockdup, &existe_el_cliente, sizeof(int)); //Lo envio al cliente
+    }
 }
 
 

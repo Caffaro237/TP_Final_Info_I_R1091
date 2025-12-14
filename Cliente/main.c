@@ -21,7 +21,7 @@ int main (void)
     
     sock = conectar(SERVER, PORT, 1);
 
-    while(opcion != 7)
+    while(opcion != 8)
     {
 
         opcion = menu();
@@ -59,16 +59,19 @@ int main (void)
                 pausa();
                 break;
 
-          
-
             case 7:
+                Enviar_WhatsApp(sock);
+                pausa();
+                break;
+
+            case 8:
                 printf("Saliendo de la Aplicacion\n");
                 close (sock);
                 break;
                 
             case -1:
                 printf("Cerrando servidor\n");
-                opcion = 7;// Para salir del while
+                opcion = 8;// Para salir del while
                 close (sock);
                 break;
 

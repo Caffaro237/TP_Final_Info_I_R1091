@@ -40,8 +40,8 @@ int conectar(char *hostname, int port, int debug)
 
 	if (debug)
 	{
-		printf(stderr, "Conectando a %s\n", hostname);
-		printf(stderr, "IP %s:%d\t\t..........OK\n", ipstr, ntohs(their_addr.sin_port));
+		printf("Conectando a %s\n", hostname);
+		printf("IP %s:%d\t\t..........OK\n", ipstr, ntohs(their_addr.sin_port));
 	}
 	
 	
