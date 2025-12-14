@@ -340,3 +340,64 @@ int SepararPorPuntoComa(char *linea, char campos[][50])
 
     return k + 1; //Cantidad de campos encontrados
 }
+
+int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer)
+{
+    char auxNumeroOrden[5] = "";
+
+    memset(auxNumeroOrden, 0, sizeof(auxNumeroOrden));
+
+    switch (tipoDato)
+    {
+        case 1:
+            sprintf(auxNumeroOrden, "%d", cliente.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.fechaIngreso);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.nombre);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.apellido);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.direccion);
+            strcat(buffer, ";");
+            strcat(buffer, cliente.telefono);
+            strcat(buffer, "\n");
+            break;
+        case 2:
+            sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.tipo);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.marca);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.modelo);
+            strcat(buffer, ";");
+            strcat(buffer, equipo.falla);
+            strcat(buffer, "\n");
+            break;
+        case 3:
+            sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.reparacionAEfectuar);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.presupuesto);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.confirmacion);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.reparado);
+            strcat(buffer, ";");
+            strcat(buffer, reparaciones.fechaEgreso);
+            strcat(buffer, "\n");
+            break;
+        
+        default:
+            return -1;
+            break;
+    }
+
+    return 0;
+
+}
