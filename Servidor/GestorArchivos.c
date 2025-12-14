@@ -93,6 +93,7 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
     char archivo[100];
     int fdFile = 0;
     char buffer[1000] = "";
+    char auxNumeroOrden[5] = "";
     
     switch (tipoDato)
     {
@@ -118,11 +119,15 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
         printf("Error al abrir archivo\n");
         return -1;
     }
+    
+    memset(buffer, 0, sizeof(buffer));
+    memset(auxNumeroOrden, 0, sizeof(auxNumeroOrden));
 
     switch (tipoDato)
     {
         case 1:
-            strcat(buffer, itoa(cliente.numero_de_orden));
+            sprintf(auxNumeroOrden, "%d", cliente.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
             strcat(buffer, ",");
             strcat(buffer, cliente.fechaIngreso);
             strcat(buffer, ",");
@@ -136,7 +141,8 @@ int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, i
             strcat(buffer, "\n");
             break;
         case 2:
-            strcat(buffer, itoa(equipo.numero_de_orden));
+            sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
             strcat(buffer, ",");
             strcat(buffer, equipo.tipo);
             strcat(buffer, ",");
