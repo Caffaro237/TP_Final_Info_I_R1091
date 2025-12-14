@@ -227,7 +227,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
             strcpy(reparacion.reparacionAEfectuar, campos[1]);
             strcpy(reparacion.presupuesto, campos[2]);
             strcpy(reparacion.confirmacion, campos[3]);
-            strcpy(reparacion.reparacionAEfectuar, campos[4]);
+            strcpy(reparacion.reparado, campos[4]);
             strcpy(reparacion.fechaEgreso, campos[5]);
 
             AgregarNodo_Reparaciones(TOP_Reparaciones, reparacion);
