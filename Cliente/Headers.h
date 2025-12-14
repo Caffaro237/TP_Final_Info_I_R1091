@@ -12,6 +12,7 @@
 #include <sys/wait.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <ctype.h>
 
 
 #define SERVER "reparacionespcmaster.ddns.net"  /* Servidor al que se conectará*/
