@@ -244,8 +244,6 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
         return -1;
     }
 
-    char linea[256];
-
     switch (tipoDato)
     {
         case 1:
