@@ -13,7 +13,7 @@ int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
     int fdFile = 0;
     int retorno = 0;
 
-    char archivo[100];
+    char archivo[100] = "";
 
     SeleccionarArchivo(archivo, tipoDato);
 
@@ -73,7 +73,7 @@ int LeerLinea(int fd, char **linea)
 
 int EscribirNuevoCliente(CLIENTE cliente)
 {
-    char archivo[100];
+    char archivo[100] = "";
     int fdFile = 0;
     char buffer[1000] = "";
 
@@ -83,7 +83,7 @@ int EscribirNuevoCliente(CLIENTE cliente)
     
     strcpy(archivo, ARCHIVO_CLIENTES);
 
-    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+    fdFile = open(archivo, O_WRONLY | O_CREAT | O_APPEND, 0644);
 
     if (fdFile == -1)
     {
@@ -105,7 +105,7 @@ int EscribirNuevoCliente(CLIENTE cliente)
 
 int EscribirNuevoEquipo(EQUIPO equipo)
 {
-    char archivo[100];
+    char archivo[100] = "";
     int fdFile = 0;
     char buffer[1000] = "";
 
@@ -114,7 +114,7 @@ int EscribirNuevoEquipo(EQUIPO equipo)
     
     strcpy(archivo, ARCHIVO_EQUIPOS);
 
-    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+    fdFile = open(archivo, O_WRONLY | O_CREAT | O_APPEND, 0644);
 
     if (fdFile == -1)
     {
@@ -136,7 +136,7 @@ int EscribirNuevoEquipo(EQUIPO equipo)
 
 int EscribirNuevoReparacion(REPARACIONES reparaciones)
 {
-    char archivo[100];
+    char archivo[100] = "";
     int fdFile = 0;
     char buffer[1000] = "";
 
@@ -145,7 +145,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
     
     strcpy(archivo, ARCHIVO_REPARACIONES);
 
-    fdFile = open(archivo, O_WRONLY | O_CREAT, 0644);
+    fdFile = open(archivo, O_WRONLY | O_CREAT | O_APPEND, 0644);
 
     if (fdFile == -1)
     {
@@ -167,7 +167,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato)
 {
-    char campos[6][200];
+    char campos[6][200]= {0};
 
     CLIENTE cliente;
     EQUIPO equipo;
@@ -230,7 +230,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 
 int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato)
 {
-    char archivo[100];
+    char archivo[100] = "";
     int fdFile = 0;
     char buffer[1000] = "";
 
