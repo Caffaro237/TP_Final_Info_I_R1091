@@ -80,7 +80,7 @@ int main (void)
         GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
         GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
     }
-    
+
     exit(0);
 }
 
@@ -149,6 +149,11 @@ void* work (void* ptr)
                 
             case -1:
                 cerrarServidor = 1;
+                
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+                
                 close(sockdup);
                 exit(0);
                 break;
