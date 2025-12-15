@@ -102,5 +102,5 @@ void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* c
 {
  	CLIENTE x;
 	EQUIPO y;
-	UnirPorPuntoComa(x, y, estruct_reparaciones, 3, cadena_reparaciones);
+	UnirPorPuntoComa(x, y, estruct_reparaciones, 3, cadena_reparaciones, 0);
 }

@@ -13,7 +13,7 @@ int EscribirNuevoEquipo(EQUIPO equipo);
 int EscribirNuevoReparacion(REPARACIONES reparaciones);
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
 int SepararPorPuntoComa(char *linea, char campos[][200]);
-int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);
+int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer, int conNumeroOrden);
 int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato);
 int SeleccionarArchivo(char *archivo, int tipoDato);
 

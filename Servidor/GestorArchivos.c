@@ -93,7 +93,7 @@ int EscribirNuevoCliente(CLIENTE cliente)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer, 1))
     {
         return -1;
     }
@@ -124,7 +124,7 @@ int EscribirNuevoEquipo(EQUIPO equipo)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer, 1))
     {
         return -1;
     }
@@ -155,7 +155,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer, 1))
     {
         return -1;
     }
@@ -251,7 +251,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer, 1))
                 {
                     return -1;
                 }
@@ -268,7 +268,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer, 1))
                 {
                     return -1;
                 }
@@ -285,7 +285,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer, 1))
                 {
                     return -1;
                 }
