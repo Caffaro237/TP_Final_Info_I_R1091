@@ -19,6 +19,7 @@
 int main (void)
 {
     int retorno = 0;
+    int existe_orden = 0;
     NodoCliente *TOP_Clientes = NULL;
     NodoEquipo *TOP_Equipo = NULL;
     NodoReparaciones *TOP_Reparaciones = NULL;
@@ -55,15 +56,33 @@ int main (void)
                 break;
                 
             case 3:
-                Generar_reparacion (sock, sockdup, TOP_Reparaciones);
+                existe_orden = Generar_reparacion (sock, sockdup, TOP_Reparaciones);
+                
+                if(!existe_orden)
+                {
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+                }
+
                 break;
 
             case 4:
-                Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
+                existe_orden = Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
+                
+                if(!existe_orden)
+                {
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+                }
+
                 break;
 
             case 5:
-                Modificar_datos_de_equipo (sock, sockdup, TOP_Equipo);
+                existe_orden = Modificar_datos_de_equipo (sock, sockdup, TOP_Equipo);
+                
+                if(!existe_orden)
+                {
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+                }
+
                 break;
                 
             case 6:

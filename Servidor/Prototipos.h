@@ -8,10 +8,14 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 //Funciones para manejo archivos
 int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, int tipoDato);
 int LeerLinea(int fd, char **linea);
-int EscribirArchivo(CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato);
+int EscribirNuevoCliente(CLIENTE cliente);
+int EscribirNuevoEquipo(EQUIPO equipo);
+int EscribirNuevoReparacion(REPARACIONES reparaciones);
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato);
-int SepararPorPuntoComa(char *linea, char campos[][50]);
+int SepararPorPuntoComa(char *linea, char campos[][200]);
 int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);
+int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato);
+int SeleccionarArchivo(char *archivo, int tipoDato);
 
 //Funciones para el cliente
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos);
@@ -53,8 +57,8 @@ int aceptar_pedidos(int, int debug);                  // función que acepta una
 //FUNCIONES PRINCIPALES (que van en el main)
 void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones);
-void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones);
-void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes);
-void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo);
+int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones);
+int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes);
+int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo);
 void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 
