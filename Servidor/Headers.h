@@ -12,6 +12,7 @@
 #include <sys/wait.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <signal.h>
 
     
 #define PORT 7726  /* El puerto donde se conectará, servidor */
