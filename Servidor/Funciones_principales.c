@@ -11,7 +11,17 @@ void Listar_clientes (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Eq
     NodoEquipo* puntero_a_equipo = TOP_Equipo;
     NodoReparaciones* puntero_a_reparaciones = TOP_Reparaciones;
 
-    while (TOP_Clientes != NULL || TOP_Equipo != NULL || TOP_Reparaciones != NULL) //Veo si la lista esta vacia
+    if (TOP_Clientes == NULL || TOP_Equipo == NULL || TOP_Reparaciones == NULL)//Veo si la lista esta vacia
+    {
+        memset(datos_a_pasar, 0, sizeof(datos_a_pasar));
+
+        strcpy(datos_a_pasar, "SIN_LISTA");
+
+        write(sockdup, datos_a_pasar, strlen(datos_a_pasar)); //Lo envio al cliente
+    }
+    
+
+    while (TOP_Clientes != NULL || TOP_Equipo != NULL || TOP_Reparaciones != NULL) //Recorro la lista hasta el final
     {
         memset(datos_cliente, 0, sizeof(datos_cliente));
         memset(datos_equipo, 0, sizeof(datos_equipo));

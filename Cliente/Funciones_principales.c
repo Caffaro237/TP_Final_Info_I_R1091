@@ -6,16 +6,19 @@ void Listar_clientes (int sock)
 
     while (read(sock, datos, sizeof(datos)))
     {
-
         if(!strcmp(datos, "SI"))
         {
             break;
         }
 
-        if(strcmp(datos, "SI"))
+        if(!strcmp(datos, "SIN_LISTA"))
         {
-            Mostrar_cadena(datos);
+            printf("La lista esta vacio o no existe...\n\n");
+
+            break;
         }
+
+        Mostrar_cadena(datos);
         
         memset(datos, 0, sizeof(datos));
     }
