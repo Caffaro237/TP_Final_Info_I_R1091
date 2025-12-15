@@ -55,7 +55,7 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 
 EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 {
-  char campos[5][50];
+  char campos[5][200] = {0};
 	EQUIPO equipo;
 
 	SepararPorPuntoComa(datos_crudos, campos);

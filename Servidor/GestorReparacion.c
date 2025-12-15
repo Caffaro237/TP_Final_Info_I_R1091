@@ -54,7 +54,7 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 {
-  char campos[6][50] = {0};
+  char campos[6][200] = {0};
   REPARACIONES reparacion;
 
   SepararPorPuntoComa(datos_crudos, campos);

@@ -55,7 +55,7 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 {
-	char campos[6][50];
+	char campos[6][200] = {0};
 	CLIENTE cliente_nuevo;
 
 	SepararPorPuntoComa(datos_crudos, campos);

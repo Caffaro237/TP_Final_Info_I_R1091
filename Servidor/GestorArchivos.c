@@ -93,7 +93,7 @@ int EscribirNuevoCliente(CLIENTE cliente)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer))
     {
         return -1;
     }
@@ -124,7 +124,7 @@ int EscribirNuevoEquipo(EQUIPO equipo)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer))
     {
         return -1;
     }
@@ -155,7 +155,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (!UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer))
     {
         return -1;
     }
@@ -167,7 +167,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato)
 {
-    char campos[6][50];
+    char campos[6][200];
 
     CLIENTE cliente;
     EQUIPO equipo;
@@ -251,7 +251,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer))
                 {
                     return -1;
                 }
@@ -260,13 +260,15 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
                 TOP_Clientes = TOP_Clientes->next;
             }
+
             break;
+            
         case 2:
             while(TOP_Equipo != NULL)
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer))
                 {
                     return -1;
                 }
@@ -275,6 +277,8 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
                 TOP_Equipo = TOP_Equipo->next;
             }
+
+            break;
 
         case 3:
             while(TOP_Reparaciones != NULL)
@@ -290,6 +294,8 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
                 TOP_Reparaciones = TOP_Reparaciones->next;
             }
+
+            break;
     
         default:
             return -1;
