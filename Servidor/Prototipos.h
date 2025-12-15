@@ -61,3 +61,7 @@ int Modificar_datos_de_cliente (int sockdup, NodoCliente *TOP_Clientes);
 int Modificar_datos_de_equipo (int sockdup, NodoEquipo *TOP_Equipo);
 void Buscar_cliente (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 void Buscar_Telefono_Cliente(int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones);
+
+
+//Funciones para modificacion de signals
+void CierreCliente(int signal);

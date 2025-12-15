@@ -11,6 +11,7 @@
 #include "GestorReparacion.c"
 #include "ManejoRemito.c"
 #include "Funciones_principales.c"
+#include "Signals.c"
 
 */
 
@@ -40,7 +41,6 @@ int main (void)
     if(retorno < 0)
     {
         return retorno;
-        
     }
 
 
@@ -48,11 +48,28 @@ int main (void)
 
     while (1)
     {
-        
         connection = (connection_t*) malloc (sizeof(connection_t));
+        
+        if (!connection)
+        {
+            continue;
+        }
+        
         connection -> sock = aceptar_pedidos(sock, 1);
 
-        pthread_create (&tid, 0, work, (void *)connection);
+        if (connection->sock < 0)
+        {
+            free(connection); //Libera memoria y no crea el thread
+            continue;
+        }
+    
+        if (pthread_create(&tid, 0, work, (void*)connection)!= 0)
+        {
+            close(connection->sock);
+            free(connection);
+            continue;
+        }
+
         pthread_detach(tid);
     }
 
@@ -68,10 +85,10 @@ void* work (void* ptr)
     int32_t opcion = 0;
     char seguir = 's';
   
-	connection_t* conn;
-    conn = (connection_t*) ptr;
+	connection_t* conn = (connection_t*) ptr;
     sockdup = conn -> sock;
 
+    free(conn); //Libera el malloc hecho en el main
 
     while(seguir != 'n')
     {
@@ -142,8 +159,7 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
     int retorno = 0;
 
     signal(SIGINT, SIG_IGN); // Apretar Ctrl+C no cierra el Server
-    signal(SIGHUP, SIG_IGN); // Cerrar la terminal cierra el Server
-    signal(SIGPIPE, SIG_IGN); // Cerrar el Cliente cierra el Server
+    signal(SIGHUP, SIG_IGN); // Cerrar la terminal no cierra el Server
 
     retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
 
@@ -170,50 +186,3 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 
     return retorno;
 }
-
-/*
-
-TOP = Estructura1
-TOPSiguiente = Estructura2
-TOPSiguiente->Siguiente = NULL
-
-
-FN AgregarNodo(TOP, Struct)
-    Agrega un nodo a lo ultimo
-    Desplazando el NULL uno mas adelante
-
-
-FN Alta_Datos(Datos_sueltos)
-    Usas TOP Creado
-    No va a existir Numero de Orden 
-    Lees la lista, obtenes el ultimo nodo, sacas el numero de orden y le sumas 1
-    Creas una struct con esos datos 
-    FN AgregarNodo(TOP, Struct)
-
-*/
-
-/*
-
-El servidor siempre va a estar clavado en un read esperando a saber que se va a realizar
-
-printf("1 - Listar clientes\n");
-printf("2 - Alta de cliente\n");
-printf("3 - Generar Reparacion\n");
-printf("4 - Modificar datos de cliente\n");
-printf("5 - Modificar datos de equipo\n");
-printf("6 - Buscar cliente\n");
-
-2
-Servidor Detecta Alta de cliente
-Verifica ultimo numero de orden viendo la lista, si no existe ninguno empezar desde 1000, si existe suma uno y guardarlo en una variable
-Se pone en modo read de datos de cliente - Una vez recibido, creas la estructura y lo agrega a la lista al final
-Se pone en modo read de datos de equipo - Una vez recibido, creas la estructura y lo agrega a la lista al final
-                                            Creas la estructura reparacion con todos los valores vacios y lo agregas a la lista
-
-3
-Servidor Detecta Generar Reparacion
-Se pone en modo read de numero de orden a generar reparacion, (validaciones)
-Si existe
-Se pone en modo read de datos de reparacion - Una vez recibido, modificar el nodo correspondiente
-
-*/
