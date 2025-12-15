@@ -48,8 +48,8 @@ void Modificar_datos_de_cliente (int sock)
     int32_t opcion_a_modificar;
     int existe_el_cliente=0;
     int32_t se_logro_la_modificación;
-    char datos_del_cliente[300];
-    char datos_a_modficar [50];
+    char datos_del_cliente[300] = "";
+    char datos_a_modficar [50] = "";
 
     printf("Escriba el numero de orden del cliente: ");
     scanf("%d", &num_de_orden);
@@ -58,12 +58,12 @@ void Modificar_datos_de_cliente (int sock)
     write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el cliente
-    read(sock, &existe_el_cliente, sizeof(int));
+    read(sock, &existe_el_cliente, sizeof(existe_el_cliente));
     
     if(existe_el_cliente)
     {
         //Muestro el cliente
-        read(sock, datos_del_cliente, 300);
+        read(sock, datos_del_cliente, sizeof(datos_del_cliente));
         printf("Los datos del cliente con numero de orden %d son:\n", num_de_orden);
         Mostrar_cadena(datos_del_cliente);
         pausa();
@@ -138,8 +138,8 @@ void Modificar_datos_de_equipo (int sock)
     int32_t opcion_a_modificar;
     int existe_el_equipo=0;
     int32_t se_logro_la_modificación;
-    char datos_del_equipo[300];
-    char datos_a_modficar [50];
+    char datos_del_equipo[300] = "";
+    char datos_a_modficar [50] = "";
 
     printf("Escriba el numero de orden del equipo: ");
     scanf("%d", &num_de_orden);
@@ -148,20 +148,20 @@ void Modificar_datos_de_equipo (int sock)
     write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el equipo
-    read(sock, &existe_el_equipo, sizeof(int));
+    read(sock, &existe_el_equipo, sizeof(existe_el_equipo));
     
     if(existe_el_equipo)
     {
         //Muestro el equipo
-        read(sock, datos_del_equipo, 300);
+        read(sock, datos_del_equipo, sizeof(datos_del_equipo));
         printf("Los datos del equipo con numero de orden %d son:\n", num_de_orden);
         Mostrar_cadena(datos_del_equipo);
         pausa();
         do
         {        
             printf("(0) Tipo\n");
-            printf("(1) Modelo\n");
-            printf("(2) Marca\n");
+            printf("(1) Marca\n");
+            printf("(2) Modelo\n");
             printf("(3) Falla\n");
             printf ("Indique con el numero correspondiente que dato quiere modificar: ");
             scanf("%d", &opcion_a_modificar);

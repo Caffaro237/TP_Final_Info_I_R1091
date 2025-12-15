@@ -64,8 +64,8 @@ int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes
     int32_t opcion_a_modificar;
     int32_t num_de_orden;
     NodoCliente* puntero_a_cliente;
-    char datos_del_cliente [300];
-    char datos_a_modificar [50];
+    char datos_del_cliente [300] = "";
+    char datos_a_modificar [50] = "";
     int32_t se_logro_la_modificación;
 
     read(sockdup, &num_de_orden, sizeof(int32_t));
@@ -198,8 +198,8 @@ int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
     int32_t opcion_a_modificar;
     int32_t num_de_orden;
     NodoEquipo* puntero_a_equipo;
-    char datos_del_equipo [300];
-    char datos_a_modificar [50];
+    char datos_del_equipo [300] = "";
+    char datos_a_modificar [50] = "";
     int32_t se_logro_la_modificación;
 
     read(sockdup, &num_de_orden, sizeof(int32_t));
@@ -231,9 +231,9 @@ int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
                 }
                 break;
             case 1:
-                if (strlen(datos_a_modificar) < MAX_MODELO)
+                if (strlen(datos_a_modificar) < MAX_MARCA)
                 {
-                    strcpy(puntero_a_equipo->data.modelo, datos_a_modificar);
+                    strcpy(puntero_a_equipo->data.marca, datos_a_modificar);
                     se_logro_la_modificación=1;
                 }
                 else
@@ -242,9 +242,9 @@ int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
                 }
                 break;
             case 2:
-                if (strlen(datos_a_modificar) < MAX_MARCA)
+                if (strlen(datos_a_modificar) < MAX_MODELO)
                 {
-                    strcpy(puntero_a_equipo->data.marca, datos_a_modificar);
+                    strcpy(puntero_a_equipo->data.modelo, datos_a_modificar);
                     se_logro_la_modificación=1;
                 }
                 else
@@ -363,13 +363,13 @@ void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, N
 }
 
 
-int SepararPorPuntoComa(char *linea, char campos[][50])
+int SepararPorPuntoComa(char *linea, char campos[][200])
 {
     int i;
     int j = 0;
     int k = 0;
 
-    memset(campos, 0, 6 * 50);
+    memset(campos, 0, 6 * 200);
 
     for (i = 0; linea[i] != '\0'; i++)
     {
@@ -386,10 +386,7 @@ int SepararPorPuntoComa(char *linea, char campos[][50])
         }
         else
         {
-            if (j < 49) 
-            {
-                campos[k][j++] = linea[i];
-            }
+            campos[k][j++] = linea[i];
         }
     }
 
