@@ -48,15 +48,15 @@ int main (void)
         switch(opcion) 
         {
             case 1:
-                Listar_clientes (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+                Listar_clientes (sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
                 
             case 2:
-                Alta_de_cliente (sock, sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
+                Alta_de_cliente (sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
                 break;
                 
             case 3:
-                existe_orden = Generar_reparacion (sock, sockdup, TOP_Reparaciones);
+                existe_orden = Generar_reparacion (sockdup, TOP_Reparaciones);
                 
                 if(!existe_orden)
                 {
@@ -66,7 +66,7 @@ int main (void)
                 break;
 
             case 4:
-                existe_orden = Modificar_datos_de_cliente (sock, sockdup, TOP_Clientes);
+                existe_orden = Modificar_datos_de_cliente (sockdup, TOP_Clientes);
                 
                 if(!existe_orden)
                 {
@@ -76,7 +76,7 @@ int main (void)
                 break;
 
             case 5:
-                existe_orden = Modificar_datos_de_equipo (sock, sockdup, TOP_Equipo);
+                existe_orden = Modificar_datos_de_equipo (sockdup, TOP_Equipo);
                 
                 if(!existe_orden)
                 {
@@ -86,11 +86,11 @@ int main (void)
                 break;
                 
             case 6:
-                Buscar_cliente (sock, sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+                Buscar_cliente (sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
 
             case 7:
-                Buscar_Telefono_Cliente(sock, sockdup, TOP_Clientes, TOP_Reparaciones);
+                Buscar_Telefono_Cliente(sockdup, TOP_Clientes, TOP_Reparaciones);
                 break;
                 
             case 8:
