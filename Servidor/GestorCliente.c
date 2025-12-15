@@ -60,11 +60,11 @@ CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 
 	SepararPorPuntoComa(datos_crudos, campos);
 
-	strcpy(cliente_nuevo.fechaIngreso, campos[1]);
-	strcpy(cliente_nuevo.nombre, campos[2]);
-	strcpy(cliente_nuevo.apellido, campos[3]);
-	strcpy(cliente_nuevo.direccion, campos[4]);
-	strcpy(cliente_nuevo.telefono, campos[5]);
+	strcpy(cliente_nuevo.fechaIngreso, campos[0]);
+	strcpy(cliente_nuevo.nombre, campos[1]);
+	strcpy(cliente_nuevo.apellido, campos[2]);
+	strcpy(cliente_nuevo.direccion, campos[3]);
+	strcpy(cliente_nuevo.telefono, campos[4]);
 
   return cliente_nuevo;
 }
