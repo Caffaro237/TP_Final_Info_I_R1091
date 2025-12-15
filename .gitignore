@@ -2,4 +2,5 @@ Cliente/main
 .vscode/tasks.json
 .vscode/c_cpp_properties.json
 Servidor/Server
+Cliente/Cliente
 Servidor/main
