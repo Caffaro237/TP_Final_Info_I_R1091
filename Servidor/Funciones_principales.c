@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+void Listar_clientes (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
 {
     int32_t termino_la_lista;
     char datos_a_pasar [300];
@@ -47,7 +47,7 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
 }
 
 
-void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
+void Alta_de_cliente (int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
 {
     char datos_crudos [300];
     read(sockdup, datos_crudos, sizeof(datos_crudos));
@@ -58,7 +58,7 @@ void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEqu
 }
 
 
-int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
+int Modificar_datos_de_cliente (int sockdup, NodoCliente *TOP_Clientes)
 {
     int existe_el_cliente = 0;
     int32_t opcion_a_modificar;
@@ -157,7 +157,7 @@ int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes
 }
 
 
-int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
+int Generar_reparacion (int sockdup, NodoReparaciones* TOP_Reparaciones)
 {
     NodoReparaciones* reparacion_a_generar;
     int32_t num_de_orden;
@@ -192,7 +192,7 @@ int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacione
 }
 
 
-int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
+int Modificar_datos_de_equipo (int sockdup, NodoEquipo *TOP_Equipo)
 {
     int existe_el_equipo = 0;
     int32_t opcion_a_modificar;
@@ -279,7 +279,7 @@ int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 }
 
 
-void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+void Buscar_cliente (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
 {
     char datos_crudos[300] = "";
     int32_t num_de_orden;
@@ -324,7 +324,7 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 }
 
 
-void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
+void Buscar_Telefono_Cliente(int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
 {
     int32_t num_de_orden;
     int existe_el_cliente = 0;
