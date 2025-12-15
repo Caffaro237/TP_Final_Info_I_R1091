@@ -21,8 +21,11 @@
 NodoCliente *TOP_Clientes = NULL;
 NodoEquipo *TOP_Equipo = NULL;
 NodoReparaciones *TOP_Reparaciones = NULL;
+int cerrarServidor = 0;
+int sock = -1;
 
-typedef struct datosConexion{
+typedef struct datosConexion
+{
   int sock;
 } connection_t;
 
@@ -30,7 +33,6 @@ void* work (void* ptr);
 
 int main (void)
 {
-    int sock;
     connection_t* connection;
     pthread_t tid;
 
@@ -43,10 +45,9 @@ int main (void)
         return retorno;
     }
 
-
     sock = abrir_conexion(PORT, BACKLOG, 1);
 
-    while (1)
+    while(!cerrarServidor)
     {
         connection = (connection_t*) malloc (sizeof(connection_t));
         
@@ -55,7 +56,7 @@ int main (void)
             continue;
         }
         
-        connection -> sock = aceptar_pedidos(sock, 1);
+        connection->sock = aceptar_pedidos(sock, 1);
 
         if (connection->sock < 0)
         {
@@ -73,9 +74,14 @@ int main (void)
         pthread_detach(tid);
     }
 
-    close (sock);
-    free (connection);
-    return 0;
+    if(cerrarServidor)
+    {
+        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+    }
+    
+    exit(0);
 }
 
 void* work (void* ptr)
@@ -83,17 +89,16 @@ void* work (void* ptr)
     int existe_orden = 0;
     int sockdup;
     int32_t opcion = 0;
-    char seguir = 's';
   
 	connection_t* conn = (connection_t*) ptr;
     sockdup = conn -> sock;
 
     free(conn); //Libera el malloc hecho en el main
 
-    while(seguir != 'n')
+    while(!cerrarServidor)
     {
         read(sockdup, &opcion, sizeof(int32_t));
-
+        
         switch(opcion) 
         {
             case 1:
@@ -142,15 +147,17 @@ void* work (void* ptr)
                 Buscar_Telefono_Cliente(sockdup, TOP_Clientes, TOP_Reparaciones);
                 break;
                 
-            case 8:
-                seguir = 'n';
+            case -1:
+                cerrarServidor = 1;
                 close(sockdup);
+                exit(0);
                 break;
 
             default:
                 break;
         }
     }
+
     return NULL;
 }
 
@@ -160,6 +167,8 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 
     signal(SIGINT, SIG_IGN); // Apretar Ctrl+C no cierra el Server
     signal(SIGHUP, SIG_IGN); // Cerrar la terminal no cierra el Server
+    signal(SIGPIPE, SIG_IGN); // Cerrar el Cliente cierra el Server
+    signal(SIGTSTP, SalirCtrlZ); //Cierra el servidor y todos los threads
 
     retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
 
@@ -185,4 +194,17 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
     printf("Archivos leidos y cargados con exito.\n\n");
 
     return retorno;
+}
+
+void SalirCtrlZ(int sig)
+{
+    (void)sig;
+    char mensaje[50] = "Guardando archivos y cerrando servidor\n";
+    
+    system("clear");
+
+    write(1, mensaje, strlen(mensaje));
+
+    cerrarServidor = 1;
+    close(sock);
 }

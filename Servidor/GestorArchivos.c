@@ -301,9 +301,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             return -1;
             break;
     }
-
     
-
     close(fdFile);
     return 1;
 }
