@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+void Listar_clientes (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
 {
     char datos_cliente[300] = "";
     char datos_equipo[300] = "";
@@ -25,11 +25,8 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
         EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_reparaciones); //Guardo la estructura en un cadena
 
         strcat(datos_a_pasar, datos_cliente);
-        strcat(datos_a_pasar, ";");
         strcat(datos_a_pasar, datos_equipo);
-        strcat(datos_a_pasar, ";");
         strcat(datos_a_pasar, datos_reparaciones);
-        strcat(datos_a_pasar, "\n");
 
 
         write(sockdup, datos_a_pasar, strlen(datos_a_pasar)); //Lo envio al cliente
@@ -54,7 +51,7 @@ void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEqui
 }
 
 
-void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
+void Alta_de_cliente (int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones)
 {
     char datos_crudos[1000] = "";
     
@@ -70,7 +67,7 @@ void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEqu
 }
 
 
-int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
+int Modificar_datos_de_cliente (int sockdup, NodoCliente *TOP_Clientes)
 {
     int existe_el_cliente = 0;
     int32_t opcion_a_modificar;
@@ -169,7 +166,7 @@ int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes
 }
 
 
-int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
+int Generar_reparacion (int sockdup, NodoReparaciones* TOP_Reparaciones)
 {
     NodoReparaciones* reparacion_a_generar;
     int32_t num_de_orden;
@@ -204,7 +201,7 @@ int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacione
 }
 
 
-int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
+int Modificar_datos_de_equipo (int sockdup, NodoEquipo *TOP_Equipo)
 {
     int existe_el_equipo = 0;
     int32_t opcion_a_modificar;
@@ -291,8 +288,11 @@ int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 }
 
 
-void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+void Buscar_cliente (int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
 {
+    char datos_cliente[300] = "";
+    char datos_equipo[300] = "";
+    char datos_reparaciones[300] = "";
     char datos_crudos[300] = "";
     int32_t num_de_orden;
     int existe_el_cliente = 0;
@@ -304,28 +304,34 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
     memset(datos_crudos, 0, sizeof(datos_crudos));
 
     read(sockdup, &num_de_orden, sizeof(int32_t));
-    puntero_a_cliente=BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
-                
-    if (puntero_a_cliente!=NULL)
+    
+    puntero_a_cliente = BusquedaCliente_por_numero_de_orden(TOP_Clientes, (int) num_de_orden); //Guardo en un puntero el cliente que quiero
+    puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero   
+    puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
+        
+
+    if (puntero_a_cliente != NULL || puntero_a_equipo != NULL || puntero_a_reparaciones != NULL)
     {
         existe_el_cliente = 1;
         write(sockdup, &existe_el_cliente, sizeof(existe_el_cliente));
-        
-        EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
-        
-        memset(datos_crudos, 0, strlen(datos_crudos));
-        usleep(SLEEP);
-        
-        puntero_a_equipo = BusquedaEquipo_por_numero_de_orden(TOP_Equipo, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_crudos); //Guardo la estructura en un cadena
-        write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
-        
-        memset(datos_crudos, 0, strlen(datos_crudos));
-        usleep(SLEEP);
 
-        puntero_a_reparaciones = BusquedaReparaciones_por_numero_de_orden(TOP_Reparaciones, (int) num_de_orden); //Guardo en un puntero el equipo que quiero
-        EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_crudos); //Guardo la estructura en un cadena
+
+        memset(datos_cliente, 0, sizeof(datos_cliente));
+        memset(datos_equipo, 0, sizeof(datos_equipo));
+        memset(datos_reparaciones, 0, sizeof(datos_reparaciones));
+        memset(datos_crudos, 0, sizeof(datos_crudos));
+
+        EstructuraCliente_a_cadena(puntero_a_cliente->data, datos_cliente); //Guardo la estructura en un cadena
+            
+        EstructuraEquipo_a_cadena(puntero_a_equipo->data, datos_equipo); //Guardo la estructura en un cadena
+
+        EstructuraReparaciones_a_cadena(puntero_a_reparaciones->data, datos_reparaciones); //Guardo la estructura en un cadena
+
+        strcat(datos_crudos, datos_cliente);
+        strcat(datos_crudos, datos_equipo);
+        strcat(datos_crudos, datos_reparaciones);
+
+
         write(sockdup, datos_crudos, strlen(datos_crudos)); //Lo envio al cliente
     }
     else
@@ -336,7 +342,7 @@ void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquip
 }
 
 
-void Buscar_Telefono_Cliente(int sock, int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
+void Buscar_Telefono_Cliente(int sockdup, NodoCliente *TOP_Clientes, NodoReparaciones *TOP_Reparaciones)
 {
     int32_t num_de_orden;
     int existe_el_cliente = 0;
@@ -408,10 +414,9 @@ int SepararPorPuntoComa(char *linea, char campos[][200])
 }
 
 
-int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer, int conNumeroOrden)
+int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer)
 {
     char auxNumeroOrden[5] = "";
-    int conSaltoLinea = conNumeroOrden;
 
     memset(auxNumeroOrden, 0, sizeof(auxNumeroOrden));
 
@@ -430,22 +435,12 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, cliente.direccion);
             strcat(buffer, ";");
             strcat(buffer, cliente.telefono);
-            if (conSaltoLinea)
-            {
-                strcat(buffer, "\n\0");
-            }
-            else
-            {
-                strcat(buffer, "\0");
-            }
+            strcat(buffer, "\n\0");
             break;
         case 2:
-            if(conNumeroOrden)
-            {
-                sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
-                strcat(buffer, auxNumeroOrden);
-                strcat(buffer, ";");
-            }
+            sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
             strcat(buffer, equipo.tipo);
             strcat(buffer, ";");
             strcat(buffer, equipo.marca);
@@ -453,22 +448,12 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, equipo.modelo);
             strcat(buffer, ";");
             strcat(buffer, equipo.falla);
-            if (conSaltoLinea)
-            {
-                strcat(buffer, "\n\0");
-            }
-            else
-            {
-                strcat(buffer, "\0");
-            }
+            strcat(buffer, "\n\0");
             break;
         case 3:
-            if(conNumeroOrden)
-            {
-                sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
-                strcat(buffer, auxNumeroOrden);
-                strcat(buffer, ";");
-            }
+            sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
+            strcat(buffer, auxNumeroOrden);
+            strcat(buffer, ";");
             strcat(buffer, reparaciones.reparacionAEfectuar);
             strcat(buffer, ";");
             strcat(buffer, reparaciones.presupuesto);
@@ -478,14 +463,7 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, reparaciones.reparado);
             strcat(buffer, ";");
             strcat(buffer, reparaciones.fechaEgreso);
-            if (conSaltoLinea)
-            {
-                strcat(buffer, "\n\0");
-            }
-            else
-            {
-                strcat(buffer, "\0");
-            }
+            strcat(buffer, "\n\0");
             break;
         
         default:

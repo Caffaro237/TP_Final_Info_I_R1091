@@ -102,5 +102,5 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 {
 	EQUIPO equipo = {0};
 	REPARACIONES reparaciones = {0};
-	UnirPorPuntoComa(estruct_cliente, equipo, reparaciones, 1, cadena_cliente, 0);
+	UnirPorPuntoComa(estruct_cliente, equipo, reparaciones, 1, cadena_cliente);
 }
