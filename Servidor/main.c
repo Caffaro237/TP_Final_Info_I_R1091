@@ -141,6 +141,10 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 {
     int retorno = 0;
 
+    signal(SIGINT, SIG_IGN); // Apretar Ctrl+C no cierra el Server
+    signal(SIGHUP, SIG_IGN); // Cerrar la terminal cierra el Server
+    signal(SIGPIPE, SIG_IGN); // Cerrar el Cliente cierra el Server
+
     retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
 
     if(retorno < 0)
