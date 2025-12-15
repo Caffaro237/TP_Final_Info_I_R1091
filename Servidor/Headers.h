@@ -16,6 +16,7 @@
     
 #define PORT 7726  /* El puerto donde se conectará, servidor */
 #define BACKLOG 2 /* Tamaño de la cola de conexiones recibidas */
+#define SLEEP 200000 /* Sleep de 200 ms */
 
 #define MAX_FECHA_INGRESO 50
 #define MAX_NOMBRE 50
