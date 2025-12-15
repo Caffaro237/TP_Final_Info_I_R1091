@@ -69,11 +69,6 @@ int main (void)
                 close (sock);
                 break;
                 
-            case -1:
-                printf("Cerrando servidor\n");
-                opcion = 8;// Para salir del while
-                close (sock);
-                break;
 
             default:
                 printf("Opción invalida\n");
