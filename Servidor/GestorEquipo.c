@@ -30,7 +30,7 @@ void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos)
 
 void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 {
-  EQUIPO equipo_nuevo;
+  EQUIPO equipo_nuevo = {0};
   NodoEquipo* aux=*top_equipo;
 
   equipo_nuevo=Datos_crudos_a_EQUIPO(datos_crudos);
@@ -55,19 +55,18 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 
 EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 {
-  char campos[5][200] = {0};
-	EQUIPO equipo;
+  char campos[6][200] = {0};
+	EQUIPO equipo = {0};
 
 	SepararPorPuntoComa(datos_crudos, campos);
 
-	strcpy(equipo.tipo, campos[1]);
-  strcpy(equipo.marca, campos[2]);
-  strcpy(equipo.modelo, campos[3]);
-  strcpy(equipo.falla, campos[4]);
+	strcpy(equipo.tipo, campos[0]);
+  strcpy(equipo.marca, campos[1]);
+  strcpy(equipo.modelo, campos[2]);
+  strcpy(equipo.falla, campos[3]);
 
 
   return equipo;
-
 }
 
 NodoEquipo* BusquedaEquipo_por_numero_de_orden(NodoEquipo* top_equipo, int numero_de_orden)
@@ -100,7 +99,7 @@ void Mostrar_equipo (NodoEquipo* equipo_a_mostrar)
 
 void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
 {
-	CLIENTE x;
-	REPARACIONES z;
-	UnirPorPuntoComa(x, estruct_equipo, z, 2, cadena_equipo);
+	CLIENTE cliente = {0};
+	REPARACIONES reparaciones = {0};
+	UnirPorPuntoComa(cliente, estruct_equipo, reparaciones, 2, cadena_equipo);
 }
