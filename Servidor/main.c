@@ -15,20 +15,25 @@
 */
 
 #include "Headers.h"
+#include <pthread.h>
+
+NodoCliente *TOP_Clientes = NULL;
+NodoEquipo *TOP_Equipo = NULL;
+NodoReparaciones *TOP_Reparaciones = NULL;
+
+typedef struct datosConexion{
+  int sock;
+} connection_t;
+
+void* work (void* ptr);
 
 int main (void)
 {
-    int retorno = 0;
-    int existe_orden = 0;
-    NodoCliente *TOP_Clientes = NULL;
-    NodoEquipo *TOP_Equipo = NULL;
-    NodoReparaciones *TOP_Reparaciones = NULL;
-  
     int sock;
-	int sockdup;
+    connection_t* connection;
+    pthread_t tid;
 
-    int32_t opcion = 0;
-    char seguir = 's';
+    int retorno = 0;
 
     retorno = inicializar(&TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
 
@@ -38,8 +43,35 @@ int main (void)
         
     }
 
-	sock = abrir_conexion(PORT, BACKLOG, 1);
-    sockdup = aceptar_pedidos(sock, 1);
+
+    sock = abrir_conexion(PORT, BACKLOG, 1);
+
+    while (1)
+    {
+        
+        connection = (connection_t*) malloc (sizeof(connection_t));
+        connection -> sock = aceptar_pedidos(sock, 1);
+
+        pthread_create (&tid, 0, work, (void *)connection);
+        pthread_detach(tid);
+    }
+
+    close (sock);
+    free (connection);
+    return 0;
+}
+
+void* work (void* ptr)
+{
+    int existe_orden = 0;
+    int sockdup;
+    int32_t opcion = 0;
+    char seguir = 's';
+  
+	connection_t* conn;
+    conn = (connection_t*) ptr;
+    sockdup = conn -> sock;
+
 
     while(seguir != 'n')
     {
@@ -94,11 +126,6 @@ int main (void)
                 break;
                 
             case 8:
-                close(sockdup);
-                sockdup = aceptar_pedidos(sock, 1);
-                break;
-
-            case -1:
                 seguir = 'n';
                 close(sockdup);
                 break;
@@ -107,12 +134,8 @@ int main (void)
                 break;
         }
     }
-
-    close (sock);
-
-    return retorno;
+    return NULL;
 }
-
 
 int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones)
 {
