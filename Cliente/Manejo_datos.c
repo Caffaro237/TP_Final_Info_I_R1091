@@ -38,7 +38,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux [300] = "";
     
     do
     {
@@ -115,7 +115,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux [300] = "";
     
     do
     {
@@ -176,7 +176,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux[300] = "";
     
     do
     {

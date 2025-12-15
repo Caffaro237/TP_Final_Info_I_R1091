@@ -30,7 +30,7 @@ void AgregarNodo_Equipo (NodoEquipo** top_equipo, EQUIPO datos)
 
 void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 {
-  EQUIPO equipo_nuevo;
+  EQUIPO equipo_nuevo = {0};
   NodoEquipo* aux=*top_equipo;
 
   equipo_nuevo=Datos_crudos_a_EQUIPO(datos_crudos);
@@ -99,7 +99,7 @@ void Mostrar_equipo (NodoEquipo* equipo_a_mostrar)
 
 void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
 {
-	CLIENTE x;
-	REPARACIONES z;
-	UnirPorPuntoComa(x, estruct_equipo, z, 2, cadena_equipo, 0);
+	CLIENTE cliente = {0};
+	REPARACIONES reparaciones = {0};
+	UnirPorPuntoComa(cliente, estruct_equipo, reparaciones, 2, cadena_equipo, 0);
 }

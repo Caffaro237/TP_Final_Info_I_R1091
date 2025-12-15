@@ -30,7 +30,7 @@ void AgregarNodo_Cliente (NodoCliente** top_cliente, CLIENTE datos)
 
 void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 {
-  CLIENTE cliente_nuevo;
+  CLIENTE cliente_nuevo = {0};
   NodoCliente* aux=*top_cliente;
 
   cliente_nuevo=Datos_crudos_a_CLIENTE(datos_crudos);
@@ -56,7 +56,7 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 {
 	char campos[6][200] = {0};
-	CLIENTE cliente_nuevo;
+	CLIENTE cliente_nuevo = {0};
 
 	SepararPorPuntoComa(datos_crudos, campos);
 
@@ -100,7 +100,7 @@ void Mostrar_cliente (NodoCliente* cliente_a_mostrar)
 
 void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 {
-	EQUIPO y;
-	REPARACIONES z;
-	UnirPorPuntoComa(estruct_cliente, y, z, 1, cadena_cliente, 0);
+	EQUIPO equipo = {0};
+	REPARACIONES reparaciones = {0};
+	UnirPorPuntoComa(estruct_cliente, equipo, reparaciones, 1, cadena_cliente, 0);
 }

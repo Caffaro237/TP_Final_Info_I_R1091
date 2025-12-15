@@ -77,8 +77,8 @@ int EscribirNuevoCliente(CLIENTE cliente)
     int fdFile = 0;
     char buffer[1000] = "";
 
-    EQUIPO equipo;
-    REPARACIONES reparaciones;
+    EQUIPO equipo = {0};
+    REPARACIONES reparaciones = {0};
 
     
     strcpy(archivo, ARCHIVO_CLIENTES);
@@ -109,8 +109,8 @@ int EscribirNuevoEquipo(EQUIPO equipo)
     int fdFile = 0;
     char buffer[1000] = "";
 
-    CLIENTE cliente;
-    REPARACIONES reparaciones;
+    CLIENTE cliente = {0};
+    REPARACIONES reparaciones = {0};
     
     strcpy(archivo, ARCHIVO_EQUIPOS);
 
@@ -140,8 +140,8 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
     int fdFile = 0;
     char buffer[1000] = "";
 
-    CLIENTE cliente;
-    EQUIPO equipo;
+    CLIENTE cliente = {0};
+    EQUIPO equipo = {0};
     
     strcpy(archivo, ARCHIVO_REPARACIONES);
 
@@ -169,9 +169,9 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 {
     char campos[6][200]= {0};
 
-    CLIENTE cliente;
-    EQUIPO equipo;
-    REPARACIONES reparacion;
+    CLIENTE cliente = {0};
+    EQUIPO equipo = {0};
+    REPARACIONES reparacion = {0};
 
     int cantidad = SepararPorPuntoComa(linea, campos);
 

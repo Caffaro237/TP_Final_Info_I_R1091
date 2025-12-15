@@ -101,7 +101,7 @@ void Generar_raparacion (int sock)
 {
     int32_t num_de_orden;
     int existe_la_reparacion = 0;
-    char datos[300];
+    char datos[300] = "";
 
 
     printf("Escriba el numero de orden de la reparación a generar: ");
@@ -227,7 +227,7 @@ void Enviar_WhatsApp(int sock)
     int existe_el_cliente = 0;
     char datos[20] = "";
     char telefono[20] = "549";
-    char mensaje[1000];
+    char mensaje[1000] = "";
     char auxNumeroOrden[5] = "";
 
     printf("Escriba el numero de orden: ");

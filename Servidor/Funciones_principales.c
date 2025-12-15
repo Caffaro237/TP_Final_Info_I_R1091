@@ -174,7 +174,7 @@ int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacione
     NodoReparaciones* reparacion_a_generar;
     int32_t num_de_orden;
     int existe_la_reparacion = 0;
-    char datos_crudos[300];
+    char datos_crudos[300] = "";
     REPARACIONES reparacion_datos;
 
 

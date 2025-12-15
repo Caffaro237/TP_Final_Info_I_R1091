@@ -29,7 +29,7 @@ void AgregarNodo_Reparaciones (NodoReparaciones** top_reparaciones, REPARACIONES
 
 void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_crudos)
 {
-  REPARACIONES reparaciones_nuevo;
+  REPARACIONES reparaciones_nuevo = {0};
   NodoReparaciones* aux=*top_reparaciones;
 
   reparaciones_nuevo=Datos_crudos_a_REPARACIONES(datos_crudos);
@@ -55,7 +55,7 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 {
   char campos[6][200] = {0};
-  REPARACIONES reparacion;
+  REPARACIONES reparacion = {0};
 
   SepararPorPuntoComa(datos_crudos, campos);
 
@@ -98,9 +98,9 @@ void Mostrar_reparaciones (NodoReparaciones* reparaciones_a_mostrar)
 }
 
 
-void EstructuraReparaciones_a_cadena (REPARACIONES estruct_reparaciones, char* cadena_reparaciones)
+void EstructuraReparaciones_a_cadena (REPARACIONES reparaciones, char* cadena_reparaciones)
 {
- 	CLIENTE x;
-	EQUIPO y;
-	UnirPorPuntoComa(x, y, estruct_reparaciones, 3, cadena_reparaciones, 0);
+ 	CLIENTE cliente = {0};
+	EQUIPO equipo = {0};
+	UnirPorPuntoComa(cliente, equipo, reparaciones, 3, cadena_reparaciones, 0);
 }
