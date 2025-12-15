@@ -2,18 +2,18 @@
 
 void Mostrar_cadena (char* cadena)
 {
-    int i=0;
-    while (cadena[i] != '\0')
+    for (int i = 0; cadena[i] != '\0'; i++)
     {
-        if (cadena[i]==';') //Si encuentro una coma, meto enter y paso al siguiente
+        if(cadena[i] == ';')
         {
-            printf ("\n");
-            i++;
+            printf ("%s", "  |  ");
         }
-        printf ("%c", cadena[i]);
-        
-        i++;
+        else
+        {
+            printf ("%c", cadena[i]);
+        }
     }
+    
     printf("\n");
 }
 
@@ -38,7 +38,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux [300] = "";
     
     do
     {
@@ -115,7 +115,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux [300] = "";
     
     do
     {
@@ -134,11 +134,11 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     do
     {
-        printf("Escriba el modelo del equipo: ");
+        printf("Escriba la marca del equipo: ");
         scanf("%299s", aux);
 
         
-    } while (!verificar_longitud(aux, MAX_MODELO));
+    } while (!verificar_longitud(aux, MAX_MARCA));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -148,11 +148,11 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     do
     {
-        printf("Escriba la marca del equipo: ");
+        printf("Escriba el modelo del equipo: ");
         scanf("%299s", aux);
 
         
-    } while (!verificar_longitud(aux, MAX_MARCA));
+    } while (!verificar_longitud(aux, MAX_MODELO));
     
     strcpy(&datos_crudos[i], aux);
 
@@ -176,7 +176,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
 
     int i=0;
 
-    char aux [300];
+    char aux[300] = "";
     
     do
     {
