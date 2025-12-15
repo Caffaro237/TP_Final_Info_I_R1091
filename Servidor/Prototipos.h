@@ -57,8 +57,8 @@ int aceptar_pedidos(int, int debug);                  // función que acepta una
 //FUNCIONES PRINCIPALES (que van en el main)
 void Listar_clientes (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEquipo** TOP_Equipo, NodoReparaciones** TOP_Reparaciones);
-void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones);
-void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes);
-void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo);
+int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones);
+int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes);
+int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo);
 void Buscar_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 

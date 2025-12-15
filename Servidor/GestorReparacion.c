@@ -54,16 +54,16 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 {
-  char campos[6][50];
+  char campos[6][50] = {0};
   REPARACIONES reparacion;
 
   SepararPorPuntoComa(datos_crudos, campos);
 
-  strcpy(reparacion.reparacionAEfectuar, campos[1]);
-  strcpy(reparacion.presupuesto, campos[2]);
-  strcpy(reparacion.confirmacion, campos[3]);
-  strcpy(reparacion.reparado, campos[4]);
-  strcpy(reparacion.fechaEgreso, campos[5]);
+  strcpy(reparacion.reparacionAEfectuar, campos[0]);
+  strcpy(reparacion.presupuesto, campos[1]);
+  strcpy(reparacion.confirmacion, campos[2]);
+  strcpy(reparacion.reparado, campos[3]);
+  strcpy(reparacion.fechaEgreso, campos[4]);
 
   return reparacion;
 }

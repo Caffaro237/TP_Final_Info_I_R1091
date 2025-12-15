@@ -281,7 +281,7 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (!UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer))
                 {
                     return -1;
                 }

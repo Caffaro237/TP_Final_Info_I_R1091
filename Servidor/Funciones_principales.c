@@ -58,7 +58,7 @@ void Alta_de_cliente (int sock, int sockdup, NodoCliente** TOP_Clientes, NodoEqu
 }
 
 
-void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
+int Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Clientes)
 {
     int existe_el_cliente = 0;
     int32_t opcion_a_modificar;
@@ -149,12 +149,15 @@ void Modificar_datos_de_cliente (int sock, int sockdup, NodoCliente *TOP_Cliente
     {
         existe_el_cliente=0;
         write(sockdup, &existe_el_cliente,sizeof(existe_el_cliente)); //Lo envio al cliente
+
+        return -1;
     }
 
+    return 0;
 }
 
 
-void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
+int Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparaciones)
 {
     NodoReparaciones* reparacion_a_generar;
     int32_t num_de_orden;
@@ -181,11 +184,15 @@ void Generar_reparacion (int sock, int sockdup, NodoReparaciones* TOP_Reparacion
     {
         existe_la_reparacion = 0;
         write(sockdup, &existe_la_reparacion,sizeof(existe_la_reparacion)); //Lo envio al cliente
+
+        return -1;
     }
+
+    return 0;
 }
 
 
-void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
+int Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
 {
     int existe_el_equipo = 0;
     int32_t opcion_a_modificar;
@@ -264,8 +271,11 @@ void Modificar_datos_de_equipo (int sock, int sockdup, NodoEquipo *TOP_Equipo)
     {
         existe_el_equipo=0;
         write(sockdup, &existe_el_equipo,sizeof(existe_el_equipo)); //Lo envio al equipo
+
+        return -1;
     }
 
+    return 0;
 }
 
 
@@ -359,17 +369,27 @@ int SepararPorPuntoComa(char *linea, char campos[][50])
     int j = 0;
     int k = 0;
 
+    memset(campos, 0, 6 * 50);
+
     for (i = 0; linea[i] != '\0'; i++)
     {
         if (linea[i] == ';')
         {
             campos[k][j] = '\0';
-            k++;
+            
+            if (k < 5)
+            {
+                k++;
+            }
+
             j = 0;
         }
         else
         {
-            campos[k][j++] = linea[i];
+            if (j < 49) 
+            {
+                campos[k][j++] = linea[i];
+            }
         }
     }
 
@@ -400,7 +420,7 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, cliente.direccion);
             strcat(buffer, ";");
             strcat(buffer, cliente.telefono);
-            strcat(buffer, "\0");
+            strcat(buffer, "\n\0");
             break;
         case 2:
             sprintf(auxNumeroOrden, "%d", equipo.numero_de_orden);
@@ -413,7 +433,7 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, equipo.modelo);
             strcat(buffer, ";");
             strcat(buffer, equipo.falla);
-            strcat(buffer, "\0");
+            strcat(buffer, "\n\0");
             break;
         case 3:
             sprintf(auxNumeroOrden, "%d", reparaciones.numero_de_orden);
@@ -428,7 +448,7 @@ int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones,
             strcat(buffer, reparaciones.reparado);
             strcat(buffer, ";");
             strcat(buffer, reparaciones.fechaEgreso);
-            strcat(buffer, "\0");
+            strcat(buffer, "\n\0");
             break;
         
         default:
