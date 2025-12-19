@@ -101,7 +101,7 @@ int Modificar_datos_de_cliente (int sockdup, NodoCliente *TOP_Clientes)
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
-        read (sockdup, datos_a_modificar, 50);
+        read (sockdup, datos_a_modificar, strlen(datos_a_modificar));
 
         switch (opcion_a_modificar) //Modifico el dato y verifico que sea del tamaño correcto
         {
@@ -235,7 +235,7 @@ int Modificar_datos_de_equipo (int sockdup, NodoEquipo *TOP_Equipo)
 
         
         read(sockdup, &opcion_a_modificar, sizeof(int32_t)); //Recibo la opcion elegida
-        read (sockdup, datos_a_modificar, 50);
+        read (sockdup, datos_a_modificar, strlen(datos_a_modificar));
         switch (opcion_a_modificar)
         {
             case 0:
