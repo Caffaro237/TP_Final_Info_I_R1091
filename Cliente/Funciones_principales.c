@@ -43,6 +43,7 @@ void Modificar_datos_de_cliente (int sock)
     int32_t se_logro_la_modificacion;
     char datos_del_cliente[300] = "";
     char datos_a_modficar [50] = "";
+    int c;
 
     printf("Escriba el numero de orden del cliente: ");
     scanf("%d", &num_de_orden);
@@ -62,6 +63,7 @@ void Modificar_datos_de_cliente (int sock)
         
         Mostrar_cadena(datos_del_cliente);
         
+        while ((c = getchar()) != '\n' && c != EOF);
         pausa();
         
         do
@@ -83,8 +85,8 @@ void Modificar_datos_de_cliente (int sock)
         write(sock, &opcion_a_modificar, sizeof(opcion_a_modificar)); //Envio la opcion elegida al servidor
         
         printf("Escriba el dato a reemplazar: ");
-        scanf("%s", datos_a_modficar);
-        
+        leer_string (datos_a_modficar, sizeof(datos_a_modficar));  
+
         write(sock, datos_a_modficar, strlen(datos_a_modficar));
         read(sock, &se_logro_la_modificacion, sizeof(int32_t));
 
@@ -137,6 +139,7 @@ void Modificar_datos_de_equipo (int sock)
     int32_t se_logro_la_modificacion;
     char datos_del_equipo[300] = "";
     char datos_a_modficar [50] = "";
+    int c;
 
     printf("Escriba el numero de orden del equipo: ");
     scanf("%d", &num_de_orden);
@@ -156,6 +159,7 @@ void Modificar_datos_de_equipo (int sock)
         
         Mostrar_cadena(datos_del_equipo);
         
+        while ((c = getchar()) != '\n' && c != EOF);
         pausa();
         
         do
@@ -176,7 +180,7 @@ void Modificar_datos_de_equipo (int sock)
         write(sock, &opcion_a_modificar, sizeof(opcion_a_modificar)); //Envio la opcion elegida al servidor
         
         printf("Escriba el dato a reemplazar: ");
-        scanf("%s", datos_a_modficar);
+        leer_string (datos_a_modficar,sizeof(datos_a_modficar)); 
         
         write(sock, datos_a_modficar, strlen(datos_a_modficar));
         
@@ -199,7 +203,8 @@ void Buscar_cliente (int sock)
     int32_t num_de_orden = 0;
     int existe_el_cliente = 0;
     char datos[1000] = "";
-    
+    int c;
+
     printf("Escriba el numero de orden: ");
     scanf("%d", &num_de_orden);
     
@@ -222,6 +227,8 @@ void Buscar_cliente (int sock)
     {
         printf ("No se encontro el numero de orden\n");
     }
+
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 void Enviar_WhatsApp(int sock)

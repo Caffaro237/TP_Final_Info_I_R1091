@@ -43,7 +43,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     do
     {
         printf("Escriba la fecha de ingreso: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_FECHA_INGRESO); 
 
         
     } while (!verificar_longitud(aux, MAX_FECHA_INGRESO));
@@ -58,7 +58,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     do
     {
         printf("Escriba el nombre del cliente: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_NOMBRE); 
 
         
     } while (!verificar_longitud(aux, MAX_NOMBRE));
@@ -72,7 +72,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     do
     {
         printf("Escriba el apellido del cliente: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_APELLIDO); 
 
         
     } while (!verificar_longitud(aux, MAX_APELLIDO));
@@ -86,7 +86,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     do
     {
         printf("Escriba la direccion del cliente: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_DIRECCION); 
 
         
     } while (!verificar_longitud(aux, MAX_DIRECCION));
@@ -100,7 +100,7 @@ void Pedir_datos_del_cliente(char* datos_crudos)
     do
     {
         printf("Escriba telefono del cliente: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_TELEFONO); 
 
         
     } while (!verificar_longitud(aux, MAX_TELEFONO));
@@ -120,7 +120,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
     do
     {
         printf("Escriba el tipo de maquina: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_TIPO); 
 
         
     } while (!verificar_longitud(aux, MAX_TIPO));
@@ -135,7 +135,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
     do
     {
         printf("Escriba la marca del equipo: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_MARCA); 
 
         
     } while (!verificar_longitud(aux, MAX_MARCA));
@@ -149,7 +149,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
     do
     {
         printf("Escriba el modelo del equipo: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_MODELO); 
 
         
     } while (!verificar_longitud(aux, MAX_MODELO));
@@ -162,7 +162,7 @@ void Pedir_datos_del_equipo(char* datos_crudos)
 
     {
         printf("Escriba la falla de la maquina: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_FALLA);
 
         
     } while (!verificar_longitud(aux, MAX_FALLA));
@@ -181,7 +181,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     do
     {
         printf("Escriba la reparacion a efectuar: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_REPARACION); 
 
         
     } while (!verificar_longitud(aux, MAX_REPARACION));
@@ -196,7 +196,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     do
     {
         printf("Indicar el presupuesto: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_PRESUPUESTO); 
 
         
     } while (!verificar_longitud(aux, MAX_PRESUPUESTO));
@@ -210,7 +210,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     do
     {
         printf("Confirmación?: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_CONFIRMACION); 
 
         
     } while (!verificar_longitud(aux, MAX_CONFIRMACION));
@@ -224,7 +224,7 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     do
     {
         printf("Escriba si se realizo la reparacion: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_REPARADO); 
 
         
     } while (!verificar_longitud(aux, MAX_REPARADO));
@@ -238,11 +238,38 @@ void Pedir_datos_de_reparacion (char* datos_crudos)
     do
     {
         printf("Fecha de egreso: ");
-        scanf("%299s", aux);
+        leer_string(aux, MAX_FECHA_EGRESO); 
 
         
     } while (!verificar_longitud(aux, MAX_FECHA_EGRESO));
     
     strcpy(&datos_crudos[i], aux);
+
+}
+
+void leer_string (char* buffer, int limite)
+{
+    int i = 0;
+    int c;
+
+    memset (buffer,0, limite);
+    fflush(stdout);
+
+
+    do
+    { 
+        fflush(stdout);
+        c = getchar ();
+    }while (c == '\n' || c == '\r') ;
+
+    while (i < (limite - 1) && c != '\n' && c != EOF)
+    {
+        buffer [i] = (char) c;
+        i++;
+        fflush(stdout);
+        c = getchar();
+    }
+
+    buffer [i] = '\0';
 
 }

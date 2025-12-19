@@ -17,6 +17,7 @@ int verificar_longitud(char* cadena, int tamaño_maximo);
 void Pedir_datos_del_cliente(char* cadena_para_guardar_datos);
 void Pedir_datos_del_equipo(char* datos_crudos);
 void Pedir_datos_de_reparacion (char* datos_crudos);
+void leer_string (char* buffer, int limite);
 
 //FUNCIONES PRINCIPALES (que van en el main)
 void Listar_clientes (int sock);
