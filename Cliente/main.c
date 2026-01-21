@@ -29,42 +29,42 @@ int main (void)
       
         switch(opcion) 
         {
-            case 1:
+            case LISTAR_CLIENTES:
                 Listar_clientes(sock);
                 pausa();
                 break;
 
-            case 2:
+            case ALTA_DE_CLIENTE:
                 Alta_de_cliente (sock);
                 pausa();
                 break;
             
-            case 3:
+            case GENERAR_REPARACION:
                 Generar_raparacion (sock);
                 pausa();
                 break;
 
-            case 4:
+            case MODIFICAR_DATOS_CLIENTE:
                 Modificar_datos_de_cliente (sock);
                 pausa();
                 break;
             
-            case 5:
+            case MODIFICAR_DATOS_EQUIPO:
                 Modificar_datos_de_equipo (sock);
                 pausa();
                 break;
             
-            case 6:
+            case BUSCAR_CLIENTE:
                 Buscar_cliente(sock);
                 pausa();
                 break;
 
-            case 7:
+            case ENVIAR_WHATSAPP:
                 Enviar_WhatsApp(sock);
                 pausa();
                 break;
 
-            case 8:
+            case SALIR:
                 printf("Saliendo de la Aplicacion\n");
                 close (sock);
                 break;

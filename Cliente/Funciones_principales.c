@@ -2,7 +2,7 @@
 
 void Listar_clientes (int sock)
 {
-    char datos[1000] = "";
+    char datos[MAX_DATOS_BUFFER] = "";
 
     while (read(sock, datos, sizeof(datos)))
     {
@@ -26,7 +26,7 @@ void Listar_clientes (int sock)
 
 void Alta_de_cliente(int sock)
 {
-    char datos[1000] = "";
+    char datos[MAX_DATOS_BUFFER] = "";
     
     Pedir_datos_del_cliente(datos);
     write(sock, datos, strlen(datos));
@@ -41,8 +41,8 @@ void Modificar_datos_de_cliente (int sock)
     int32_t opcion_a_modificar;
     int existe_el_cliente = 0;
     int32_t se_logro_la_modificacion;
-    char datos_del_cliente[300] = "";
-    char datos_a_modficar [50] = "";
+    char datos_del_cliente[MAX_DATOS] = "";
+    char datos_a_modficar [MAX_DATOS] = "";
     int c;
 
     printf("Escriba el numero de orden del cliente: ");
@@ -106,7 +106,7 @@ void Generar_raparacion (int sock)
 {
     int32_t num_de_orden;
     int existe_la_reparacion = 0;
-    char datos[300] = "";
+    char datos[MAX_DATOS_BUFFER] = "";
 
 
     printf("Escriba el numero de orden de la reparación a generar: ");
@@ -137,8 +137,8 @@ void Modificar_datos_de_equipo (int sock)
     int32_t opcion_a_modificar;
     int existe_el_equipo = 0;
     int32_t se_logro_la_modificacion;
-    char datos_del_equipo[300] = "";
-    char datos_a_modficar [50] = "";
+    char datos_del_equipo[MAX_DATOS] = "";
+    char datos_a_modficar [MAX_DATOS] = "";
     int c;
 
     printf("Escriba el numero de orden del equipo: ");
@@ -202,7 +202,7 @@ void Buscar_cliente (int sock)
 {
     int32_t num_de_orden = 0;
     int existe_el_cliente = 0;
-    char datos[1000] = "";
+    char datos[MAX_DATOS_BUFFER] = "";
     int c;
 
     printf("Escriba el numero de orden: ");
@@ -235,10 +235,10 @@ void Enviar_WhatsApp(int sock)
 {
     int32_t num_de_orden = 0;
     int existe_el_cliente = 0;
-    char datos[20] = "";
-    char telefono[20] = "549";
-    char mensaje[1000] = "";
-    char auxNumeroOrden[5] = "";
+    char datos[MAX_DATOS] = "";
+    char telefono[MAX_DATOS] = "549";
+    char mensaje[MAX_DATOS_BUFFER] = "";
+    char auxNumeroOrden[MAX_DATOS] = "";
 
     printf("Escriba el numero de orden: ");
     scanf("%d", &num_de_orden);
@@ -278,7 +278,7 @@ void Enviar_WhatsApp(int sock)
 
 void AbrirWhatsapp(char *telefono, char *mensaje)
 {
-    char comando[1000] = "";
+    char comando[MAX_DATOS_BUFFER] = "";
 
     strcat(comando, "xdg-open \"https://wa.me/");
     strcat(comando, telefono);
