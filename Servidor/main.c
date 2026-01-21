@@ -101,53 +101,53 @@ void* work (void* ptr)
         
         switch(opcion) 
         {
-            case 1:
+            case OPCION_LISTAR_CLIENTES:
                 Listar_clientes (sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
                 
-            case 2:
+            case OPCION_ALTA_CLIENTE:
                 Alta_de_cliente (sockdup, &TOP_Clientes, &TOP_Equipo, &TOP_Reparaciones);
                 break;
                 
-            case 3:
+            case OPCION_GENERAR_REPARACION:
                 existe_orden = Generar_reparacion (sockdup, TOP_Reparaciones);
                 
                 if(!existe_orden)
                 {
-                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_REPARACIONES);
                 }
 
                 break;
 
-            case 4:
+            case OPCION_MODIFICAR_CLIENTE:
                 existe_orden = Modificar_datos_de_cliente (sockdup, TOP_Clientes);
                 
                 if(!existe_orden)
                 {
-                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_CLIENTES);
                 }
 
                 break;
 
-            case 5:
+            case OPCION_MODIFICAR_EQUIPO:
                 existe_orden = Modificar_datos_de_equipo (sockdup, TOP_Equipo);
                 
                 if(!existe_orden)
                 {
-                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+                    GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_EQUIPOS);
                 }
 
                 break;
                 
-            case 6:
+            case OPCION_BUSCAR_CLIENTE:
                 Buscar_cliente (sockdup, TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
                 break;
 
-            case 7:
+            case OPCION_ENVIAR_WHATSAPP:
                 Buscar_Telefono_Cliente(sockdup, TOP_Clientes, TOP_Reparaciones);
                 break;
                 
-            case -1:
+            case OPCION_CERRAR_SERVIDOR:
                 cerrarServidor = 1;
                 
                 GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
@@ -175,21 +175,21 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
     signal(SIGPIPE, SIG_IGN); // Cerrar el Cliente cierra el Server
     signal(SIGTSTP, SalirCtrlZ); //Cierra el servidor y todos los threads
 
-    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_CLIENTES);
 
     if(retorno < 0)
     {
         return retorno;
     }
 
-    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_EQUIPOS);
 
     if(retorno < 0)
     {
         return retorno;
     }
 
-    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+    retorno = LeerArchivo(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_REPARACIONES);
 
     if(retorno < 0)
     {
@@ -204,7 +204,7 @@ int inicializar(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 void SalirCtrlZ(int sig)
 {
     (void)sig;
-    char mensaje[50] = "Guardando archivos y cerrando servidor\n";
+    char mensaje[MAX_DATOS] = "Guardando archivos y cerrando servidor\n";
     
     system("clear");
 

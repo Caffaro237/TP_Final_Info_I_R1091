@@ -25,7 +25,9 @@ int abrir_conexion(int port, int backlog, int debug)
 	/* Asignamos valores a la estructura my_addr */
 
 	if (port == 0)
+	{
 		port = PORT;
+	}
 
 	my_addr.sin_family = AF_INET;		  /* familia de sockets INET para UNIX*/
 	my_addr.sin_port = htons(port);		  /* convierte el entero formato PC a entero formato network*/
@@ -42,7 +44,9 @@ int abrir_conexion(int port, int backlog, int debug)
 	/* Habilitamos el socket para recibir conexiones, con una cola de conexiones en espera que tendrá como máximo el tamaño especificado en BACKLOG*/
 
 	if (backlog == 0)
+	{
 		backlog = BACKLOG;
+	}
 
 	if ((aux = listen(sockaux, backlog)) == -1)
 	{

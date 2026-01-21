@@ -55,7 +55,7 @@ void AltaDatos_Equipo(NodoEquipo** top_equipo, char* datos_crudos)
 
 EQUIPO Datos_crudos_a_EQUIPO(char* datos_crudos)
 {
-  char campos[6][200] = {0};
+  char campos[MAX_COLUMNAS][MAX_DATOS] = {0};
 	EQUIPO equipo = {0};
 
 	SepararPorPuntoComa(datos_crudos, campos);
@@ -101,5 +101,5 @@ void EstructuraEquipo_a_cadena (EQUIPO estruct_equipo, char* cadena_equipo)
 {
 	CLIENTE cliente = {0};
 	REPARACIONES reparaciones = {0};
-	UnirPorPuntoComa(cliente, estruct_equipo, reparaciones, 2, cadena_equipo);
+	UnirPorPuntoComa(cliente, estruct_equipo, reparaciones, OPCION_EQUIPOS, cadena_equipo);
 }
