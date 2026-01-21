@@ -235,7 +235,7 @@ void Enviar_WhatsApp(int sock)
 {
     int32_t num_de_orden = 0;
     int existe_el_cliente = 0;
-    char datos[MAX_DATOS = "";
+    char datos[MAX_DATOS] = "";
     char telefono[MAX_DATOS] = "549";
     char mensaje[MAX_DATOS_BUFFER] = "";
     char auxNumeroOrden[MAX_DATOS] = "";
