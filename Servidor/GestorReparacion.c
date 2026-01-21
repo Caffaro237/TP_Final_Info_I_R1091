@@ -54,7 +54,7 @@ void AltaDatos_Reparaciones(NodoReparaciones** top_reparaciones, char* datos_cru
 
 REPARACIONES Datos_crudos_a_REPARACIONES (char* datos_crudos)
 {
-  char campos[6][200] = {0};
+  char campos[MAX_COLUMNAS][MAX_DATOS] = {0};
   REPARACIONES reparacion = {0};
 
   SepararPorPuntoComa(datos_crudos, campos);
@@ -102,5 +102,5 @@ void EstructuraReparaciones_a_cadena (REPARACIONES reparaciones, char* cadena_re
 {
  	CLIENTE cliente = {0};
 	EQUIPO equipo = {0};
-	UnirPorPuntoComa(cliente, equipo, reparaciones, 3, cadena_reparaciones);
+	UnirPorPuntoComa(cliente, equipo, reparaciones, OPCION_REPARACIONES, cadena_reparaciones);
 }

@@ -3,17 +3,13 @@
 
 #include "Headers.h"
 
-#define ARCHIVO_CLIENTES "./Clientes.csv"
-#define ARCHIVO_EQUIPOS "./Equipos.csv"
-#define ARCHIVO_REPARACIONES "./Reparaciones.csv"
-
 int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, int tipoDato)
 {
     char *linea;
     int fdFile = 0;
     int retorno = 0;
 
-    char archivo[100] = "";
+    char archivo[MAX_DATOS] = "";
 
     SeleccionarArchivo(archivo, tipoDato);
 
@@ -42,14 +38,14 @@ int LeerArchivo(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparac
 
 int LeerLinea(int fd, char **linea)
 {
-    char lineaAux[2000] = "";
+    char lineaAux[MAX_DATOS_BUFFER] = "";
     char buffer = ' ';
     int contador = 0;
     int bytesLeidos = 1;
 
     while(bytesLeidos)
     {
-        bytesLeidos = read(fd, &buffer, sizeof(char));
+        bytesLeidos = read(fd, &buffer, sizeof(buffer));
 
         if(buffer != '\r')
         {
@@ -73,9 +69,9 @@ int LeerLinea(int fd, char **linea)
 
 int EscribirNuevoCliente(CLIENTE cliente)
 {
-    char archivo[100] = "";
+    char archivo[MAX_DATOS] = "";
+    char buffer[MAX_DATOS_BUFFER] = "";
     int fdFile = 0;
-    char buffer[1000] = "";
 
     EQUIPO equipo = {0};
     REPARACIONES reparaciones = {0};
@@ -93,7 +89,7 @@ int EscribirNuevoCliente(CLIENTE cliente)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 1, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, OPCION_CLIENTES, buffer))
     {
         return -1;
     }
@@ -105,9 +101,9 @@ int EscribirNuevoCliente(CLIENTE cliente)
 
 int EscribirNuevoEquipo(EQUIPO equipo)
 {
-    char archivo[100] = "";
+    char archivo[MAX_DATOS] = "";
+    char buffer[MAX_DATOS_BUFFER] = "";
     int fdFile = 0;
-    char buffer[1000] = "";
 
     CLIENTE cliente = {0};
     REPARACIONES reparaciones = {0};
@@ -124,7 +120,7 @@ int EscribirNuevoEquipo(EQUIPO equipo)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 2, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, OPCION_EQUIPOS, buffer))
     {
         return -1;
     }
@@ -136,9 +132,9 @@ int EscribirNuevoEquipo(EQUIPO equipo)
 
 int EscribirNuevoReparacion(REPARACIONES reparaciones)
 {
-    char archivo[100] = "";
+    char archivo[MAX_DATOS] = "";
+    char buffer[MAX_DATOS_BUFFER] = "";
     int fdFile = 0;
-    char buffer[1000] = "";
 
     CLIENTE cliente = {0};
     EQUIPO equipo = {0};
@@ -155,7 +151,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
     memset(buffer, 0, sizeof(buffer));
 
-    if (UnirPorPuntoComa(cliente, equipo, reparaciones, 3, buffer))
+    if (UnirPorPuntoComa(cliente, equipo, reparaciones, OPCION_REPARACIONES, buffer))
     {
         return -1;
     }
@@ -167,7 +163,7 @@ int EscribirNuevoReparacion(REPARACIONES reparaciones)
 
 int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaciones **TOP_Reparaciones, char *linea, int tipoDato)
 {
-    char campos[6][200]= {0};
+    char campos[MAX_COLUMNAS][MAX_DATOS]= {0};
 
     CLIENTE cliente = {0};
     EQUIPO equipo = {0};
@@ -182,7 +178,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 
     switch (tipoDato)
     {
-        case 1: //Carga Clientes
+        case OPCION_CLIENTES:
 
             cliente.numero_de_orden = atoi(campos[0]);
             strcpy(cliente.fechaIngreso, campos[1]);
@@ -195,7 +191,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 
             break;
 
-        case 2: //Carga Equipos
+        case OPCION_EQUIPOS:
 
             equipo.numero_de_orden = atoi(campos[0]);
             strcpy(equipo.tipo, campos[1]);
@@ -207,7 +203,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 
             break;
 
-        case 3: //Carga Reparaciones
+        case OPCION_REPARACIONES:
 
             reparacion.numero_de_orden = atoi(campos[0]);
             strcpy(reparacion.reparacionAEfectuar, campos[1]);
@@ -230,9 +226,9 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 
 int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato)
 {
-    char archivo[100] = "";
+    char archivo[MAX_DATOS] = "";
+    char buffer[MAX_DATOS_BUFFER] = "";
     int fdFile = 0;
-    char buffer[1000] = "";
 
     SeleccionarArchivo(archivo, tipoDato);
 
@@ -246,12 +242,12 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
     switch (tipoDato)
     {
-        case 1:
+        case OPCION_CLIENTES:
             while(TOP_Clientes != NULL)
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 1, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, OPCION_CLIENTES, buffer))
                 {
                     return -1;
                 }
@@ -263,12 +259,12 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
             break;
             
-        case 2:
+        case OPCION_EQUIPOS:
             while(TOP_Equipo != NULL)
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 2, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, OPCION_EQUIPOS, buffer))
                 {
                     return -1;
                 }
@@ -280,12 +276,12 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
 
             break;
 
-        case 3:
+        case OPCION_REPARACIONES:
             while(TOP_Reparaciones != NULL)
             {
                 memset(buffer, 0, sizeof(buffer));
 
-                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, 3, buffer))
+                if (UnirPorPuntoComa(TOP_Clientes->data, TOP_Equipo->data, TOP_Reparaciones->data, OPCION_REPARACIONES, buffer))
                 {
                     return -1;
                 }
@@ -306,19 +302,50 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
     return 1;
 }
 
+int GuardarArchivos(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+{
+    int retorno = 0;
+
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_CLIENTES);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de clientes\n");
+        return retorno;
+    }
+
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_EQUIPOS);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de equipos\n");
+        return retorno;
+    }
+    
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_REPARACIONES);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de reparaciones\n");
+        return retorno;
+    }
+
+    return retorno;
+}
+
 int SeleccionarArchivo(char *archivo, int tipoDato)
 {
     switch (tipoDato)
     {
-        case 1:
+        case OPCION_CLIENTES:
             strcpy(archivo, ARCHIVO_CLIENTES);
             break;
             
-        case 2:
+        case OPCION_EQUIPOS:
             strcpy(archivo, ARCHIVO_EQUIPOS);
             break;
 
-        case 3:
+        case OPCION_REPARACIONES:
             strcpy(archivo, ARCHIVO_REPARACIONES);
             break;
         

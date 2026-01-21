@@ -55,7 +55,7 @@ void AltaDatos_Cliente(NodoCliente** top_cliente, char* datos_crudos)
 
 CLIENTE Datos_crudos_a_CLIENTE (char* datos_crudos)
 {
-	char campos[6][200] = {0};
+	char campos[MAX_COLUMNAS][MAX_DATOS] = {0};
 	CLIENTE cliente_nuevo = {0};
 
 	SepararPorPuntoComa(datos_crudos, campos);
@@ -102,5 +102,5 @@ void EstructuraCliente_a_cadena (CLIENTE estruct_cliente, char* cadena_cliente)
 {
 	EQUIPO equipo = {0};
 	REPARACIONES reparaciones = {0};
-	UnirPorPuntoComa(estruct_cliente, equipo, reparaciones, 1, cadena_cliente);
+	UnirPorPuntoComa(estruct_cliente, equipo, reparaciones, OPCION_CLIENTES, cadena_cliente);
 }
