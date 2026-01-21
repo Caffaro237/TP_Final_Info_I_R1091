@@ -45,7 +45,7 @@ int LeerLinea(int fd, char **linea)
 
     while(bytesLeidos)
     {
-        bytesLeidos = read(fd, &buffer, sizeof(char));
+        bytesLeidos = read(fd, &buffer, sizeof(buffer));
 
         if(buffer != '\r')
         {

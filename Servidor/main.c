@@ -101,7 +101,7 @@ void* work (void* ptr)
 
     while(!cerrarServidor)
     {
-        read(sockdup, &opcion, sizeof(int32_t));
+        read(sockdup, &opcion, sizeof(opcion));
         
         switch(opcion) 
         {
