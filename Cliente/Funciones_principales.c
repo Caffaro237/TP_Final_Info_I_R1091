@@ -85,10 +85,10 @@ void Modificar_datos_de_cliente (int sock)
         write(sock, &opcion_a_modificar, sizeof(opcion_a_modificar)); //Envio la opcion elegida al servidor
         
         printf("Escriba el dato a reemplazar: ");
-        leer_string (datos_a_modficar, sizeof(datos_a_modficar));  
+        leer_string(datos_a_modficar, sizeof(datos_a_modficar));  
 
         write(sock, datos_a_modficar, strlen(datos_a_modficar));
-        read(sock, &se_logro_la_modificacion, sizeof(int32_t));
+        read(sock, &se_logro_la_modificacion, sizeof(se_logro_la_modificacion));
 
         if (!se_logro_la_modificacion)
         {
@@ -116,7 +116,7 @@ void Generar_raparacion (int sock)
     write(sock, &num_de_orden, sizeof(num_de_orden));
 
     //El servidor me dice si existe la reparacion
-    read(sock, &existe_la_reparacion, sizeof(int));
+    read(sock, &existe_la_reparacion, sizeof(existe_la_reparacion));
 
     if (existe_la_reparacion)
     {
@@ -212,7 +212,7 @@ void Buscar_cliente (int sock)
     write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el cliente
-    read(sock, &existe_el_cliente, sizeof(int));
+    read(sock, &existe_el_cliente, sizeof(existe_el_cliente));
     
     memset(datos, 0, sizeof(datos));
 
