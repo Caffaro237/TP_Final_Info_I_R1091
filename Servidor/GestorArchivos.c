@@ -302,6 +302,37 @@ int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, No
     return 1;
 }
 
+int GuardarArchivos(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones)
+{
+    int retorno = 0;
+
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_CLIENTES);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de clientes\n");
+        return retorno;
+    }
+
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_EQUIPOS);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de equipos\n");
+        return retorno;
+    }
+    
+    retorno = GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, OPCION_REPARACIONES);
+
+    if(retorno < 0)
+    {
+        printf("Error en el guardado de archivos de reparaciones\n");
+        return retorno;
+    }
+
+    return retorno;
+}
+
 int SeleccionarArchivo(char *archivo, int tipoDato)
 {
     switch (tipoDato)

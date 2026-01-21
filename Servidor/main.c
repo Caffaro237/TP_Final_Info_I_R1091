@@ -76,12 +76,15 @@ int main (void)
 
     if(cerrarServidor)
     {
-        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
-        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
-        GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+        retorno = GuardarArchivos(TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+
+        if(retorno < 0)
+        {
+            printf("Error en el guardado de archivos\n");
+        }
     }
 
-    exit(0);
+    exit(retorno);
 }
 
 void* work (void* ptr)
@@ -89,6 +92,7 @@ void* work (void* ptr)
     int existe_orden = 0;
     int sockdup;
     int32_t opcion = 0;
+    int retorno = 0;
   
 	connection_t* conn = (connection_t*) ptr;
     sockdup = conn -> sock;
@@ -150,12 +154,15 @@ void* work (void* ptr)
             case OPCION_CERRAR_SERVIDOR:
                 cerrarServidor = 1;
                 
-                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 1);
-                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 2);
-                GuardarArchivoCompleto(TOP_Clientes, TOP_Equipo, TOP_Reparaciones, 3);
+                retorno = GuardarArchivos(TOP_Clientes, TOP_Equipo, TOP_Reparaciones);
+
+                if(retorno < 0)
+                {
+                    printf("Error en el guardado de archivos\n");
+                }
                 
                 close(sockdup);
-                exit(0);
+                exit(retorno);
                 break;
 
             default:

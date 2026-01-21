@@ -15,6 +15,7 @@ int CargarDato(NodoCliente **TOP_Clientes, NodoEquipo **TOP_Equipo, NodoReparaci
 int SepararPorPuntoComa(char *linea, char campos[][MAX_DATOS]);
 int UnirPorPuntoComa (CLIENTE cliente, EQUIPO equipo, REPARACIONES reparaciones, int tipoDato, char* buffer);
 int GuardarArchivoCompleto(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones, int tipoDato);
+int GuardarArchivos(NodoCliente *TOP_Clientes, NodoEquipo *TOP_Equipo, NodoReparaciones *TOP_Reparaciones);
 int SeleccionarArchivo(char *archivo, int tipoDato);
 
 //Funciones para el cliente
