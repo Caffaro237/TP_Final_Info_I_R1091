@@ -49,7 +49,7 @@ void Modificar_datos_de_cliente (int sock)
     scanf("%d", &num_de_orden);
     
     //Envio el numero de orden
-    write(sock, &num_de_orden, strlen(num_de_orden));
+    write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el cliente
     read(sock, &existe_el_cliente, sizeof(existe_el_cliente));
@@ -82,7 +82,7 @@ void Modificar_datos_de_cliente (int sock)
             }
         } while (opcion_a_modificar < 0 || opcion_a_modificar > 4);
 
-        write(sock, &opcion_a_modificar, strlen(opcion_a_modificar)); //Envio la opcion elegida al servidor
+        write(sock, &opcion_a_modificar, sizeof(opcion_a_modificar)); //Envio la opcion elegida al servidor
         
         printf("Escriba el dato a reemplazar: ");
         leer_string(datos_a_modficar, sizeof(datos_a_modficar));  
@@ -113,7 +113,7 @@ void Generar_raparacion (int sock)
     scanf("%d", &num_de_orden);
 
     //Envio el numero de orden
-    write(sock, &num_de_orden, strlen(num_de_orden));
+    write(sock, &num_de_orden, sizeof(num_de_orden));
 
     //El servidor me dice si existe la reparacion
     read(sock, &existe_la_reparacion, sizeof(existe_la_reparacion));
@@ -145,7 +145,7 @@ void Modificar_datos_de_equipo (int sock)
     scanf("%d", &num_de_orden);
     
     //Envio el numero de orden
-    write(sock, &num_de_orden, strlen(num_de_orden));
+    write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el equipo
     read(sock, &existe_el_equipo, sizeof(existe_el_equipo));
@@ -177,7 +177,7 @@ void Modificar_datos_de_equipo (int sock)
             }
         } while (opcion_a_modificar < 0 || opcion_a_modificar > 3);
 
-        write(sock, &opcion_a_modificar, strlen(opcion_a_modificar)); //Envio la opcion elegida al servidor
+        write(sock, &opcion_a_modificar, sizeof(opcion_a_modificar)); //Envio la opcion elegida al servidor
         
         printf("Escriba el dato a reemplazar: ");
         leer_string (datos_a_modficar,sizeof(datos_a_modficar)); 
@@ -209,7 +209,7 @@ void Buscar_cliente (int sock)
     scanf("%d", &num_de_orden);
     
     //Envio el numero de orden
-    write(sock, &num_de_orden, strlen(num_de_orden));
+    write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el cliente
     read(sock, &existe_el_cliente, sizeof(existe_el_cliente));
@@ -244,7 +244,7 @@ void Enviar_WhatsApp(int sock)
     scanf("%d", &num_de_orden);
     
     //Envio el numero de orden
-    write(sock, &num_de_orden, strlen(num_de_orden));
+    write(sock, &num_de_orden, sizeof(num_de_orden));
     
     //El servidor me dice si existe el cliente
     read(sock, &existe_el_cliente, sizeof(existe_el_cliente));
