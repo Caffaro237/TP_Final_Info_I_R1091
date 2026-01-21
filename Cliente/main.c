@@ -25,7 +25,7 @@ int main (void)
     {
 
         opcion = menu();
-        write(sock, &opcion, sizeof(opcion));
+        write(sock, &opcion, strlen(opcion));
       
         switch(opcion) 
         {
